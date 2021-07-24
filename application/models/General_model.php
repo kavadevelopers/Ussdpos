@@ -7,6 +7,28 @@ class General_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function getUser($user)
+	{
+		$user = $this->db->get_where('register_agent',['id' => $user])->row_object();
+		$userDet = $this->db->get_where('details_agent',['user' => $user->id])->row_object();
+
+		$user->detail	= $userDet;
+		return $user;
+	}
+
+	public function getFile($file,$folder)
+	{
+		if ($file != "") {
+			if (file_exists(FCPATH.'uploads/agent/1627055174.6232.png')) {
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return "";
+		}
+	}
+
 
 	public function customerPush($customer,$title,$body,$type = '',$dy = []){
 		$firebases = $this->db->get_where('customer_firebase',['user' => $customer])->result_array();

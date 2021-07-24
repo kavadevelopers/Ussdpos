@@ -6,15 +6,42 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function getuser()
+	{
+		if($this->input->post('user')){
+			retJson(['_return' => true,'user' => $this->general_model->getUser($this->input->post('user'))]);
+		}else{
+			retJson(['_return' => false,'msg' => '`user` are Required']);
+		}
+	}
+
+	public function emailcheck()
+	{
+		if ($this->input->post('email')) {
+			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email')])->row_array();
+			if ($user) {
+				retJson(['_return' => true,'msg' => 'Email already assigned with another email.']);
+			}else{
+				retJson(['_return' => false,'msg' => '']);
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`email` are Required']);
+		}	
+	}
+
 	public function login()
 	{
 		if ($this->input->post('email') && $this->input->post('password')) {
-			$user = $this->db->get_where('provider',['email' => $this->input->post('email')])->row_array();
+			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email'),'df' => ''])->row_array();
 			if ($user) {
 				if (md5($this->input->post('password')) == $user['password']) {
-					retJson(['_return' => true,'data' => $user]);	
+					if ($user['block'] == "") {
+						retJson(['_return' => true,'user' => $this->general_model->getUser($user['id'])]);
+					}else{
+						retJson(['_return' => false,'msg' => 'Your account is suspended. Please contact administrator..']);		
+					}
 				}else{
-					retJson(['_return' => false,'msg' => 'Password not match.']);	
+					retJson(['_return' => false,'msg' => 'Email and Password not match']);	
 				}
 			}else{
 				retJson(['_return' => false,'msg' => 'Email not registered']);

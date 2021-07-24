@@ -50,7 +50,7 @@
     </div>
     <!-- Pre-loader end -->
 
-    <section class="login-block" style="background: #00C691;">
+    <section class="login-block" style="background: #fafafa;">
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="row">
@@ -59,7 +59,7 @@
                     
                         <form class="md-float-material form-material" action="#" method="post" id="login" >
                             <div class="text-center">
-                                <img src="<?php echo base_url('asset/images/logo.png'); ?>" alt="" style="width: 90px;">                               
+                                <img src="<?php echo base_url('asset/images/logo.png'); ?>" alt="" style="width: 150px;">                               
                                 <!-- <p style="font-size: 30px;color: #EDBE0A;font-weight: bold;"><?= get_setting()['name'] ?></p> -->
                             </div>
                             <div class="auth-box card">
@@ -126,15 +126,15 @@
                                             </button>
                                         </div>
                                     </div>  
-                                    <hr>
+                                    <!-- <hr> -->
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <!-- <div class="col-md-12">
                                             <p class="text-center" style="margin: 0; line-height: 2px; font-size: 12px;"> <b>Powered by : </b> 
                                                 <a href="http://kavadevelopers.com" target="_blank" style="font-size: 12px;">
                                                     Kava Developers
                                                 </a>
                                             </p>
-                                        </div>
+                                        </div> -->
                                         
                                     </div>
                                 </div>
