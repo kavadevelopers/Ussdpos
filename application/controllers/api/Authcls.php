@@ -18,11 +18,11 @@ class Authcls extends CI_Controller
 	public function emailcheck()
 	{
 		if ($this->input->post('email')) {
-			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email')])->row_array();
+			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email'),'df' => ''])->row_array();
 			if ($user) {
-				retJson(['_return' => true,'msg' => 'Email already assigned with another email.']);
+				retJson(['_return' => false,'msg' => 'Email already assigned with another email.']);
 			}else{
-				retJson(['_return' => false,'msg' => '']);
+				retJson(['_return' => true,'msg' => '']);
 			}
 		}else{
 			retJson(['_return' => false,'msg' => '`email` are Required']);
