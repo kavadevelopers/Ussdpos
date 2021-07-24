@@ -33,38 +33,71 @@ class Register extends CI_Controller
 		    $agent = $this->db->insert_id();
 
 
-		    if(isset($_FILES ['fileaddress']) && $_FILES['fileaddress']['error'] == 0){
-		    	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileaddress']['name'], PATHINFO_EXTENSION);
-		    	$this->upload->initialize($config);
-		    	if($this->upload->do_upload('fileaddress')){
-		    		$fileaddress = $config['file_name'];
-		    	}else{
-		    		$fileaddress = "";
-		    	}
-		    }else{
+		    // if(isset($_FILES ['fileaddress']) && $_FILES['fileaddress']['error'] == 0){
+		    // 	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileaddress']['name'], PATHINFO_EXTENSION);
+		    // 	$this->upload->initialize($config);
+		    // 	if($this->upload->do_upload('fileaddress')){
+		    // 		$fileaddress = $config['file_name'];
+		    // 	}else{
+		    // 		$fileaddress = "";
+		    // 	}
+		    // }else{
+	    	// 	$fileaddress = "";
+	    	// }
+
+		    // if(isset($_FILES ['fileid']) && $_FILES['fileid']['error'] == 0){
+		    // 	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileid']['name'], PATHINFO_EXTENSION);
+		    // 	$this->upload->initialize($config);
+		    // 	if($this->upload->do_upload('fileid')){
+		    // 		$fileid = $config['file_name'];
+		    // 	}else{
+		    // 		$fileid = "";
+		    // 	}
+		    // }else{
+	    	// 	$fileid = "";
+	    	// }
+	    	// if(isset($_FILES ['fileprofile']) && $_FILES['fileprofile']['error'] == 0){
+		    // 	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileprofile']['name'], PATHINFO_EXTENSION);
+		    // 	$this->upload->initialize($config);
+		    // 	if($this->upload->do_upload('fileprofile')){
+		    // 		$fileprofile = $config['file_name'];
+		    // 	}else{
+		    // 		$fileprofile = "";
+		    // 	}
+		    // }else{
+	    	// 	$fileprofile = "";
+	    	// }
+
+	    	if ($this->input->post('fileaddress')) {
+	    		$img = $this->input->post('fileaddress');
+	    		$img = str_replace('data:image/png;base64,', '', $img);
+				$img = str_replace(' ', '+', $img);
+				$data = base64_decode($img);
+				$fileaddress = microtime(true).'.png';
+				file_put_contents('./uploads/agent/'.$fileaddress, $data);
+	    	}else{
 	    		$fileaddress = "";
 	    	}
 
-		    if(isset($_FILES ['fileid']) && $_FILES['fileid']['error'] == 0){
-		    	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileid']['name'], PATHINFO_EXTENSION);
-		    	$this->upload->initialize($config);
-		    	if($this->upload->do_upload('fileid')){
-		    		$fileid = $config['file_name'];
-		    	}else{
-		    		$fileid = "";
-		    	}
-		    }else{
+	    	if ($this->input->post('fileid')) {
+	    		$img = $this->input->post('fileid');
+	    		$img = str_replace('data:image/png;base64,', '', $img);
+				$img = str_replace(' ', '+', $img);
+				$data = base64_decode($img);
+				$fileid = microtime(true).'.png';
+				file_put_contents('./uploads/agent/'.$fileid, $data);
+	    	}else{
 	    		$fileid = "";
 	    	}
-	    	if(isset($_FILES ['fileprofile']) && $_FILES['fileprofile']['error'] == 0){
-		    	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileprofile']['name'], PATHINFO_EXTENSION);
-		    	$this->upload->initialize($config);
-		    	if($this->upload->do_upload('fileprofile')){
-		    		$fileprofile = $config['file_name'];
-		    	}else{
-		    		$fileprofile = "";
-		    	}
-		    }else{
+
+	    	if ($this->input->post('fileprofile')) {
+	    		$img = $this->input->post('fileprofile');
+	    		$img = str_replace('data:image/png;base64,', '', $img);
+				$img = str_replace(' ', '+', $img);
+				$data = base64_decode($img);
+				$fileprofile = microtime(true).'.png';
+				file_put_contents('./uploads/agent/'.$fileprofile, $data);
+	    	}else{
 	    		$fileprofile = "";
 	    	}
 
