@@ -11,7 +11,7 @@ class General_model extends CI_Model
 	{
 		$user = $this->db->get_where('register_agent',['id' => $user])->row_object();
 		$userDet = $this->db->get_where('details_agent',['user' => $user->id])->row_object();
-
+		$userDet->fileprofile = $this->getFile($userDet->fileprofile,'uploads/agent/');
 		$user->detail	= $userDet;
 		return $user;
 	}
@@ -19,10 +19,10 @@ class General_model extends CI_Model
 	public function getFile($file,$folder)
 	{
 		if ($file != "") {
-			if (file_exists(FCPATH.'uploads/agent/1627055174.6232.png')) {
-				return true;
+			if (file_exists(FCPATH.$folder.$file)) {
+				return base_url($folder.$file);
 			}else{
-				return false;
+				return "";
 			}
 		}else{
 			return "";

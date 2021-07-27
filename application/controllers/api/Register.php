@@ -16,6 +16,12 @@ class Register extends CI_Controller
 		    $config['overwrite']     = TRUE;
 		    $this->load->library('upload', $config);
 
+		    if($this->input->post('phone')[0] == "0"){
+		    	$phone = ltrim($this->input->post('phone'),'0');
+		    }else{
+		    	$phone = ltrim($this->input->post('phone'));
+		    }
+
 		    $data = [
 		    	'bvn'					=> $this->input->post('bvn'),
 		    	'name'					=> $this->input->post('name'),
