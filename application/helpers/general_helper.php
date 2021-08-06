@@ -123,16 +123,18 @@ function get_user_byid($id){
 
 function menu($seg,$array)
 {
+    $array = ["","",""];
     $CI =& get_instance();
     $path = $CI->uri->segment($seg);
     foreach($array as $a)
     {
         if($path === $a)
         {
-          return array("active","active","pcoded-trigger");
-          break;  
+          $array = array("active","active","pcoded-trigger");
         }
     }
+
+    return $array;
 }
 
 function sendEmail($to,$sub,$msg)
