@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="row m-t-25 text-left">
                                         <div class="col-12">
-                                            <div class="checkbox-fade fade-in-primary d-">
+                                            <div class="checkbox-fade fade-in-primary d-" style="display:none;">
                                                 <label>
                                                     <input type="checkbox" value="" id="check" <?php if(isset($this->input->cookie()['username'] ) ){ ?> checked <?php } ?>>
                                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>

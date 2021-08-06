@@ -18,7 +18,7 @@
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            <textarea name="content" type="text" id="editor" class="form-control" value="" ><?= $page['content'] ?></textarea>
+                            <textarea name="content" type="text" id="editor" class="form-control" value="" ><?= $page['descr'] ?></textarea>
                         </div>
                     </div>
                     

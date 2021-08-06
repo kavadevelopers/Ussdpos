@@ -1,6 +1,4 @@
 <?php
-
-
 class Login_model extends CI_Model
 {
 	public function login_Ath($user,$pass)
@@ -24,6 +22,20 @@ class Login_model extends CI_Model
 		{
 			return array(1,'Username Not Registered','');
 		}
+	}
+
+
+	public function firebaseLogin($user)
+	{
+		$data = [
+			'descr'		=> $this->input->post('descr'),
+			'token'		=> $this->input->post('token'),
+			'device'	=> $this->input->post('device'),
+			'device_id'	=> $this->input->post('device_id'),
+			'user'		=> $user,
+			'cat'		=> _nowDateTime()
+		];
+		$this->db->insert('firebase_agent',$data);
 	}
 }
 

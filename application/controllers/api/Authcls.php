@@ -36,7 +36,12 @@ class Authcls extends CI_Controller
 			if ($user) {
 				if (md5($this->input->post('password')) == $user['password']) {
 					if ($user['block'] == "") {
-						retJson(['_return' => true,'user' => $this->general_model->getUser($user['id'])]);
+						if ($this->input->post('descr') && $this->input->post('token') && $this->input->post('device') && $this->input->post('device_id')) {
+							@$this->login_model->firebaseLogin($user['id']);	
+							retJson(['_return' => true,'user' => $this->general_model->getUser($user['id'])]);
+						}else{
+							retJson(['_return' => false,'msg' => '`descr`,`token`,`device_id`,`device` are Required']);
+						}	
 					}else{
 						retJson(['_return' => false,'msg' => 'Your account is suspended. Please contact administrator..']);		
 					}

@@ -17,18 +17,7 @@
         <form method="post" action="<?= base_url('other/send_pushnotification') ?>">
             <div class="card-block">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>User Type <span class="-req">*</span></label>
-                            <select class="form-control" name="user_type" required>
-                                <option value="">-- Select --</option>
-                                <option value="customer">Customers</option>
-                                <option value="service">Service Providers</option>
-                                <option value="delivery">Drivers</option>
-                            </select>
-                        </div>
-                    </div> 
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label>Title <span class="-req">*</span></label>
                             <input name="title" type="text" class="form-control" value="<?= set_value('title'); ?>" placeholder="Title" required>

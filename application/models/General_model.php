@@ -89,6 +89,28 @@ class General_model extends CI_Model
 		}
 	}
 
+	public function sendNotificationsToAndroidDevices($tokens,$title,$body,$type = '',$dy = [])
+	{
+		$url = "https://fcm.googleapis.com/fcm/send";
+	    $serverKey = get_setting()['fserverkey'];
+	    $arrayToSend = array('registration_ids' => $tokens,"priority" => "high",'data' => ['title' => $title,'body' => $body,'type' => $type,'dy' => $dy]);
+	    $json = json_encode($arrayToSend);
+	    $headers = array();
+	    $headers[] = 'Content-Type: application/json';
+	    $headers[] = 'Authorization: key='. $serverKey;
+	    $ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	    curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+	    curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($ch, CURLOPT_VERBOSE, 0); 
+	    $result = curl_exec($ch);
+	    curl_close($ch);
+	}
+
 	public function getCategory($id)
 	{
 		$category = $this->db->get_where('categories',['id' => $id])->row_array();
@@ -131,7 +153,7 @@ class General_model extends CI_Model
 
 	public function get_page($id)
 	{
-		return $this->db->get_where('pages',['id' => $id])->row_array();	
+		return $this->db->get_where('cms_pages',['id' => $id])->row_array();	
 	}
 
 	public function get_setting()

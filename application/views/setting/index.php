@@ -26,33 +26,9 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Support Email <span class="-req">*</span></label>
-                            <input name="support_email" type="text" class="form-control" value="<?= set_value('support_email',get_setting()['support_email']); ?>" >
-                            <?= form_error('support_email') ?>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Customer Support Phone <span class="-req">*</span></label>
-                            <input name="customer_support_phone" type="text" class="form-control" value="<?= set_value('customer_support_phone',get_setting()['customer_support_phone']); ?>" >
-                            <?= form_error('customer_support_phone') ?>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Shop Rules <span class="-req">*</span></label>
-                            <textarea name="shop_rule" type="text" class="form-control" value=""><?= set_value('shop_rule',get_setting()['shop_rule']); ?></textarea>
-                            <?= form_error('shop_rule') ?>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Support Mobile <span class="-req">*</span></label>
-                            <input name="support_mobile" type="text" class="form-control" value="<?= set_value('support_mobile',get_setting()['support_mobile']); ?>" >
-                            <?= form_error('support_mobile') ?>
+                            <label>Flutter Wave Api Key<span class="-req">*</span></label>
+                            <input name="flutterapi" type="text" class="form-control" value="<?= set_value('flutterapi',get_setting()['flutterapi']); ?>" >
+                            <?= form_error('flutterapi') ?>
                         </div>
                     </div>
 
@@ -70,42 +46,6 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Product Tax in (%)<span class="-req">*</span></label>
-                            <input name="prod_tax" type="text" class="form-control decimal-num" placeholder="Product Tax in (%)" value="<?= set_value('prod_tax',get_setting()['prod_tax']); ?>" >
-                            <?= form_error('prod_tax') ?>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Service Tax in (%)<span class="-req">*</span></label>
-                            <input name="serv_tax" type="text" class="form-control decimal-num" placeholder="Service Tax in (%)" value="<?= set_value('serv_tax',get_setting()['serv_tax']); ?>" >
-                            <?= form_error('serv_tax') ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Stripe Secret key<span class="-req">*</span></label>
-                            <input name="stripe_sk" type="text" class="form-control" placeholder="" value="<?= set_value('stripe_sk',get_setting()['stripe_sk']); ?>" >
-                            <?= form_error('stripe_sk') ?>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Stripe Publishable key<span class="-req">*</span></label>
-                            <input name="stripe_pk" type="text" class="form-control" placeholder="" value="<?= set_value('stripe_pk',get_setting()['stripe_pk']); ?>" >
-                            <?= form_error('stripe_pk') ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
                             <label>Android App Link<span class="-req">*</span></label>
                             <input name="android_app_link" type="text" class="form-control" placeholder="" value="<?= set_value('android_app_link',get_setting()['android_app_link']); ?>" >
                             <?= form_error('android_app_link') ?>
@@ -116,6 +56,20 @@
                             <label>iOS App Link<span class="-req">*</span></label>
                             <input name="ios_app_link" type="text" class="form-control" placeholder="" value="<?= set_value('ios_app_link',get_setting()['ios_app_link']); ?>" >
                             <?= form_error('ios_app_link') ?>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Android App Version <span class="-req">*</span></label>
+                            <input name="android_ver" type="text" class="form-control" placeholder="" value="<?= set_value('android_ver',get_setting()['android_ver']); ?>" >
+                            <?= form_error('android_ver') ?>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>iOS App Version <span class="-req">*</span></label>
+                            <input name="ios_ver" type="text" class="form-control" placeholder="" value="<?= set_value('ios_ver',get_setting()['ios_ver']); ?>" >
+                            <?= form_error('ios_ver') ?>
                         </div>
                     </div>
                 </div>
@@ -151,25 +105,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Android App Version <span class="-req">*</span></label>
-                            <input name="android_ver" type="text" class="form-control" placeholder="" value="<?= set_value('android_ver',get_setting()['android_ver']); ?>" >
-                            <?= form_error('android_ver') ?>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>iOS App Version <span class="-req">*</span></label>
-                            <input name="ios_ver" type="text" class="form-control" placeholder="" value="<?= set_value('ios_ver',get_setting()['ios_ver']); ?>" >
-                            <?= form_error('ios_ver') ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div>  
             <div class="card-footer text-right">
                 <button class="btn btn-success" type="submit">
                     <i class="fa fa-save"></i> Save

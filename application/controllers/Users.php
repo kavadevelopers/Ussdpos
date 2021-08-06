@@ -12,7 +12,7 @@ class Users extends CI_Controller
 
 	public function index()
 	{
-		$data['_title']		= "Users";		
+		$data['_title']		= "Admin Users";		
 		$data['list']		= $this->db->get_where('user',['df' => '','id !=' => '1'])->result_array();
 		$this->load->theme('users/index',$data);	
 	}
