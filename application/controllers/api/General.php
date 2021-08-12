@@ -6,6 +6,16 @@ class General extends CI_Controller
 		parent::__construct();
 	}
 
+	public function getpage()
+	{
+		$settings = [
+			'_return'			=> true,
+			'content'			=> $this->db->get_where('cms_pages',['id' => $this->input->post('page')])->row_object()->descr
+		];
+
+		retJson($settings);	
+	}
+
 	public function getsettings()
 	{
 		$settings = [
