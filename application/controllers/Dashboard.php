@@ -8,6 +8,12 @@ class Dashboard extends CI_Controller
 		$this->auth->check_session();
 	}
 
+	public function mail()
+	{
+		//$this->general_model->send_mail('mehul9921@gmail.com','Test','123456');
+		$this->load->view('mail/verification_code');
+	}
+
 	public function index()
 	{
 		$data['_title']		= "Dashboard";
