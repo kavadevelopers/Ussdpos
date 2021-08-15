@@ -21,7 +21,7 @@ class Authcls extends CI_Controller
 			$mail = mt_rand(111111,999999);
 			$phone = mt_rand(111111,999999);
 			$template = $this->load->view('mail/verification_code',['code' => $mail],true);
-			@$this->general_model->send_mail($this->input->post('email'),'EmailVerification Code',$template);
+			@$this->general_model->send_mail($this->input->post('email'),'Email Verification Code',$template);
 			retJson(['_return' => true,'msg' => 'email-'.$mail.'=phone-'.$phone,'phone_code' => $phone,'email_code' => $mail]);
 		}else{
 			retJson(['_return' => false,'msg' => '`email`,`phone` are Required']);
