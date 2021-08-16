@@ -23,6 +23,8 @@ class Setting extends CI_Controller
 		$this->form_validation->set_rules('company', 'Company Name','trim|required');
 		$this->form_validation->set_rules('fserverkey', 'Firebase Server Key','trim|required');
 		$this->form_validation->set_rules('flutterapi', 'Flutter Wave Api Key','trim|required');
+		$this->form_validation->set_rules('bulksmskey', 'Bulksms Key','trim|required');
+		$this->form_validation->set_rules('bulksmssenderid', 'Bulksms Sender ID','trim|required');
 		$this->form_validation->set_rules('mail_host', 'SMTP Host','trim|required');
 		$this->form_validation->set_rules('mail_username', 'SMTP Username','trim|required');
 		$this->form_validation->set_rules('mail_pass', 'SMTP Password','trim|required');
@@ -45,6 +47,8 @@ class Setting extends CI_Controller
 				'name'						=> $this->input->post('company'),
 				'fserverkey'				=> $this->input->post('fserverkey'),
 				'flutterapi'				=> $this->input->post('flutterapi'),
+				'bulksmskey'				=> $this->input->post('bulksmskey'),
+				'bulksmssenderid'			=> $this->input->post('bulksmssenderid'),
 				'mail_host'					=> $this->input->post('mail_host'),
 				'mail_username'				=> $this->input->post('mail_username'),
 				'mail_pass'					=> $this->input->post('mail_pass'),

@@ -24,14 +24,21 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Flutter Wave Api Key<span class="-req">*</span></label>
-                            <input name="flutterapi" type="text" class="form-control" value="<?= set_value('flutterapi',get_setting()['flutterapi']); ?>" >
-                            <?= form_error('flutterapi') ?>
-                        </div>
-                    </div>
+                    
 
+                    
+
+                    
+                    
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="h5-saparater">Firebase Settings</h5>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Firebase Server Key <span class="-req">*</span></label>
@@ -39,10 +46,53 @@
                             <?= form_error('fserverkey') ?>
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <div class="card-block">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="h5-saparater">Flutterwave Settings</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Flutter Wave Api Key<span class="-req">*</span></label>
+                            <input name="flutterapi" type="text" class="form-control" value="<?= set_value('flutterapi',get_setting()['flutterapi']); ?>" >
+                            <?= form_error('flutterapi') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="h5-saparater">Bulksms Settings</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Bulksms Key <span class="-req">*</span></label>
+                            <input name="bulksmskey" type="text" class="form-control" value="<?= set_value('bulksmskey',get_setting()['bulksmskey']); ?>" >
+                            <?= form_error('bulksmskey') ?>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Bulksms Sender ID <span class="-req">*</span></label>
+                            <input name="bulksmssenderid" type="text" class="form-control" value="<?= set_value('bulksmssenderid',get_setting()['bulksmssenderid']); ?>" >
+                            <?= form_error('bulksmssenderid') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="h5-saparater">Application Settings</h5>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -75,6 +125,11 @@
                 </div>
             </div>
             <div class="card-block">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="h5-saparater">Email SMTP Settings</h5>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -114,3 +169,11 @@
         </form>
     </div>
 </div>
+
+<style type="text/css">
+    .h5-saparater{
+        border-bottom: 1px solid #ccc;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+</style>

@@ -11,7 +11,8 @@ class Dashboard extends CI_Controller
 	public function mail()
 	{
 		//$this->general_model->send_mail('mehul9921@gmail.com','Test','123456');
-		$this->load->view('mail/verification_code');
+		//$this->load->view('mail/verification_code');
+		echo $this->general_model->sendSms('2348135709201','Veriication code is : 355850');
 	}
 
 	public function index()

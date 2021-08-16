@@ -157,7 +157,38 @@ class General_model extends CI_Model
 
 	public function sendSms($to,$msg)
 	{
-		
+		$url 			= 'http://bulksmsnigeria.com/api/v1/sms/create';
+		$x 				= curl_init($url);
+		curl_setopt($x, CURLOPT_HTTPHEADER, array(
+		    'Accept: application/json'
+		));
+		$data = [
+			'api_token'				=> get_setting()['bulksmskey'],
+			'from'					=> get_setting()['bulksmssenderid'],
+			'to'					=> $to,
+			'body'					=> $msg,
+			'gateway'				=> 6,
+			'dnd'					=> 6
+		];
+		curl_setopt($x, CURLOPT_BINARYTRANSFER, true);
+		curl_setopt($x, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($x, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($x, CURLOPT_POSTFIELDS, http_build_query($data));
+		$y 			= curl_exec($x);
+		curl_close($x);
+		echo $y;
+
+
+		// $id 			= get_setting()['bulksmskey'];
+		// $sender 		= get_setting()['bulksmssenderid'];
+		// $url 			= 'http://bulksmsnigeria.com/api/v2/sms/create?api_token='.$id.'&to='.$to.'&from='.$sender.'&body='.$msg.'&gateway=6&dnd=6';
+		// $x 				= curl_init($url);
+		// curl_setopt($x, CURLOPT_BINARYTRANSFER, true);
+		// curl_setopt($x, CURLOPT_RETURNTRANSFER, true);
+		// curl_setopt($x, CURLOPT_SSL_VERIFYPEER, false);
+		// $y 			= curl_exec($x);
+		// curl_close($x);
+		// echo $y;
 	}
 }
 ?>
