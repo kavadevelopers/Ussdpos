@@ -157,28 +157,28 @@ class General_model extends CI_Model
 
 	public function sendSms($to,$msg)
 	{
-		$url 			= 'http://bulksmsnigeria.com/api/v1/sms/create';
-		$x 				= curl_init($url);
-		curl_setopt($x, CURLOPT_HTTPHEADER, array(
-		    'Accept: application/json'
-		));
-		$data = [
-			'api_token'				=> get_setting()['bulksmskey'],
-			'from'					=> get_setting()['bulksmssenderid'],
-			'to'					=> $to,
-			'body'					=> $msg,
-			'gateway'				=> 6,
-			'dnd'					=> 6
-		];
-		curl_setopt($x, CURLOPT_BINARYTRANSFER, true);
-		curl_setopt($x, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($x, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($x, CURLOPT_POSTFIELDS, http_build_query($data));
-		$y 			= curl_exec($x);
-		curl_close($x);
-		echo $y;
+		// $url 			= 'http://bulksmsnigeria.com/api/v1/sms/create';
+		// $x 				= curl_init($url);
+		// curl_setopt($x, CURLOPT_HTTPHEADER, array(
+		//     'Accept: application/json'
+		// ));
+		// $data = [
+		// 	'api_token'				=> get_setting()['bulksmskey'],
+		// 	'from'					=> get_setting()['bulksmssenderid'],
+		// 	'to'					=> $to,
+		// 	'body'					=> $msg,
+		// 	'gateway'				=> 6,
+		// 	'dnd'					=> 6
+		// ];
+		// curl_setopt($x, CURLOPT_BINARYTRANSFER, true);
+		// curl_setopt($x, CURLOPT_RETURNTRANSFER, true);
+		// curl_setopt($x, CURLOPT_SSL_VERIFYPEER, false);
+		// curl_setopt($x, CURLOPT_POSTFIELDS, http_build_query($data));
+		// $y 			= curl_exec($x);
+		// curl_close($x);
+		// echo $y;
 
-
+		// return file_get_contents('http://bulksmsnigeria.com/api/v2/sms/create?api_token='.get_setting()['bulksmskey'].'&to='.$to.'&from='.get_setting()['bulksmssenderid'].'&body='.$msg.'&gateway=6&dnd=6');
 		// $id 			= get_setting()['bulksmskey'];
 		// $sender 		= get_setting()['bulksmssenderid'];
 		// $url 			= 'http://bulksmsnigeria.com/api/v2/sms/create?api_token='.$id.'&to='.$to.'&from='.$sender.'&body='.$msg.'&gateway=6&dnd=6';
@@ -189,6 +189,23 @@ class General_model extends CI_Model
 		// $y 			= curl_exec($x);
 		// curl_close($x);
 		// echo $y;
+
+		$api_params = '?api_token='.get_setting()['bulksmskey'].'&from='.get_setting()['bulksmssenderid'].'&to='.$to.'&body='.$msg.'&gateway=6&dnd=6';  
+        $smsGatewayUrl = "https://bulksmsnigeria.com/api/v2/sms/create";  
+        $smsgatewaydata = $smsGatewayUrl.$api_params;
+        $ch = curl_init();                       // initialize CURL
+        curl_setopt($ch, CURLOPT_POST, false);    // Set CURL Post Data
+        curl_setopt($ch, CURLOPT_URL, $smsgatewaydata);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch); 
+
+        if ($err) {
+		    return "cURL Error #:" . $err;
+		} else {
+		    return $output;
+		}
 	}
 }
 ?>
