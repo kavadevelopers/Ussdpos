@@ -190,7 +190,7 @@ class General_model extends CI_Model
 		// curl_close($x);
 		// echo $y;
 
-		$api_params = '?api_token='.get_setting()['bulksmskey'].'&from='.get_setting()['bulksmssenderid'].'&to='.$to.'&body='.$msg.'&gateway=6&dnd=6';  
+		$api_params = '?api_token='.urlencode( get_setting()['bulksmskey']).'&from='.urlencode(get_setting()['bulksmssenderid']).'&to='.urlencode($to).'&body='.urlencode($msg).'&gateway=6&dnd=6';  
         $smsGatewayUrl = "https://bulksmsnigeria.com/api/v2/sms/create";  
         $smsgatewaydata = $smsGatewayUrl.$api_params;
         $ch = curl_init();                       // initialize CURL
