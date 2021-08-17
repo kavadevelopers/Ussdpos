@@ -15,22 +15,31 @@ class Authcls extends CI_Controller
 		}
 	}
 
-	public function validate_phone_email()
+	public function send_verification_phone()
 	{
-		if ($this->input->post('email') && $this->input->post('phone')) {
-			$mail = mt_rand(111111,999999);
+		if ($this->input->post('phone')) {
 			$phone = mt_rand(111111,999999);
-			$template = $this->load->view('mail/verification_code',['code' => $mail],true);
-			@$this->general_model->send_mail($this->input->post('email'),'Email Verification Code',$template);
 			if ($this->input->post('hardsms')) {
 				@$this->general_model->sendSms($this->input->post('phone'),'Phone Verification Code is : '.$phone,6);
 			}else{
 				@$this->general_model->sendSms($this->input->post('phone'),'Phone Verification Code is : '.$phone);
 			}
-			retJson(['_return' => true,'msg' => 'email-'.$mail.'=phone-'.$phone,'phone_code' => $phone,'email_code' => $mail]);
+			retJson(['_return' => true,'msg' => 'phone-'.$phone,'phone_code' => $phone]);
 		}else{
 			retJson(['_return' => false,'msg' => '`email`,`phone` are Required']);
-		}		
+		}	
+	}
+
+	public function send_verification_email()
+	{
+		if ($this->input->post('email')) {
+			$mail = mt_rand(111111,999999);
+			$template = $this->load->view('mail/verification_code',['code' => $mail],true);
+			@$this->general_model->send_mail($this->input->post('email'),'Email Verification Code',$template);
+			retJson(['_return' => true,'msg' => 'email-'.$mail,'email_code' => $mail]);
+		}else{
+			retJson(['_return' => false,'msg' => '`email` are Required']);
+		}			
 	}
 
 	public function emailcheck()
