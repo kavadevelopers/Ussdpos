@@ -58,6 +58,8 @@
     <!--forms-wizard css-->
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>asset/bower_components/jquery.steps/css/jquery.steps.css">
 
+    <link rel="stylesheet" href="<?= base_url() ?>asset/assets/photoswipe/photoswipe.css"> 
+    <link rel="stylesheet" href="<?= base_url() ?>asset/assets/photoswipe/default-skin/default-skin.css">
     
 </head>
 

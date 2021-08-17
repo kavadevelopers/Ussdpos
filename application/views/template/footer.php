@@ -62,6 +62,8 @@
     <script src="<?= base_url() ?>asset/assets/pages/form-masking/form-mask.js"></script>
 
 
+    <script src="<?= base_url() ?>asset/assets/photoswipe/photoswipe-ui-default.min.js"></script> 
+    <script src="<?= base_url() ?>asset/assets/photoswipe/photoswipe.min.js"></script> 
     <script type="text/javascript">
         <?php if(!empty($this->session->flashdata('error'))){ ?>
             PNOTY('<?= $this->session->flashdata('error'); ?>','error');

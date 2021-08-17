@@ -7,14 +7,26 @@ class General_model extends CI_Model
 		parent::__construct();
 	}
 
-	public function getUser($user)
+	public function getHeightWidthOfImage($url)
 	{
-		$user = $this->db->get_where('register_agent',['id' => $user])->row_object();
-		$userDet = $this->db->get_where('details_agent',['user' => $user->id])->row_object();
-		$user->name = ucfirst($user->name);
-		$userDet->fileprofile = $this->getFile($userDet->fileprofile,'uploads/agent/');
-		$user->detail	= $userDet;
-		return $user;
+		$data = @getimagesize($url);
+		$width = 512;
+		$height = 512;
+		if ($data) {
+			$width = $data[0];
+			$height = $data[1];	
+		}
+		return $width.','.$height;	
+	}
+
+	public function imagesArrayForPhotoSwipe($images)
+	{
+		$string = "";
+		foreach (explode(',', $images) as $key => $value) {
+			$str = $value.'='.$this->getHeightWidthOfImage($value).'+';
+			$string .= $str;
+		}
+		return rtrim($string,'+');
 	}
 
 	public function getFile($file,$folder)
@@ -29,7 +41,6 @@ class General_model extends CI_Model
 			return "";
 		}
 	}
-
 
 	public function customerPush($customer,$title,$body,$type = '',$dy = []){
 		$firebases = $this->db->get_where('customer_firebase',['user' => $customer])->result_array();

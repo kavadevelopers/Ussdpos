@@ -9,7 +9,7 @@ class Authcls extends CI_Controller
 	public function getuser()
 	{
 		if($this->input->post('user')){
-			retJson(['_return' => true,'user' => $this->general_model->getUser($this->input->post('user'))]);
+			retJson(['_return' => true,'user' => $this->agent_model->get($this->input->post('user'))]);
 		}else{
 			retJson(['_return' => false,'msg' => '`user` are Required']);
 		}
@@ -65,7 +65,7 @@ class Authcls extends CI_Controller
 					if ($user['block'] == "") {
 						if ($this->input->post('descr') && $this->input->post('token') && $this->input->post('device') && $this->input->post('device_id')) {
 							@$this->login_model->firebaseLogin($user['id']);	
-							retJson(['_return' => true,'user' => $this->general_model->getUser($user['id'])]);
+							retJson(['_return' => true,'user' => $this->agent_model->get($user['id'])]);
 						}else{
 							retJson(['_return' => false,'msg' => '`descr`,`token`,`device_id`,`device` are Required']);
 						}	

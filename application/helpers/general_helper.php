@@ -121,20 +121,45 @@ function get_user_byid($id){
     return $ci->db->get_where('user',['id' => $id])->row_array();  
 }
 
-function menu($seg,$array)
+// function menu($seg,$array)
+// {
+//     $rarray = ["","",""];
+//     $CI =& get_instance();
+//     $path = $CI->uri->segment($seg);
+//     foreach($array as $a)
+//     {
+//         if($path === $a)
+//         {
+//           $rarray = array("active","active","pcoded-trigger");
+//         }
+//     }
+
+//     return $rarray;
+// }
+function menu($seg,$iarray,$parent = false)
 {
-    $rarray = ["","",""];
+    $array = ["","",""];
     $CI =& get_instance();
-    $path = $CI->uri->segment($seg);
-    foreach($array as $a)
-    {
-        if($path === $a)
+    if(!$parent){
+        $path = $CI->uri->segment($seg);
+        foreach($iarray as $a)
         {
-          $rarray = array("active","active","pcoded-trigger");
+            if($path === $a)
+            {
+              $array = array("active kava-active","active kava-active","pcoded-trigger kava-active"); 
+            }
+        }
+    }else{
+        $path = $CI->uri->segment($seg);
+        foreach($iarray as $a)
+        {
+            if($parent == $CI->uri->segment(1) && $path === $a)
+            {
+              $array = array("active kava-active","active kava-active","pcoded-trigger kava-active"); 
+            }
         }
     }
-
-    return $rarray;
+    return $array;
 }
 
 function sendEmail($to,$sub,$msg)

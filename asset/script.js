@@ -9,6 +9,9 @@ function PNOTY(_text,_type){
 	});
 }
 
+function myConsole(a) {
+    console.log(a);
+}
 
 function delete_confirm(url) {
 	swal({

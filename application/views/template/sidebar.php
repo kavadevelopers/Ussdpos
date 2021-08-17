@@ -1,7 +1,23 @@
+<style type="text/css">
+.new-mainmenu{
+    float: left;
+    width: 240px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.new-mainmenu::-webkit-scrollbar {
+  display: none;
+}
+.pcoded-inner-navbar {
+    height: calc(100% - 80px);
+}
+</style>
+
+
 <div class="pcoded-main-container">
     <div class="pcoded-wrapper">
         <nav class="pcoded-navbar">
-            <div class="pcoded-inner-navbar main-menu">
+            <div class="pcoded-inner-navbar new-mainmenu" style="overflow-y: scroll;">
                 <div class="pcoded-navigatio-lavel">Navigation</div>
                 <ul class="pcoded-item pcoded-left-item">
                     <li class="<?= menu(1,["dashboard"])[0]; ?>">
@@ -21,15 +37,35 @@
                         </li>
                     </ul>
                 <?php } ?>
+                <?php if($this->rights->check([3])){ ?>
+                    <div class="pcoded-navigatio-lavel">Ussdpos Users</div>
+                    <?php if($this->rights->check([3])){ ?>
+                        <ul class="pcoded-item pcoded-left-item">
+                            <li class="pcoded-hasmenu <?= menu(1,["agent"])[2]; ?>">
+                                <a href="javascript:void(0)">
+                                    <span class="pcoded-micon"><i class="fa fa-user-secret"></i></span>
+                                    <span class="pcoded-mtext">Agents</span>
+                                </a>   
+                                <ul class="pcoded-submenu">
+                                    <li class="<?= menu(2,["active"],'agent')[0]; ?>">
+                                        <a href="<?= base_url('agent/active') ?>">
+                                            <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                            <span class="pcoded-mtext">Active</span>
+                                        </a>
+                                    </li>
+                                    <li class="<?= menu(2,["blocked"],'agent')[0]; ?>">
+                                        <a href="<?= base_url('agent/blocked') ?>">
+                                            <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                            <span class="pcoded-mtext">Reported / Blocked</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <?php } ?>
+                <?php } ?>
                 
-                <ul class="pcoded-item pcoded-left-item">
-                    <li>
-                        <a href="<?= base_url('login/logout') ?>">
-                            <span class="pcoded-micon"><i class="feather icon-log-out"></i></span>
-                            <span class="pcoded-mtext">Logout</span>
-                        </a>
-                    </li>
-                </ul>
+                
 
                 
                 <?php if($this->rights->check([2])){ ?>
@@ -73,6 +109,14 @@
                         </li>
                     </ul>
                 <?php } ?>
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li>
+                            <a href="<?= base_url('login/logout') ?>">
+                                <span class="pcoded-micon"><i class="feather icon-log-out"></i></span>
+                                <span class="pcoded-mtext">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
             </div>
         </nav>
         <div class="pcoded-content">

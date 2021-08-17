@@ -1,4 +1,8 @@
 <style type="text/css">
+	.tb-row-image{
+		width: 60px;
+		border-radius: 50%;
+	}
 	/*::-webkit-scrollbar {
 	display: none;
 	}*/

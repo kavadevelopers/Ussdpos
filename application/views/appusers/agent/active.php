@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="col-md-6 text-right">
-                 <a href="<?= base_url('users/add') ?>" class="btn btn-primary btn-mini"><i class="fa fa-plus"></i> Add</a>  
+                 
             </div>
         </div>
     </div>
@@ -21,47 +21,50 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-block table-responsive">
+                    
                     <table class="table table-striped table-bordered table-mini table-dt">
                         <thead>
                             <tr>
-                                <th>Register Type</th>
+                                <th class="text-center">Profile</th>
                                 <th>Name</th>
-                                <th>Business Name</th>
-                                <th>Phone</th>
                                 <th>Email</th>
-                                <th>Services</th>
-                                <th class="text-center">Status</th>
+                                <th>Phone</th>
+                                <th class="text-center">Status</th>                     
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($list as $key => $value) { ?>
                                 <tr>
-                                    <td><?= ucfirst($value['rtype']) ?></td>
-                                    <td><?= $value['firstname'].' '.$value['lastname'] ?></td>
-                                    <td><?= $value['business'] ?></td>
-                                    <td><?= $value['ccode'] ?>-<?= $value['phone'] ?></td>
-                                    <td><?= $value['email'] ?></td>
+                                    <td class="text-center">
+                                        <img src="<?= $this->agent_model->profile($value->id) ?>" class="tb-row-image">
+                                    </td>
                                     <td>
-                                       <?php $servces = ""; foreach (explode(',', $value['services']) as $vl) {
-                                           $servces .= getCategory($vl)['name'].",";
-                                       } ?> 
-                                       <?= rtrim($servces,','); ?>
+                                        <?= ucfirst($value->name) ?>
+                                    </td>
+                                    <td>
+                                        <?= $value->email ?>
+                                    </td>
+                                    <td>
+                                        <?= $value->phone ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php if($value['block'] == ""){ ?>
-                                            <a href="<?= base_url('service_provider/block/').$value['id'] ?>/yes" class="btn btn-success btn-mini" onclick="return confirm('Are you sure?');" title="Click to block user">
+                                        <?php if($value->block == ""){ ?>
+                                            <a href="<?= base_url('agent/block/').$value->id.'/'.$this->uri->segment(2) ?>/yes" class="btn btn-success btn-mini" onclick="return confirm('Are you sure?');" title="Click to block user">
                                                 Active
                                             </a>
                                         <?php }else{ ?>
-                                            <a href="<?= base_url('service_provider/block/').$value['id'] ?>" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure?');" title="Click to unblock user">
+                                            <a href="<?= base_url('agent/block/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure?');" title="Click to unblock user">
                                                 Blocked
                                             </a>
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="<?= base_url('service_provider/reject/').$value['id'] ?>/approved" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure?');">
-                                            Reject
+                                        <a href="<?= base_url('agent/view/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-success btn-mini" title="View">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="<?= base_url('agent/delete/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-danger btn-mini btn-delete" title="delete">
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
