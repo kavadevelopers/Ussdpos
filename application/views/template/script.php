@@ -41,7 +41,7 @@
             var options = {
                 // optionName: 'option value'
                 // for example:
-                shareEl:false,
+                shareEl:true,
                 index: 0 // start at first slide
             };
 
