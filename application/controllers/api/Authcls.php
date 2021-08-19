@@ -42,12 +42,26 @@ class Authcls extends CI_Controller
 		}			
 	}
 
+	public function bvncheck()
+	{
+		if ($this->input->post('bvn')) {
+			$user = $this->db->get_where('register_agent',['bvn' => $this->input->post('bvn')])->row_array();
+			if ($user) {
+				retJson(['_return' => false,'msg' => 'BVN already assigned with another email.']);
+			}else{
+				retJson(['_return' => true,'msg' => '']);
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`bvn` are Required']);
+		}	
+	}
+
 	public function emailcheck()
 	{
 		if ($this->input->post('email')) {
-			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email'),'df' => ''])->row_array();
+			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email')])->row_array();
 			if ($user) {
-				retJson(['_return' => false,'msg' => 'Email already assigned with another email.']);
+				retJson(['_return' => false,'msg' => 'Email already assigned with another user.']);
 			}else{
 				retJson(['_return' => true,'msg' => '']);
 			}

@@ -38,42 +38,6 @@ class Register extends CI_Controller
 		    $this->db->insert('register_agent',$data);
 		    $agent = $this->db->insert_id();
 
-
-		    // if(isset($_FILES ['fileaddress']) && $_FILES['fileaddress']['error'] == 0){
-		    // 	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileaddress']['name'], PATHINFO_EXTENSION);
-		    // 	$this->upload->initialize($config);
-		    // 	if($this->upload->do_upload('fileaddress')){
-		    // 		$fileaddress = $config['file_name'];
-		    // 	}else{
-		    // 		$fileaddress = "";
-		    // 	}
-		    // }else{
-	    	// 	$fileaddress = "";
-	    	// }
-
-		    // if(isset($_FILES ['fileid']) && $_FILES['fileid']['error'] == 0){
-		    // 	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileid']['name'], PATHINFO_EXTENSION);
-		    // 	$this->upload->initialize($config);
-		    // 	if($this->upload->do_upload('fileid')){
-		    // 		$fileid = $config['file_name'];
-		    // 	}else{
-		    // 		$fileid = "";
-		    // 	}
-		    // }else{
-	    	// 	$fileid = "";
-	    	// }
-	    	// if(isset($_FILES ['fileprofile']) && $_FILES['fileprofile']['error'] == 0){
-		    // 	$config['file_name'] = microtime(true).".".pathinfo($_FILES['fileprofile']['name'], PATHINFO_EXTENSION);
-		    // 	$this->upload->initialize($config);
-		    // 	if($this->upload->do_upload('fileprofile')){
-		    // 		$fileprofile = $config['file_name'];
-		    // 	}else{
-		    // 		$fileprofile = "";
-		    // 	}
-		    // }else{
-	    	// 	$fileprofile = "";
-	    	// }
-
 	    	if ($this->input->post('fileaddress')) {
 	    		$img = $this->input->post('fileaddress');
 	    		$img = str_replace('data:image/png;base64,', '', $img);
@@ -124,6 +88,9 @@ class Register extends CI_Controller
 		    	'fileprofile'			=> $fileprofile
 		    ];
 		    $this->db->insert('details_agent',$data);
+
+		    $template = $this->load->view('mail/registration_success',[,true);
+			@$this->general_model->send_mail($this->input->post('email'),'Registration Success',$template);
 
 		    retJson(['_return' => true,'msg' => 'Registration Success.']);
 		}else{
