@@ -56,6 +56,25 @@ class Authcls extends CI_Controller
 		}	
 	}
 
+	public function email_nin_check()
+	{
+		if ($this->input->post('email') && $this->input->post('nin')) {
+			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email')])->row_array();
+			if ($user) {
+				retJson(['_return' => false,'msg' => 'Email already assigned with another user.']);
+			}else{
+				$user = $this->db->get_where('details_agent',['nin' => $this->input->post('nin')])->row_array();
+				if ($user) {
+					retJson(['_return' => false,'msg' => 'NIN already assigned with another user.']);
+				}else{
+					retJson(['_return' => true,'msg' => '']);
+				}
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`email`,`nin` are Required']);
+		}
+	}
+
 	public function emailcheck()
 	{
 		if ($this->input->post('email')) {
