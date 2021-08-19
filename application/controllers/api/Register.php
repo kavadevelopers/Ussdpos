@@ -89,7 +89,7 @@ class Register extends CI_Controller
 		    ];
 		    $this->db->insert('details_agent',$data);
 
-		    $template = $this->load->view('mail/registration_success',[,true);
+		    $template = $this->load->view('mail/registration_success',[],true);
 			@$this->general_model->send_mail($this->input->post('email'),'Registration Success',$template);
 
 		    retJson(['_return' => true,'msg' => 'Registration Success.']);
