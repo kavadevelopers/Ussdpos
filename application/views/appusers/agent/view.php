@@ -34,6 +34,7 @@
                                 <div class="col-lg-12">
                                     <div class="user-title">
                                         <h2><?= ucfirst($item->name) ?></h2>
+                                        <span class="text-white">POS Agent</span>
                                     </div>
                                 </div>
                             </div>

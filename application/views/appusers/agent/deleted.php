@@ -28,8 +28,7 @@
                                 <th class="text-center">Profile</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th class="text-center">Status</th>                     
+                                <th>Phone</th>                    
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -49,25 +48,9 @@
                                         <?= $value->phone ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php if($value->block == ""){ ?>
-                                            <a href="<?= base_url('agent/block/').$value->id.'/'.$this->uri->segment(2) ?>/yes" class="btn btn-success btn-mini" onclick="return confirm('Are you sure?');" title="Click to block user">
-                                                Active
-                                            </a>
-                                        <?php }else{ ?>
-                                            <a href="<?= base_url('agent/block/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-danger btn-mini" onclick="return confirm('Are you sure?');" title="Click to unblock user">
-                                                Blocked
-                                            </a>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
                                         <a href="<?= base_url('agent/view/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-success btn-mini" title="View">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <?php if($this->session->userdata('id') == '1'){ ?>
-                                            <a href="<?= base_url('agent/delete/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-danger btn-mini btn-delete" title="delete">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>

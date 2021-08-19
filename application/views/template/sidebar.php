@@ -59,6 +59,14 @@
                                             <span class="pcoded-mtext">Reported / Blocked</span>
                                         </a>
                                     </li>
+                                    <?php if(get_user()['user_type'] == '0'){ ?>
+                                        <li class="<?= menu(2,["deleted"],'agent')[0]; ?>">
+                                            <a href="<?= base_url('agent/deleted') ?>">
+                                                <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                                <span class="pcoded-mtext">Deleted</span>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
                                 </ul>
                             </li>
                         </ul>

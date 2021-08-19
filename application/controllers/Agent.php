@@ -36,8 +36,22 @@ class Agent extends CI_Controller
 		$this->load->theme('appusers/agent/active',$data);	
 	}
 
+	public function deleted()
+	{
+		if($this->session->userdata('id') != '1'){
+			redirect(base_url('error404'));
+		}
+		$data['_title']		= "Agents - Deleted";		
+		$this->db->order_by('id','desc');
+		$data['list']		= $this->db->get_where('register_agent',['df' => 'yes'])->result_object();
+		$this->load->theme('appusers/agent/deleted',$data);	
+	}
+
 	public function delete($id,$type)
 	{
+		if($this->session->userdata('id') != '1'){
+			redirect(base_url('error404'));
+		}
 		$this->db->where('id',$id)->update('register_agent',['df' => 'yes']);
 		$this->session->set_flashdata('msg', 'Agent deleted');
 	    redirect(base_url('agent/'.$type));
