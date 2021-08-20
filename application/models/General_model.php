@@ -7,6 +7,24 @@ class General_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function getBankThumb($bank)
+	{
+		$cate = $this->db->get_where('master_banks',['id' => $bank])->row_array();
+		if($cate){
+			if($cate['image'] != ""){
+				if(file_exists(FCPATH.'uploads/master/'.$cate['image'])){
+					return base_url('uploads/master/'.$cate['image']);
+				}else{
+					return base_url('uploads/placeholders/placeholder-long.jpg');
+				}
+			}else{
+				return base_url('uploads/placeholders/placeholder-long.jpg');
+			}
+		}else{
+			return base_url('uploads/placeholders/placeholder-long.jpg');
+		}
+	}
+
 	public function getHeightWidthOfImage($url)
 	{
 		$data = @getimagesize($url);

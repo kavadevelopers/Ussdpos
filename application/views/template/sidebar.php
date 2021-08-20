@@ -99,6 +99,31 @@
                     </ul>
                 <?php } ?>
                 <?php if(get_user()['user_type'] == '0'){ ?>
+                    <div class="pcoded-navigatio-lavel">Master Management</div>
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li class="pcoded-hasmenu <?= menu(1,["banks"])[2]; ?>">
+                            <a href="javascript:void(0)">
+                                <span class="pcoded-micon"><i class="fa fa-university"></i></span>
+                                <span class="pcoded-mtext">Banks</span>
+                            </a>   
+                            <ul class="pcoded-submenu">
+                                <li class="<?= menu(2,["ussd",'edit_ussd'],'banks')[0]; ?>">
+                                    <a href="<?= base_url('banks/ussd') ?>">
+                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                        <span class="pcoded-mtext">Ussd</span>
+                                    </a>
+                                </li>
+                                <li class="<?= menu(2,["transfer",'edit_transfer'],'banks')[0]; ?>">
+                                    <a href="<?= base_url('banks/transfer') ?>">
+                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                        <span class="pcoded-mtext">Bank Transfer</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                <?php } ?>    
+                <?php if(get_user()['user_type'] == '0'){ ?>
                     <div class="pcoded-navigatio-lavel">Super Admin Access</div>
                     <ul class="pcoded-item pcoded-left-item">
                         <li class="<?= menu(1,["users"])[0]; ?>">

@@ -6,6 +6,26 @@ class General extends CI_Controller
 		parent::__construct();
 	}
 
+	public function getbanks()
+	{
+		if ($this->input->post('type')) {
+			
+			$this->db->where('type',$this->input->post('type'));
+			$query = $this->db->get('master_banks');
+
+
+			$list = $query->result_object();
+			foreach ($list as $key => $value) {
+				$value->image = $this->general_model->getBankThumb($value->id);
+			}
+
+			retJson(['_return' => true,'count' => $query->num_rows(),'list' => $list]);
+
+		}else{
+			retJson(['_return' => false,'msg' => '`type` are Required']);
+		}
+	}
+
 	public function getpage()
 	{
 		$settings = [
