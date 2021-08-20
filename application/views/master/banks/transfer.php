@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Thumbnail <span class="-req">*</span></label>
+                                    <label>Thumbnail <span class="-req">*</span> <small>size (640w x 360h)</small></label>
                                     <input name="image" type="file" class="form-control" onchange="readFileImage(this)" value="<?= set_value('image'); ?>" required>
                                     <?= form_error('image') ?>
                                 </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Thumbnail</label>
+                                    <label>Thumbnail <small>size (640w x 360h)</small></label>
                                     <input name="image" type="file" class="form-control" onchange="readFileImage(this)" value="<?= set_value('image'); ?>">
                                     <?= form_error('image') ?>
                                 </div>
