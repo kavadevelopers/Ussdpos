@@ -11,6 +11,7 @@ class General extends CI_Controller
 		if ($this->input->post('type')) {
 			
 			$this->db->where('type',$this->input->post('type'));
+			$this->db->where('df',"");
 			$query = $this->db->get('master_banks');
 
 
