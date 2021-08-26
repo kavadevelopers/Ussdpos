@@ -9,6 +9,15 @@ function pre_print($array)
     exit;
 }
 
+function traType($type)
+{
+    if ($type == 1) {
+        return ['ussd','1'];
+    }else if($type == 2){
+        return ['comission','2'];
+    }
+}
+
 function ptPretyAmount($amount)
 {
     return number_format($amount, 2, '.', ',');

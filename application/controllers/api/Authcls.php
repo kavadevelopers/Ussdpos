@@ -56,9 +56,9 @@ class Authcls extends CI_Controller
 		}	
 	}
 
-	public function email_nin_check()
+	public function email_nin_phone_check()
 	{
-		if ($this->input->post('email') && $this->input->post('nin')) {
+		if ($this->input->post('email') && $this->input->post('nin') && $this->input->post('phone')) {
 			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email')])->row_array();
 			if ($user) {
 				retJson(['_return' => false,'msg' => 'Email already assigned with another user.']);
@@ -67,11 +67,16 @@ class Authcls extends CI_Controller
 				if ($user) {
 					retJson(['_return' => false,'msg' => 'NIN already assigned with another user.']);
 				}else{
-					retJson(['_return' => true,'msg' => '']);
+					$user = $this->db->get_where('register_agent',['phone' => $this->input->post('phone')])->row_array();
+					if ($user) {
+						retJson(['_return' => false,'msg' => 'Phone no. already assigned with another user.']);		
+					}else{
+						retJson(['_return' => true,'msg' => '']);
+					}
 				}
 			}
 		}else{
-			retJson(['_return' => false,'msg' => '`email`,`nin` are Required']);
+			retJson(['_return' => false,'msg' => '`email`,`nin`,`phone` are Required']);
 		}
 	}
 
@@ -92,7 +97,8 @@ class Authcls extends CI_Controller
 	public function login()
 	{
 		if ($this->input->post('email') && $this->input->post('password')) {
-			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email'),'df' => ''])->row_array();
+			$user = $this->db->where('df','')->where('email',$this->input->post('email'))->or_where('phone',$this->input->post('email'))->get('register_agent')->row_array();
+			//$user = $this->db->get_where('register_agent',['email' => $this->input->post('email'),'df' => ''])->row_array();
 			if ($user) {
 				if (md5($this->input->post('password')) == $user['password']) {
 					if ($user['block'] == "") {
@@ -106,10 +112,10 @@ class Authcls extends CI_Controller
 						retJson(['_return' => false,'msg' => 'Your account is suspended. Please contact administrator..']);		
 					}
 				}else{
-					retJson(['_return' => false,'msg' => 'Email and Password not match']);	
+					retJson(['_return' => false,'msg' => 'Email/Phone and Password not match']);	
 				}
 			}else{
-				retJson(['_return' => false,'msg' => 'Email not registered']);
+				retJson(['_return' => false,'msg' => 'Email/Phone not registered']);
 			}
 		}else{
 			retJson(['_return' => false,'msg' => '`email`,`password` are Required']);
