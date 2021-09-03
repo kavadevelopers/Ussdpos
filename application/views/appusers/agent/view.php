@@ -84,7 +84,7 @@
                                                                     <th scope="row">Mobile no.</th>
                                                                     <td>
                                                                         <?= $item->phone ?> 
-                                                                        <a href="https://web.whatsapp.com/send?phone=+234<?= $item->phone ?>">
+                                                                        <a href="https://web.whatsapp.com/send?phone=+234<?= $item->phone ?>" target="_blank">
                                                                             <img src="<?= base_url('asset/images/watsapp.png') ?>" style="width:20px;">
                                                                         </a>
                                                                     </td>
