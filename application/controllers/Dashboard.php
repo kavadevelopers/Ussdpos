@@ -6,6 +6,12 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		$this->auth->check_session();
+		$this->load->library('Flutterwave');
+	}
+
+	public function test()
+	{
+		echo ($this->flutterwave->ChargeUSSD('001','058','10','kava@gmail.com','09096655115','Eva'));
 	}
 
 	public function mail()

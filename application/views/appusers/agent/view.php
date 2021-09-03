@@ -82,7 +82,12 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Mobile no.</th>
-                                                                    <td><?= $item->phone ?></td>
+                                                                    <td>
+                                                                        <?= $item->phone ?> 
+                                                                        <a href="whatsapp://send?phone=+234<?= $item->phone ?>">
+                                                                            <img src="<?= base_url('asset/images/watsapp.png') ?>" style="width:20px;">
+                                                                        </a>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Gender</th>

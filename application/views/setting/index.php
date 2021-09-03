@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Flutter Wave Api Key<span class="-req">*</span></label>
+                            <label>FlutterWave Secret Key<span class="-req">*</span></label>
                             <input name="flutterapi" type="text" class="form-control" value="<?= set_value('flutterapi',get_setting()['flutterapi']); ?>" >
                             <?= form_error('flutterapi') ?>
                         </div>
