@@ -63,6 +63,9 @@
                                         <a href="<?= base_url('agent/view/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-success btn-mini" title="View">
                                             <i class="fa fa-eye"></i>
                                         </a>
+                                        <a href="<?= base_url('agent/edit/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-primary btn-mini" title="Edit">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
                                         <?php if($this->session->userdata('id') == '1'){ ?>
                                             <a href="<?= base_url('agent/delete/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-danger btn-mini btn-delete" title="delete">
                                                 <i class="fa fa-trash"></i>

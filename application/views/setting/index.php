@@ -171,9 +171,5 @@
 </div>
 
 <style type="text/css">
-    .h5-saparater{
-        border-bottom: 1px solid #ccc;
-        padding: 5px;
-        margin-bottom: 10px;
-    }
+    
 </style>

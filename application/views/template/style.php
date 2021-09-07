@@ -1,4 +1,9 @@
 <style type="text/css">
+	.h5-saparater{
+        border-bottom: 1px solid #ccc;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
 	.tb-row-image{
 		width: 60px;
 		border-radius: 50%;
@@ -98,13 +103,13 @@
 
 	.ajaxLoader{
 		display: none;
-		position: absolute;
+		position: fixed;
 	  	top: 0;
 	  	bottom: 0%;
 	  	left: 0;
 	  	right: 0%;
 	  	background-color: #cccccc87;
-	  	z-index: 999999;
+	  	z-index: 9999999999;
 	}
 	.ajaxLoader .loader{
 		top: 50%;

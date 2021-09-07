@@ -50,6 +50,14 @@
             gallery.init();
         });
     });
+
+    function showAjaxLoader() {
+        $('.ajaxLoader').show();
+    }
+
+    function hideAjaxLoader() {
+        $('.ajaxLoader').hide();
+    }
 </script>
 
 

@@ -56,6 +56,20 @@ function checkSubscriptionExpiration($expireDate)
     }
 }
 
+function selected($val,$val2,$val3 = false){
+    $ret = "";
+    if($val == $val2){
+        $ret = "selected";
+    }
+
+    if($val3 && $ret == ''){
+        if($val == $val3){
+            $ret = "selected";       
+        }
+    }
+    return $ret;
+}
+
 function _nowDateTime()
 {   
     return date('Y-m-d H:i:s');

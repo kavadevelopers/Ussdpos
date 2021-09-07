@@ -7,6 +7,16 @@ class General_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function getStates()
+	{
+		return $this->db->get_where('master_states',['df' => ''])->result_object();
+	}
+
+	public function getRegBanks()
+	{
+		return $this->db->get_where('master_reg_banks',['df' => ''])->result_object();
+	}
+
 	public function getBankThumb($bank)
 	{
 		$cate = $this->db->get_where('master_banks',['id' => $bank])->row_array();

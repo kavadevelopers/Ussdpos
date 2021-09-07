@@ -45,7 +45,7 @@ class Authcls extends CI_Controller
 	public function bvncheck()
 	{
 		if ($this->input->post('bvn')) {
-			$user = $this->db->get_where('register_agent',['bvn' => $this->input->post('bvn')])->row_array();
+			$user = $this->db->get_where('register_agent',['bvn' => $this->input->post('bvn'),'df' => ''])->row_array();
 			if ($user) {
 				retJson(['_return' => false,'msg' => 'BVN already assigned with another email.']);
 			}else{
@@ -59,15 +59,15 @@ class Authcls extends CI_Controller
 	public function email_nin_phone_check()
 	{
 		if ($this->input->post('email') && $this->input->post('nin') && $this->input->post('phone')) {
-			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email')])->row_array();
+			$user = $this->db->get_where('register_agent',['email' => $this->input->post('email'),'df' => ''])->row_array();
 			if ($user) {
 				retJson(['_return' => false,'msg' => 'Email already assigned with another user.']);
 			}else{
-				$user = $this->db->get_where('details_agent',['nin' => $this->input->post('nin')])->row_array();
+				$user = $this->db->get_where('details_agent',['nin' => $this->input->post('nin'),'df' => ''])->row_array();
 				if ($user) {
 					retJson(['_return' => false,'msg' => 'NIN already assigned with another user.']);
 				}else{
-					$user = $this->db->get_where('register_agent',['phone' => $this->input->post('phone')])->row_array();
+					$user = $this->db->get_where('register_agent',['phone' => $this->input->post('phone'),'df' => ''])->row_array();
 					if ($user) {
 						retJson(['_return' => false,'msg' => 'Phone no. already assigned with another user.']);		
 					}else{
