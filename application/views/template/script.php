@@ -11,14 +11,14 @@
             "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
         });
 
-        $('.btn-delete').click(function() {
+        $(document).on('click','.btn-delete', function(event){
 			if(confirm('Are you sure you want to delete this?')){
 				return true;
 			}
 			return false;
 		});
 
-		$('.btn-status').click(function() {
+        $(document).on('click','.btn-status', function(event){
 			if(confirm('Are you sure you want to change status?')){
 				return true;
 			}

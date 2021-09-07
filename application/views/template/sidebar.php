@@ -122,6 +122,22 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li class="<?= menu(1,["regbanks"])[0]; ?>">
+                            <a href="<?= base_url('regbanks/banks') ?>">
+                                <span class="pcoded-micon"><i class="fa fa-university"></i></span>
+                                <span class="pcoded-mtext">Reg. Banks</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li class="<?= menu(1,["states"])[0]; ?>">
+                            <a href="<?= base_url('states/list') ?>">
+                                <span class="pcoded-micon"><i class="fa fa-map"></i></span>
+                                <span class="pcoded-mtext">States</span>
+                            </a>
+                        </li>
+                    </ul>
                 <?php } ?>    
                 <?php if(get_user()['user_type'] == '0'){ ?>
                     <div class="pcoded-navigatio-lavel">Super Admin Access</div>
