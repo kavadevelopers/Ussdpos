@@ -25,7 +25,7 @@
                     <table class="table table-striped table-bordered table-mini table-dt">
                         <thead>
                             <tr>
-                                <th class="text-center">Profile</th>
+                                <th class="text-center">#</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -37,7 +37,7 @@
                             <?php foreach ($list as $key => $value) { ?>
                                 <tr>
                                     <td class="text-center">
-                                        <img src="<?= $this->agent_model->profile($value->id) ?>" class="tb-row-image">
+                                        <?= $key + 1 ?>
                                     </td>
                                     <td>
                                         <?= ucfirst($value->name) ?>
