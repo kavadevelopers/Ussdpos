@@ -14,7 +14,7 @@ class Agent_model extends CI_Model
 		if ($this->general_model->getFile($userDet->fileprofile,'uploads/agent/') != "") {
 			return $this->general_model->getFile($userDet->fileprofile,'uploads/agent/');
 		}else{
-			return base_url('uploads/common/profile.png');
+			return base_url('uploads/placeholders/placeholder512.png');
 		}
 	}
 
@@ -25,7 +25,7 @@ class Agent_model extends CI_Model
 		if ($this->general_model->getFile($userDet->fileid,'uploads/agent/') != "") {
 			return $this->general_model->getFile($userDet->fileid,'uploads/agent/');
 		}else{
-			return base_url('uploads/common/profile.png');
+			return base_url('uploads/placeholders/placeholder512.png');
 		}
 	}
 
@@ -36,7 +36,7 @@ class Agent_model extends CI_Model
 		if ($this->general_model->getFile($userDet->fileaddress,'uploads/agent/') != "") {
 			return $this->general_model->getFile($userDet->fileaddress,'uploads/agent/');
 		}else{
-			return base_url('uploads/common/profile.png');
+			return base_url('uploads/placeholders/placeholder512.png');
 		}
 	}
 

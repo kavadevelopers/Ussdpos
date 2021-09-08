@@ -98,6 +98,12 @@
             if(window.innerWidth > 990){
                 //$('#mobile-collapse').click(); 
             }
+            target = $('.pcoded-inner-navbar .kava-active');
+            $('.pcoded-inner-navbar').stop().animate({
+                    scrollTop: $(target).offset().top - 100
+            }, 600, function() {
+                    //location.hash = target;
+            });
         });
     </script>
 

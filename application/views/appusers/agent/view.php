@@ -57,10 +57,12 @@
                         <a class="nav-link" data-toggle="tab" href="#doc" role="tab" aria-selected="false">Documents</a>
                         <div class="slide"></div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#ver" role="tab" aria-selected="false">Verification</a>
-                        <div class="slide"></div>
-                    </li>
+                    <?php if ($item->df == "") { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#ver" role="tab" aria-selected="false">Verification</a>
+                            <div class="slide"></div>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
             <div class="tab-content">
