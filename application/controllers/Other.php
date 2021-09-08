@@ -30,7 +30,7 @@ class Other extends CI_Controller
 		foreach ($androidUsers as $key => $value) {
 			array_push($atokens, $value['token']);
 		}
-		$iosUsers = $this->db->select('token')->where('token !=','')->where('device','ios')->get('firebase_agent')->result_array();
+		$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->get('firebase_agent')->result_array();
 		foreach ($iosUsers as $key => $value) {
 			array_push($itokens, $value['token']);
 		}

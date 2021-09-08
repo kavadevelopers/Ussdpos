@@ -9,6 +9,80 @@ class Agent extends CI_Controller
 		$this->rights->redirect([3]);
 	}
 
+	public function doc_status()
+	{
+		$processing = 0; $photo = 1; $idphoto = 1; $address = 1;
+		$agent = $this->db->get_where('register_agent',['id' => $this->input->post('agent')])->row_object();
+		if ($this->input->post('photos_status') == '0') {
+			@$this->general_model->agentPush(
+				$this->input->post('agent'),
+				'Passport photo rejected',
+				$this->input->post('photo_reason')
+			);
+
+
+			$template = $this->load->view('mail/document_verification_rejected',[
+				'type'		=> 'Passport Photo',
+				'reason'	=> $this->input->post('photo_reason')
+			],true);
+			@$this->general_model->send_mail($agent->email,'Passport photo rejected',$template);
+			$processing++;
+			$photo = 2;
+		}
+
+		if ($this->input->post('id_status') == '0') {
+			@$this->general_model->agentPush(
+				$this->input->post('agent'),
+				'ID Photo rejected',
+				$this->input->post('id_reason')
+			);
+
+
+			$template = $this->load->view('mail/document_verification_rejected',[
+				'type'		=> 'ID Photo',
+				'reason'	=> $this->input->post('id_reason')
+			],true);
+			@$this->general_model->send_mail($agent->email,'ID Photo rejected',$template);
+			$processing++;
+			$idphoto = 2;
+		}
+
+		if ($this->input->post('address_status') == '0') {
+			@$this->general_model->agentPush(
+				$this->input->post('agent'),
+				'Address Verification rejected',
+				$this->input->post('address_reason')
+			);
+
+
+			$template = $this->load->view('mail/document_verification_rejected',[
+				'type'		=> 'Address Verification',
+				'reason'	=> $this->input->post('address_reason')
+			],true);
+			@$this->general_model->send_mail($agent->email,'Address Verification rejected',$template);
+			$processing++;
+			$address = 2;
+		}
+
+		if ($processing == 0) {
+			$approved = 1;
+		}else{
+			$approved = 2;
+		}
+
+		$data = [
+			'status'	=> $approved,
+			'sphoto'	=> $photo,
+			'sid'		=> $idphoto,
+			'saddress'	=> $address
+		];
+
+		$this->db->where('id',$this->input->post('agent'))->update('register_agent',$data);
+
+		$this->session->set_flashdata('msg', 'Agent Status has been changed');
+	    redirect(base_url('agent/view/'.$this->input->post('agent').'/'.$this->input->post('uri')));
+	}
+
 	public function update()
 	{
 		$data = [
@@ -127,7 +201,31 @@ class Agent extends CI_Controller
 	{
 		$data['_title']		= "Agents - Active";		
 		$this->db->order_by('id','desc');
-		$data['list']		= $this->db->get_where('register_agent',['df' => '','block' => ''])->result_object();
+		$data['list']		= $this->db->get_where('register_agent',['df' => '','block' => '','status' => '1'])->result_object();
+		$this->load->theme('appusers/agent/active',$data);	
+	}
+
+	public function pending()
+	{
+		$data['_title']		= "Agents - Pending Verification";		
+		$this->db->order_by('id','desc');
+		$data['list']		= $this->db->get_where('register_agent',['df' => '','block' => '','status' => '0'])->result_object();
+		$this->load->theme('appusers/agent/active',$data);	
+	}
+
+	public function processing()
+	{
+		$data['_title']		= "Agents - Processing";		
+		$this->db->order_by('id','desc');
+		$data['list']		= $this->db->get_where('register_agent',['df' => '','block' => '','status' => '2'])->result_object();
+		$this->load->theme('appusers/agent/active',$data);	
+	}
+
+	public function reuploaded()
+	{
+		$data['_title']		= "Agents - Documents Re Uploaded";		
+		$this->db->order_by('id','desc');
+		$data['list']		= $this->db->get_where('register_agent',['df' => '','block' => '','status' => '3'])->result_object();
 		$this->load->theme('appusers/agent/active',$data);	
 	}
 
@@ -147,6 +245,20 @@ class Agent extends CI_Controller
 		if($this->session->userdata('id') != '1'){
 			redirect(base_url('error404'));
 		}
+
+		$old = $this->db->get_where('details_agent',['user' => $id])->row_object();
+		if(file_exists(FCPATH.'/uploads/agent/'.$old->fileprofile)) {
+			@unlink(FCPATH.'/uploads/agent/'.$old->fileprofile);
+		}
+
+		if(file_exists(FCPATH.'/uploads/agent/'.$old->fileaddress)) {
+			@unlink(FCPATH.'/uploads/agent/'.$old->fileaddress);
+		}
+
+		if(file_exists(FCPATH.'/uploads/agent/'.$old->fileid)) {
+			@unlink(FCPATH.'/uploads/agent/'.$old->fileid);
+		}
+		
 		$this->db->where('id',$id)->update('register_agent',['df' => 'yes']);
 		$this->db->where('user',$id)->update('details_agent',['df' => 'yes']);
 		$this->session->set_flashdata('msg', 'Agent deleted');

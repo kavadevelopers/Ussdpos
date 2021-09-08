@@ -100,8 +100,8 @@ class General_model extends CI_Model
 		}
 	}
 
-	public function servicePush($provider,$title,$body,$type = '',$dy = []){
-		$firebases = $this->db->get_where('service_firebase',['user' => $provider])->result_array();
+	public function agentPush($user,$title,$body,$type = '',$dy = []){
+		$firebases = $this->db->get_where('firebase_agent',['user' => $user])->result_array();
 		$url = "https://fcm.googleapis.com/fcm/send";
 	    $serverKey = get_setting()['fserverkey'];
 		foreach ($firebases as $key => $firebase) {

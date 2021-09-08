@@ -57,6 +57,10 @@
                         <a class="nav-link" data-toggle="tab" href="#doc" role="tab" aria-selected="false">Documents</a>
                         <div class="slide"></div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#ver" role="tab" aria-selected="false">Verification</a>
+                        <div class="slide"></div>
+                    </li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -209,6 +213,152 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="ver" role="tabpanel">
+                    <form method="post" action="<?= base_url('agent/doc_status') ?>">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="view-info">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <table class="table table-striped table-bordered">
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <th>Photo</th>
+                                                    <th>Type</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Passport Photo
+                                                    </th>
+                                                    <td>
+                                                        <a href="#" class="profile-image photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($item->detail->fileprofile) ?>">
+                                                            <img src="<?= $item->detail->fileprofile ?>" alt="user-img" style="width: 100px;">   
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <?php if($item->sphoto == '0'){ ?>
+                                                            <div class="form-radio">
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="photos_status" value="1" required>
+                                                                        <i class="helper"></i>Approve
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="photos_status" value="0">
+                                                                        <i class="helper"></i>Reject
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div id="passReason" class="form-group" style="display:none;">
+                                                                <select class="form-control" name="photo_reason">
+                                                                    <option value="">-- Select Reason--</option>
+                                                                    <?php foreach (docRejectReasons() as $key => $value) { ?>
+                                                                        <option value="<?= $value ?>"><?= $value ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        <?php }else if($item->sphoto == '1'){ ?>
+                                                            Approved
+                                                        <?php }else if($item->sphoto == '2'){ ?>
+                                                            Rejected
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        ID Verification
+                                                    </th>
+                                                    <td>
+                                                        <a href="#" class="profile-image photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($item->detail->fileid) ?>">
+                                                            <img src="<?= $item->detail->fileid ?>" alt="user-img" style="width: 100px;">   
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <?php if($item->sid == '0'){ ?>
+                                                            <div class="form-radio">
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="id_status" value="1" required>
+                                                                        <i class="helper"></i>Approve
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="id_status" value="0">
+                                                                        <i class="helper"></i>Reject
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div id="idReason" class="form-group" style="display:none;">
+                                                                <select class="form-control" name="id_reason">
+                                                                    <option value="">-- Select Reason--</option>
+                                                                    <?php foreach (docRejectReasons() as $key => $value) { ?>
+                                                                        <option value="<?= $value ?>"><?= $value ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        <?php }else if($item->sid == '1'){ ?>
+                                                            Approved
+                                                        <?php }else if($item->sid == '2'){ ?>
+                                                            Rejected
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Address Verification
+                                                    </th>
+                                                    <td>
+                                                        <a href="#" class="profile-image photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($item->detail->fileaddress) ?>">
+                                                            <img src="<?= $item->detail->fileaddress ?>" alt="user-img" style="width: 100px;">   
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <?php if($item->saddress == '0'){ ?>
+                                                            <div class="form-radio">
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="address_status" value="1" required>
+                                                                        <i class="helper"></i>Approve
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="address_status" value="0">
+                                                                        <i class="helper"></i>Reject
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div id="addressReason" class="form-group" style="display:none;">
+                                                                <select class="form-control" name="address_reason">
+                                                                    <option value="">-- Select Reason--</option>
+                                                                    <?php foreach (docRejectReasons() as $key => $value) { ?>
+                                                                        <option value="<?= $value ?>"><?= $value ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        <?php }else if($item->saddress == '1'){ ?>
+                                                            Approved
+                                                        <?php }else if($item->saddress == '2'){ ?>
+                                                            Rejected
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <input type="hidden" name="agent" value="<?= $item->id ?>">
+                                <input type="hidden" name="uri" value="<?= $this->uri->segment(4) ?>">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o"></i> Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -220,3 +370,42 @@
         white-space: normal;
     }
 </style>
+
+
+<script type="text/javascript">
+    $(function(){
+        $('input[name=photos_status]').change(function(event) {
+            if ($(this).val() == '0') {
+                $('#passReason').show();
+                $('#passReason').find('select').attr('required','required');
+                $('#passReason').find('select').val('');
+            }else{
+                $('#passReason').hide();
+                $('#passReason').find('select').removeAttr('required');
+                $('#passReason').find('select').val('');
+            }
+        });
+        $('input[name=id_status]').change(function(event) {
+            if ($(this).val() == '0') {
+                $('#idReason').show();
+                $('#idReason').find('select').attr('required','required');
+                $('#idReason').find('select').val('');
+            }else{
+                $('#idReason').hide();
+                $('#idReason').find('select').removeAttr('required');
+                $('#idReason').find('select').val('');
+            }
+        });
+        $('input[name=address_status]').change(function(event) {
+            if ($(this).val() == '0') {
+                $('#addressReason').show();
+                $('#addressReason').find('select').attr('required','required');
+                $('#addressReason').find('select').val('');
+            }else{
+                $('#addressReason').hide();
+                $('#addressReason').find('select').removeAttr('required');
+                $('#addressReason').find('select').val('');
+            }
+        });
+    })
+</script>

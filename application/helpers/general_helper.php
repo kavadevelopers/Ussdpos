@@ -42,20 +42,6 @@ function _sortdate($datetime)
     }
 }
 
-function checkSubscriptionExpiration($expireDate)
-{
-    if($expireDate == NULL){
-        return "expired";
-    }else{
-        $date1 = strtotime($expireDate);
-        if($date1 >= strtotime(date('Y-m-d'))){
-            return 'active';
-        }else{
-            return 'expired';
-        }
-    }
-}
-
 function selected($val,$val2,$val3 = false){
     $ret = "";
     if($val == $val2){
@@ -144,21 +130,6 @@ function get_user_byid($id){
     return $ci->db->get_where('user',['id' => $id])->row_array();  
 }
 
-// function menu($seg,$array)
-// {
-//     $rarray = ["","",""];
-//     $CI =& get_instance();
-//     $path = $CI->uri->segment($seg);
-//     foreach($array as $a)
-//     {
-//         if($path === $a)
-//         {
-//           $rarray = array("active","active","pcoded-trigger");
-//         }
-//     }
-
-//     return $rarray;
-// }
 function menu($seg,$iarray,$parent = false)
 {
     $array = ["","",""];
@@ -185,32 +156,19 @@ function menu($seg,$iarray,$parent = false)
     return $array;
 }
 
-function sendEmail($to,$sub,$msg)
+function docRejectReasons()
 {
-    $CI =& get_instance();
-    $CI->load->library('email');
-    $config = array(
-        'protocol'      => 'SMTP',
-        'smtp_host' => get_setting()['mail_host'],
-        'smtp_port' => get_setting()['mail_port'],
-        'smtp_user' => get_setting()['mail_username'],
-        'smtp_pass' => get_setting()['mail_pass'],
-        'mailtype'      => 'html',
-        'charset'       => 'utf-8'
-    );
-    $CI->email->initialize($config);
-    $CI->email->set_mailtype("html");
-    $CI->email->set_newline("\r\n");
-    $CI->email->to($to);
-    $CI->email->from(get_setting()['mail_username']);
-    $CI->email->subject($sub);
-    $CI->email->message($msg);
-    if($CI->email->send()){
-        //echo "ok";
-    }else{
-        //echo $CI->email->print_debugger();
-    }
+    $ar = [
+        'Image not clear',
+        'Out of date utility bill, must be the 3 last months',
+        'Address not Visible or content not readable',
+        'Retake full utility bill Image',
+        'Retake clear passport Photo',
+        'Invalid ID card type'
+    ];
+    return $ar;
 }
+
 
 // Groom
 

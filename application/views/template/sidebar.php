@@ -47,6 +47,24 @@
                                     <span class="pcoded-mtext">Agents</span>
                                 </a>   
                                 <ul class="pcoded-submenu">
+                                    <li class="<?= menu(2,["pending"],'agent')[0]; ?>">
+                                        <a href="<?= base_url('agent/pending') ?>">
+                                            <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                            <span class="pcoded-mtext">Pending</span>
+                                        </a>
+                                    </li>
+                                    <li class="<?= menu(2,["processing"],'agent')[0]; ?>">
+                                        <a href="<?= base_url('agent/processing') ?>">
+                                            <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                            <span class="pcoded-mtext">Processing</span>
+                                        </a>
+                                    </li>
+                                    <li class="<?= menu(2,["reuploaded"],'agent')[0]; ?>">
+                                        <a href="<?= base_url('agent/reuploaded') ?>">
+                                            <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                            <span class="pcoded-mtext">Re-Uploaded</span>
+                                        </a>
+                                    </li>
                                     <li class="<?= menu(2,["active"],'agent')[0]; ?>">
                                         <a href="<?= base_url('agent/active') ?>">
                                             <span class="pcoded-micon"><i class="fa fa-list"></i></span>
