@@ -10,7 +10,7 @@ class Register extends CI_Controller
 	{
 		if($this->input->post('bvn') && $this->input->post('name') && $this->input->post('gender') && $this->input->post('phone') && $this->input->post('email') && $this->input->post('password') && $this->input->post('bname') && $this->input->post('bankac') && $this->input->post('bank') && $this->input->post('nin') && $this->input->post('emp')  && $this->input->post('agent') && $this->input->post('state') && $this->input->post('city') && $this->input->post('address') && $this->input->post('idtype') && $this->input->post('idnum')){
 
-			$old = $this->db->get_where('register_agent',['email' => $this->input->post('email'),'password' => md5($this->input->post('password'))])->row_object()
+			$old = $this->db->get_where('register_agent',['df' => '','email' => $this->input->post('email'),'password' => md5($this->input->post('password'))])->row_object();
 			if ($old) {
 				retJson(['_return' => true,'msg' => 'Registration Success.']);
 			}else{
