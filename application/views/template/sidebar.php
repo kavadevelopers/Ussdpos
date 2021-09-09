@@ -18,7 +18,7 @@
     <div class="pcoded-wrapper">
         <nav class="pcoded-navbar">
             <div class="pcoded-inner-navbar new-mainmenu" style="overflow-y: scroll;">
-                <div class="pcoded-navigatio-lavel">Navigation</div>
+                <!-- <div class="pcoded-navigatio-lavel">Navigation</div> -->
                 <ul class="pcoded-item pcoded-left-item">
                     <li class="<?= menu(1,["dashboard"])[0]; ?>">
                         <a href="<?= base_url('dashboard') ?>">
@@ -38,7 +38,7 @@
                     </ul>
                 <?php } ?>
                 <?php if($this->rights->check([3])){ ?>
-                    <div class="pcoded-navigatio-lavel">Ussdpos Users</div>
+                    <!-- <div class="pcoded-navigatio-lavel">Ussdpos Users</div> -->
                     <?php if($this->rights->check([3])){ ?>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="pcoded-hasmenu <?= menu(1,["agent"])[2]; ?>">
@@ -95,7 +95,7 @@
 
                 
                 <?php if($this->rights->check([2])){ ?>
-                    <div class="pcoded-navigatio-lavel">CMS</div>
+                    <!-- <div class="pcoded-navigatio-lavel">CMS</div> -->
                     <ul class="pcoded-item pcoded-left-item">
                         <li class="pcoded-hasmenu <?= menu(1,["pages"])[2]; ?>">
                             <a href="javascript:void(0)">
@@ -117,7 +117,7 @@
                     </ul>
                 <?php } ?>
                 <?php if(get_user()['user_type'] == '0'){ ?>
-                    <div class="pcoded-navigatio-lavel">Master Management</div>
+                    <!-- <div class="pcoded-navigatio-lavel">Master Management</div> -->
                     <ul class="pcoded-item pcoded-left-item">
                         <li class="pcoded-hasmenu <?= menu(1,["banks"])[2]; ?>">
                             <a href="javascript:void(0)">
@@ -158,7 +158,7 @@
                     </ul>
                 <?php } ?>    
                 <?php if(get_user()['user_type'] == '0'){ ?>
-                    <div class="pcoded-navigatio-lavel">Super Admin Access</div>
+                    <!-- <div class="pcoded-navigatio-lavel">Super Admin Access</div> -->
                     <ul class="pcoded-item pcoded-left-item">
                         <li class="<?= menu(1,["users"])[0]; ?>">
                             <a href="<?= base_url('users') ?>">

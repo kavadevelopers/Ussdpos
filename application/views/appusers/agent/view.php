@@ -353,11 +353,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer text-right">
-                                <input type="hidden" name="agent" value="<?= $item->id ?>">
-                                <input type="hidden" name="uri" value="<?= $this->uri->segment(4) ?>">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o"></i> Send</button>
-                            </div>
+                            <?php if($item->saddress == '0' || $item->sid == '0' || $item->sphoto == '0'){ ?>
+                                <div class="card-footer text-right">
+                                    <input type="hidden" name="agent" value="<?= $item->id ?>">
+                                    <input type="hidden" name="uri" value="<?= $this->uri->segment(4) ?>">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o"></i> Send</button>
+                                </div>      
+                            <?php } ?>
                         </div>
                     </form>
                 </div>
