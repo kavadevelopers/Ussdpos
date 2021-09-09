@@ -32,14 +32,18 @@ class Home extends CI_Controller
 			$transList[$key]->typestr = ucfirst(traType($value->type)[0]);
 		}
 
-
+		$user = NULL;
+		if ($this->input->post('user')) {
+			$user = $this->agent_model->get($this->input->post('user'));
+		}
 
 		$data = [
 			'_return'		=> true,
-			'balance'		=> '18500.00',
-			'pbalance'		=> ptPretyAmount('18500.00'),
+			'balance'		=> '0.00',
+			'pbalance'		=> ptPretyAmount('0.00'),
 			'tracounter'	=> $trans->num_rows(),
-			'tralist'		=> $transList
+			'tralist'		=> $transList,
+			'user' 			=> $user
 		];
 
 		retJson($data);

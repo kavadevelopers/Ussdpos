@@ -102,23 +102,29 @@ class Authcls extends CI_Controller
 			if ($user) {
 				if (md5($this->input->post('password')) == $user['password']) {
 					if ($user['block'] == "") {
-						if ($this->input->post('descr') && $this->input->post('token') && $this->input->post('device') && $this->input->post('device_id')) {
-							@$this->login_model->firebaseLogin($user['id']);	
-							retJson(['_return' => true,'user' => $this->agent_model->get($user['id'])]);
+						if ($user['status'] == "0") {
+							retJson(['_return' => false,'result' => 401,'msg' => 'Registration application is still in review']);			
 						}else{
-							retJson(['_return' => false,'msg' => '`descr`,`token`,`device_id`,`device` are Required']);
-						}	
+							if ($this->input->post('descr') && $this->input->post('token') && $this->input->post('device') && $this->input->post('device_id')) {
+							
+								@$this->login_model->firebaseLogin($user['id']);	
+								retJson(['_return' => true,'user' => $this->agent_model->get($user['id'])]);
+
+							}else{
+								retJson(['_return' => false,'result' => 400,'msg' => '`descr`,`token`,`device_id`,`device` are Required']);
+							}	
+						}
 					}else{
-						retJson(['_return' => false,'msg' => 'Your account is suspended. Please contact administrator..']);		
+						retJson(['_return' => false,'result' => 400,'msg' => 'Your account is suspended. Please contact administrator..']);		
 					}
 				}else{
-					retJson(['_return' => false,'msg' => 'Email/Phone and Password not match']);	
+					retJson(['_return' => false,'result' => 400,'msg' => 'Email/Phone and Password not match']);	
 				}
 			}else{
-				retJson(['_return' => false,'msg' => 'Email/Phone not registered']);
+				retJson(['_return' => false,'result' => 400,'msg' => 'Email/Phone not registered']);
 			}
 		}else{
-			retJson(['_return' => false,'msg' => '`email`,`password` are Required']);
+			retJson(['_return' => false,'result' => 400,'msg' => '`email`,`password` are Required']);
 		}	
 	}
 
