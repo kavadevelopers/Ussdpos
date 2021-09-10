@@ -15,6 +15,9 @@ class Agent extends CI_Controller
 		$agent = $this->db->get_where('register_agent',['id' => $this->input->post('agent')])->row_object();
 		if ($this->input->post('photos_status') == '0') {
 			$smsTemp = "Your Passport Photograph Verification has been rejected. Reason - ".$this->input->post('photo_reason').", Please login and reupload a new Passport Photo";
+
+			echo $smsTemp;exit;
+
 			@$this->general_model->agentPush(
 				$this->input->post('agent'),
 				'Passport photo rejected',
@@ -31,7 +34,7 @@ class Agent extends CI_Controller
 		}
 
 		if ($this->input->post('id_status') == '0') {
-			$smsTemp = "Your Proof of Identity Verification has been rejected. Reason - ".$this->input->post('photo_reason').", Please login and reupload a new Proof of Identification";
+			$smsTemp = "Your Proof of Identity Verification has been rejected. Reason - ".$this->input->post('id_reason').", Please login and reupload a new Proof of Identification";
 			@$this->general_model->agentPush(
 				$this->input->post('agent'),
 				'ID Photo rejected',
@@ -49,7 +52,7 @@ class Agent extends CI_Controller
 		}
 
 		if ($this->input->post('address_status') == '0') {
-			$smsTemp = "Your Address Verification has been rejected. Reason - ".$this->input->post('photo_reason').", Please login and reupload a new proof of address";
+			$smsTemp = "Your Address Verification has been rejected. Reason - ".$this->input->post('address_reason').", Please login and reupload a new proof of address";
 			@$this->general_model->agentPush(
 				$this->input->post('agent'),
 				'Address Verification rejected',
