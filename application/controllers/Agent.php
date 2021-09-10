@@ -16,7 +16,7 @@ class Agent extends CI_Controller
 		if ($this->input->post('photos_status') == '0') {
 			$smsTemp = "Your Passport Photograph Verification has been rejected. Reason - ".$this->input->post('photo_reason').", Please login and reupload a new Passport Photo";
 
-			echo $smsTemp;exit;
+			
 
 			@$this->general_model->agentPush(
 				$this->input->post('agent'),
