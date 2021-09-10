@@ -67,22 +67,46 @@
             <div class="card-block">
                 <div class="row">
                     <div class="col-md-12">
-                        <h5 class="h5-saparater">Bulksms Settings</h5>
+                        <h5 class="h5-saparater">SMS Settings</h5>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Bulksms Key <span class="-req">*</span></label>
+                            <label>BulkSMS Nigeria Key <span class="-req">*</span></label>
                             <input name="bulksmskey" type="text" class="form-control" value="<?= set_value('bulksmskey',get_setting()['bulksmskey']); ?>" >
                             <?= form_error('bulksmskey') ?>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Bulksms Sender ID <span class="-req">*</span></label>
+                            <label>BulkSMS Nigeria Sender ID <span class="-req">*</span></label>
                             <input name="bulksmssenderid" type="text" class="form-control" value="<?= set_value('bulksmssenderid',get_setting()['bulksmssenderid']); ?>" >
                             <?= form_error('bulksmssenderid') ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nigeria Bulksms User <span class="-req">*</span></label>
+                            <input name="nsmsuser" type="text" class="form-control" value="<?= set_value('nsmsuser',get_setting()['nsmsuser']); ?>" >
+                            <?= form_error('nsmsuser') ?>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nigeria Bulksms Pass <span class="-req">*</span></label>
+                            <input name="nsmspass" type="text" class="form-control" value="<?= set_value('nsmspass',get_setting()['nsmspass']); ?>" >
+                            <?= form_error('nsmspass') ?>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nigeria Bulksms Sender ID <span class="-req">*</span></label>
+                            <input name="nsmssendid" type="text" class="form-control" value="<?= set_value('nsmssendid',get_setting()['nsmssendid']); ?>" >
+                            <?= form_error('nsmssendid') ?>
                         </div>
                     </div>
                 </div>

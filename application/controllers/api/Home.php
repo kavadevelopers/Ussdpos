@@ -16,7 +16,7 @@ class Home extends CI_Controller
 
 		$data = [
 			'_return'		=> true,
-			'tracounter'	=> $trans->num_rows(),
+			'tracounter'	=> 0,
 			'tralist'		=> $transList
 		];
 
@@ -41,7 +41,7 @@ class Home extends CI_Controller
 			'_return'		=> true,
 			'balance'		=> '0.00',
 			'pbalance'		=> ptPretyAmount('0.00'),
-			'tracounter'	=> $trans->num_rows(),
+			'tracounter'	=> 0,
 			'tralist'		=> $transList,
 			'user' 			=> $user
 		];
