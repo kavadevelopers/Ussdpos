@@ -64,3 +64,34 @@
     </div>
 
 </div>
+
+<div class="modal fade" id="changeAgentPass" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <form method="post" action="<?= base_url('agent/reset_password') ?>">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Reset Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>New Password<span class="-req">*</span></label>
+                                <input name="pass" type="text" class="form-control" value="" placeholder="New Password" required>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id">
+                    <input type="hidden" name="route">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Change</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

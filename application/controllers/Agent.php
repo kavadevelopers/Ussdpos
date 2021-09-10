@@ -9,6 +9,13 @@ class Agent extends CI_Controller
 		$this->rights->redirect([3]);
 	}
 
+	public function reset_password()
+	{
+		$this->db->where('id',$this->input->post('id'))->update('register_agent',['password' => md5($this->input->post('pass'))]);
+		$this->session->set_flashdata('msg', 'Password has been changed');
+	    redirect(base_url('agent/'.$this->input->post('route')));
+	}
+
 	public function doc_status()
 	{
 		$processing = 0; $photo = 1; $idphoto = 1; $address = 1;

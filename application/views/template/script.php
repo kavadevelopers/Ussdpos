@@ -49,6 +49,13 @@
             var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
             gallery.init();
         });
+
+        $(document).on('click','.btnChangeAgentPassword', function(event){
+            $('#changeAgentPass').modal('show');
+            $('#changeAgentPass').find('input[name=id]').val($(this).data('id'));
+            $('#changeAgentPass').find('input[name=route]').val($(this).data('uri'));
+            event.preventDefault();
+        });            
     });
 
     function showAjaxLoader() {

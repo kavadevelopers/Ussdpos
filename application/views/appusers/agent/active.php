@@ -75,6 +75,10 @@
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         <?php } ?>
+                                        <br>
+                                        <a href="#" data-id="<?= $value->id ?>" data-uri="<?= $this->uri->segment(2) ?>" class="btn btn-danger btn-mini btnChangeAgentPassword">
+                                            Reset Password
+                                        </a>
                                     </td>
                                 </tr>
                             <?php } ?>
