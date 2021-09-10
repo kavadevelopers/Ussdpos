@@ -14,52 +14,54 @@ class Agent extends CI_Controller
 		$processing = 0; $photo = 1; $idphoto = 1; $address = 1;
 		$agent = $this->db->get_where('register_agent',['id' => $this->input->post('agent')])->row_object();
 		if ($this->input->post('photos_status') == '0') {
+			$smsTemp = "Your Passport Photograph Verification has been rejected. Reason - ".$this->input->post('photo_reason').", Please login and reupload a new Passport Photo";
 			@$this->general_model->agentPush(
 				$this->input->post('agent'),
 				'Passport photo rejected',
-				$this->input->post('photo_reason')
+				$smsTemp
 			);
 
-
-			$template = $this->load->view('mail/document_verification_rejected',[
-				'type'		=> 'Passport Photo',
+			$template = $this->load->view('mail/verification/photo',[
 				'reason'	=> $this->input->post('photo_reason')
 			],true);
 			@$this->general_model->send_mail($agent->email,'Passport photo rejected',$template);
+			@$this->general_model->nigeriaBulkSms($agent->phone,$smsTemp);
 			$processing++;
 			$photo = 2;
 		}
 
 		if ($this->input->post('id_status') == '0') {
+			$smsTemp = "Your Proof of Identity Verification has been rejected. Reason - ".$this->input->post('photo_reason').", Please login and reupload a new Proof of Identification";
 			@$this->general_model->agentPush(
 				$this->input->post('agent'),
 				'ID Photo rejected',
-				$this->input->post('id_reason')
+				$smsTemp
 			);
 
 
-			$template = $this->load->view('mail/document_verification_rejected',[
-				'type'		=> 'ID Photo',
+			$template = $this->load->view('mail/verification/id',[
 				'reason'	=> $this->input->post('id_reason')
 			],true);
 			@$this->general_model->send_mail($agent->email,'ID Photo rejected',$template);
+			@$this->general_model->nigeriaBulkSms($agent->phone,$smsTemp);
 			$processing++;
 			$idphoto = 2;
 		}
 
 		if ($this->input->post('address_status') == '0') {
+			$smsTemp = "Your Address Verification has been rejected. Reason - ".$this->input->post('photo_reason').", Please login and reupload a new proof of address";
 			@$this->general_model->agentPush(
 				$this->input->post('agent'),
 				'Address Verification rejected',
-				$this->input->post('address_reason')
+				$smsTemp
 			);
 
 
-			$template = $this->load->view('mail/document_verification_rejected',[
-				'type'		=> 'Address Verification',
+			$template = $this->load->view('mail/verification/address',[
 				'reason'	=> $this->input->post('address_reason')
 			],true);
 			@$this->general_model->send_mail($agent->email,'Address Verification rejected',$template);
+			@$this->general_model->nigeriaBulkSms($agent->phone,$smsTemp);
 			$processing++;
 			$address = 2;
 		}

@@ -22,7 +22,7 @@ class Authcls extends CI_Controller
 			if ($this->input->post('hardsms')) {
 				@$this->general_model->sendSms($this->input->post('phone'),'Phone Verification Code is : '.$phone,6);
 			}else{
-				@$this->general_model->sendSms($this->input->post('phone'),'Phone Verification Code is : '.$phone);
+				@$this->general_model->nigeriaBulkSms($this->input->post('phone'),'Phone Verification Code is : '.$phone);
 			}
 			retJson(['_return' => true,'msg' => 'phone-'.$phone,'phone_code' => $phone]);
 		}else{
