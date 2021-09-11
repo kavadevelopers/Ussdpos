@@ -15,7 +15,17 @@ class Authcls extends CI_Controller
 		}
 	}
 
-	public function forget()
+	public function resetpass()
+	{
+		if ($this->input->post('user') && $this->input->post('pass')) {
+			$this->db->where('id',$this->input->post('user'))->update('register_agent',['password' => md5($this->input->post('pass'))]);
+			retJson(['_return' => true,'msg' => '']);	
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`pass` are Required']);
+		}	
+	}
+
+	public function forgetpass()
 	{
 		if ($this->input->post('email')) {
 			$user = $this->db->get_where('register_agent',['df' => '','email' => $this->input->post('email')])->row_object();
@@ -23,7 +33,7 @@ class Authcls extends CI_Controller
 				$mail = mt_rand(111111,999999);
 				$template = $this->load->view('mail/verification_code',['code' => $mail],true);
 				@$this->general_model->send_mail($this->input->post('email'),'Email Verification Code',$template);
-				retJson(['_return' => true,'msg' => 'email-'.$mail,'email_code' => $mail]);	
+				retJson(['_return' => true,'msg' => 'email-'.$mail,'email_code' => $mail,'userid' => $user->id]);	
 			}else{
 				retJson(['_return' => false,'msg' => 'Email is not registered']);	
 			}
