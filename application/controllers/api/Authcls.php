@@ -15,10 +15,21 @@ class Authcls extends CI_Controller
 		}
 	}
 
+	public function logout()
+	{
+		if ($this->input->post('user') && $this->input->post('token')) {
+			$this->db->where('user',$this->input->post('user'))->where('token',$this->input->post('token'))->delete('firebase_agent');
+			retJson(['_return' => true,'msg' => 'Logout Success']);	
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`token` are Required']);
+		}
+	}
+
 	public function resetpass()
 	{
 		if ($this->input->post('user') && $this->input->post('pass')) {
 			$this->db->where('id',$this->input->post('user'))->update('register_agent',['password' => md5($this->input->post('pass'))]);
+			$this->db->where('user',$this->input->post('user'))->delete('firebase_agent');
 			retJson(['_return' => true,'msg' => '']);	
 		}else{
 			retJson(['_return' => false,'msg' => '`user`,`pass` are Required']);
