@@ -15,6 +15,23 @@ class Authcls extends CI_Controller
 		}
 	}
 
+	public function forget()
+	{
+		if ($this->input->post('email')) {
+			$user = $this->db->get_where('register_agent',['df' => '','email' => $this->input->post('email')])->row_object();
+			if ($user) {
+				$mail = mt_rand(111111,999999);
+				$template = $this->load->view('mail/verification_code',['code' => $mail],true);
+				@$this->general_model->send_mail($this->input->post('email'),'Email Verification Code',$template);
+				retJson(['_return' => true,'msg' => 'email-'.$mail,'email_code' => $mail]);	
+			}else{
+				retJson(['_return' => false,'msg' => 'Email is not registered']);	
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`email` are Required']);
+		}
+	}
+
 	public function send_verification_phone()
 	{
 		if ($this->input->post('phone')) {
