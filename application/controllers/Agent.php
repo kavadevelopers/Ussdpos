@@ -91,6 +91,20 @@ class Agent extends CI_Controller
 
 		$this->db->where('id',$this->input->post('agent'))->update('register_agent',$data);
 
+		if ($approved == 1) {
+			$smsTemp = "Your account information has been verified and approved, please  proceed to using enjoying our services such instant bank alert and ordering POS terminals";
+			@$this->general_model->agentPush(
+				$this->input->post('agent'),
+				'Document Verification Success',
+				$smsTemp
+			);
+			@$this->general_model->nigeriaBulkSms($agent->phone,$smsTemp);
+			$template = $this->load->view('mail/registration_success',[
+				
+			],true);
+			@$this->general_model->send_mail($agent->email,'Document Verification Success',$template);
+		}
+
 		$this->session->set_flashdata('msg', 'Agent Status has been changed');
 	    redirect(base_url('agent/view/'.$this->input->post('agent').'/'.$this->input->post('uri')));
 	}
