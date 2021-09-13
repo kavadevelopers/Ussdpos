@@ -37,12 +37,18 @@ class Flutterwave{
 			CURLOPT_POSTFIELDS => $postFields,
 		  	CURLOPT_HTTPHEADER => array(
 		    	'Content-Type: application/json',
-		    	'Authorization: Bearer '.$this->apiKey
+		    	'Authorization: Bearer '.$this->apiKey,
+		    	"cache-control: no-cache"
 		  	),
 		));
 
 		$response = curl_exec($curl);
+		$error = curl_error($curl);
 		curl_close($curl);
-		return $response;
+		if ($error != "") {
+			return $response;
+		}else{
+			return $error;
+		}
 	}
 }

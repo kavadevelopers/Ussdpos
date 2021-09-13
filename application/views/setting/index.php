@@ -35,6 +35,22 @@
             <div class="card-block">
                 <div class="row">
                     <div class="col-md-12">
+                        <h5 class="h5-saparater">Comission Settings</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>USSD Commmission<span class="-req">*</span></label>
+                            <input name="com_ussd" type="text" class="form-control decimal-num" value="<?= set_value('com_ussd',get_setting()['com_ussd']); ?>" >
+                            <?= form_error('com_ussd') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-12">
                         <h5 class="h5-saparater">Firebase Settings</h5>
                     </div>
                 </div>
@@ -57,9 +73,23 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label>FlutterWave Public Key<span class="-req">*</span></label>
+                            <input name="flutter_public" type="text" class="form-control" value="<?= set_value('flutter_public',get_setting()['flutter_public']); ?>" >
+                            <?= form_error('flutter_public') ?>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label>FlutterWave Secret Key<span class="-req">*</span></label>
                             <input name="flutterapi" type="text" class="form-control" value="<?= set_value('flutterapi',get_setting()['flutterapi']); ?>" >
                             <?= form_error('flutterapi') ?>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>FlutterWave Encryption Key<span class="-req">*</span></label>
+                            <input name="flutter_enc_key" type="text" class="form-control" value="<?= set_value('flutter_enc_key',get_setting()['flutter_enc_key']); ?>" >
+                            <?= form_error('flutter_enc_key') ?>
                         </div>
                     </div>
                 </div>

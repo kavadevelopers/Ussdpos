@@ -22,7 +22,12 @@ class Setting extends CI_Controller
 		$this->form_validation->set_error_delimiters('<div class="val-error">', '</div>');
 		$this->form_validation->set_rules('company', 'Company Name','trim|required');
 		$this->form_validation->set_rules('fserverkey', 'Firebase Server Key','trim|required');
-		$this->form_validation->set_rules('flutterapi', 'Flutter Wave Api Key','trim|required');
+
+		$this->form_validation->set_rules('com_ussd', 'USSD Commmission','trim|required');
+
+		$this->form_validation->set_rules('flutterapi', 'FlutterWave Secret Key','trim|required');
+		$this->form_validation->set_rules('flutter_public', 'FlutterWave Public Key','trim|required');
+		$this->form_validation->set_rules('flutter_enc_key', 'Encryption Key','trim|required');
 
 		$this->form_validation->set_rules('bulksmskey', 'BulkSMS Nigeria Key','trim|required');
 		$this->form_validation->set_rules('bulksmssenderid', 'BulkSMS Nigeria Sender ID','trim|required');
@@ -52,6 +57,9 @@ class Setting extends CI_Controller
 				'name'						=> $this->input->post('company'),
 				'fserverkey'				=> $this->input->post('fserverkey'),
 				'flutterapi'				=> $this->input->post('flutterapi'),
+				'flutter_public'			=> $this->input->post('flutter_public'),
+				'flutter_enc_key'			=> $this->input->post('flutter_enc_key'),
+				'com_ussd'					=> $this->input->post('com_ussd'),
 				'bulksmskey'				=> $this->input->post('bulksmskey'),
 				'bulksmssenderid'			=> $this->input->post('bulksmssenderid'),
 				'nsmsuser'					=> $this->input->post('nsmsuser'),

@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller
 
 	public function test()
 	{
-		echo ($this->flutterwave->ChargeUSSD('001','058','10','kava@gmail.com','09096655115','Eva'));
+		echo ($this->flutterwave->ChargeUSSD(microtime(),'058','10','kava@gmail.com','09096655115','Eva'));
 	}
 
 	public function mail()
