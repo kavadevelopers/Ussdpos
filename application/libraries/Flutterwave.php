@@ -43,9 +43,11 @@ class Flutterwave{
 		));
 
 		$response = curl_exec($curl);
-		$error = curl_error($curl);
+		if (curl_errno($curl)) {
+		    $error_msg = curl_error($curl);
+		}
 		curl_close($curl);
-		if ($error != "") {
+		if (!isset($error_msg)) {
 			return $response;
 		}else{
 			return $error;
