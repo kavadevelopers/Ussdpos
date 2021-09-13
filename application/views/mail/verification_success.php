@@ -2,6 +2,6 @@
 
 <p>Hi there,</p>
 
-<p>Your account information has been verified and approved, please  proceed to using enjoying our services such instant bank alert and ordering POS terminals</p>
+<p>Your account has been approved, Start enjoying instant bank transfer alert with personalized accounts in over 20 banks, also Order your POS terminal</p>
 
 <?= $this->load->view('mail/template/footer',[],true);  ?>
