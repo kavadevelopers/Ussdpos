@@ -12,7 +12,25 @@ class Flutterwaveapi extends CI_Controller
 
 
 
-
+	public function ussd_charge_continue_check()
+	{
+		if ($this->input->post('user') && $this->input->post('chid')) {
+			$charge = $this->db->get_where('payment_ussd',['id' => $this->input->post('chid')])->row_object();
+			if ($charge) {
+				if ($charge->status == "1") {
+					retJson(['_return' => true,'msg' => 'Payment successful']);			
+				}else if ($charge->status == "2") {
+					retJson(['_return' => true,'msg' => 'Payment failed']);			
+				}else{
+					retJson(['_return' => false,'msg' => '']);			
+				}
+			}else{
+				retJson(['_return' => false,'msg' => 'Error Please Try again later.']);	
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`chid` are Required']);
+		}	
+	}
 
 	public function verify_ussd_payment()
 	{
@@ -22,9 +40,17 @@ class Flutterwaveapi extends CI_Controller
 				$getCharge = $this->flutterwave->verifyUSSDPayment($charge->chid);
 				if ($getCharge != "") {
 					$response = json_decode($getCharge);
-
-					echo $response->data->tx_ref;
-
+					if($response->data->status == "pending"){
+						retJson(['_return' => false,'msg' => 'Payment is pending please wait..']);			
+					}else if($response->data->status == "successful"){
+						$this->db->where('id',$this->input->post('chid'))->update('payment_ussd',['status' => '1']);
+						$this->db->where('pay',$this->input->post('chid'))->update('payment_types',['status' => '1']);
+						retJson(['_return' => true,'msg' => 'Payment successful']);			
+					}else{
+						$this->db->where('id',$this->input->post('chid'))->update('payment_ussd',['status' => '2']);
+						$this->db->where('pay',$this->input->post('chid'))->update('payment_types',['status' => '2']);
+						retJson(['_return' => true,'msg' => 'Payment failed']);	
+					}
 				}else{
 					retJson(['_return' => false,'msg' => 'Error Please Try again later.']);		
 				}
