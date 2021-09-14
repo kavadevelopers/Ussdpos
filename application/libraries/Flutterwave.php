@@ -43,14 +43,15 @@ class Flutterwave{
 		));
 
 		$response = curl_exec($curl);
-		if (curl_errno($curl)) {
-		    $error_msg = curl_error($curl);
-		}
+		// if (curl_errno($curl)) {
+		//     $error_msg = curl_error($curl);
+		// }
 		curl_close($curl);
-		if (!isset($error_msg)) {
-			return $response;
-		}else{
-			return $error;
-		}
+		return $response;
+		// if (!isset($error_msg)) {
+		// 	return $response;
+		// }else{
+		// 	return $error;
+		// }
 	}
 }

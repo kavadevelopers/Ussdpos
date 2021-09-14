@@ -7,6 +7,16 @@ class General_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function generateUssdRefId()
+	{
+		$last = $this->db->order_by('id','desc')->get_where('payment_ussd')->row_object();
+		if ($last) {
+			return "USSDPOS".mt_rand(111111,999999).($last->id + 1);
+		}else{
+			return "USSDPOS".mt_rand(111111,999999).'1';
+		}
+	}
+
 	public function getStates()
 	{
 		return $this->db->get_where('master_states',['df' => ''])->result_object();
