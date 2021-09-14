@@ -1,4 +1,46 @@
 <style type="text/css">
+	.radio-togless-field{
+		display: flex;
+		margin-bottom: 36px;
+		overflow: hidden;
+	}
+
+	.radio-togless-field input{
+		position: absolute !important;
+		clip: rect(0, 0, 0, 0);
+		height: 1px;
+		width: 1px;
+		border: 0;
+		overflow: hidden;
+	}
+
+	.radio-togless-field label {
+		text-align: center;
+		margin-right: 5px;
+	}
+
+	.radio-togless-field label span{
+		padding: 8px 16px;
+		background-color: #fff;
+		display: block;
+		color: #808080;
+		font-size: 14px;
+		line-height: 1;
+		border-radius: 4px;
+		border: 1px solid #ccc;
+		transition: all 0.1s ease-in-out;
+	}
+
+	.radio-togless-field label:hover {
+		cursor: pointer;
+	}
+
+	.radio-togless-field input:checked + span{
+		background-color: #fe8e06;
+		display: block;
+		color: #fff;
+		box-shadow: none;
+	}
 	.btn {
 	    margin-top: 5px;
 	}
@@ -6,6 +48,7 @@
         border-bottom: 1px solid #ccc;
         padding: 5px;
         margin-bottom: 10px;
+        font-weight: 600;
     }
 	.tb-row-image{
 		width: 60px;

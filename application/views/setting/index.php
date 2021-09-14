@@ -32,7 +32,7 @@
                     
                 </div>
             </div>
-            <div class="card-block">
+            <!-- <div class="card-block">
                 <div class="row">
                     <div class="col-md-12">
                         <h5 class="h5-saparater">Comission Settings</h5>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="card-block">
                 <div class="row">
                     <div class="col-md-12">

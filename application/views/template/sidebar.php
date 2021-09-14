@@ -168,6 +168,14 @@
                         </li>
                     </ul>
                     <ul class="pcoded-item pcoded-left-item">
+                        <li class="<?= menu(1,["commission"])[0]; ?>">
+                            <a href="<?= base_url('commission') ?>">
+                                <span class="pcoded-micon"><i class="fa fa-percent"></i></span>
+                                <span class="pcoded-mtext">Commission Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="pcoded-item pcoded-left-item">
                         <li class="<?= menu(1,["setting"])[0]; ?>">
                             <a href="<?= base_url('setting') ?>">
                                 <span class="pcoded-micon"><i class="fa fa-gear fa-spin"></i></span>
