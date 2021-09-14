@@ -88,18 +88,39 @@ class Flutterwaveapi extends CI_Controller
 	public function webhook_success()
 	{
 		$body = @file_get_contents("php://input");
-		$this->load->helper('file');
-		if (!write_file('./uploads/'.microtime(true).'.txt', $body)){
-		     //echo 'Unable to write the file';
+		$response = json_decode($body,1);
+		$paymentRow = $this->db->get_where('payment_types',['chid' => $response['id']])->row_object();
+		if ($paymentRow) {
+			$this->db->where('chid',$response['id'])->update('payment_types',['status' => '1']);
+			if ($paymentRow->type == "ussd") {
+				$this->db->where('id',$response['pay'])->update('payment_ussd',['status' => '1']);
+			}
 		}
+
+
+
+
+		// $this->load->helper('file');
+		// if (!write_file('./uploads/'.microtime(true).'.txt', $body)){
+		//      //echo 'Unable to write the file';
+		// }
 	}
 
 	public function webhook_failed()
 	{
 		$body = @file_get_contents("php://input");
-		$this->load->helper('file');
-		if (!write_file('./uploads/'.microtime(true).'.txt', 'Failed-'.$body)){
-		     //echo 'Unable to write the file';
+		$response = json_decode($body,1);
+		$paymentRow = $this->db->get_where('payment_types',['chid' => $response['id']])->row_object();
+		if ($paymentRow) {
+			$this->db->where('chid',$response['id'])->update('payment_types',['status' => '2']);
+			if ($paymentRow->type == "ussd") {
+				$this->db->where('id',$response['pay'])->update('payment_ussd',['status' => '2']);
+			}
 		}
+
+		// $this->load->helper('file');
+		// if (!write_file('./uploads/'.microtime(true).'.txt', 'Failed-'.$body)){
+		//      //echo 'Unable to write the file';
+		// }
 	}
 }
