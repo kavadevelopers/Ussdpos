@@ -7,6 +7,35 @@ class Flutterwaveapi extends CI_Controller
 		$this->load->library('Flutterwave');
 	}
 
+
+
+
+
+
+
+
+	public function verify_ussd_payment()
+	{
+		if ($this->input->post('user') && $this->input->post('chid')) {	
+			$charge = $this->db->get_where('payment_ussd',['id' => $this->input->post('chid')])->row_object();
+			if ($charge) {
+				$getCharge = $this->flutterwave->verifyUSSDPayment($charge->chid);
+				if ($getCharge != "") {
+					$response = json_decode($getCharge);
+
+					echo $response->data->tx_ref;
+
+				}else{
+					retJson(['_return' => false,'msg' => 'Error Please Try again later.']);		
+				}
+			}else{
+				retJson(['_return' => false,'msg' => 'Error Please Try again later.']);	
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`chid` are Required']);
+		}
+	}
+
 	public function ussdcharge()
 	{
 		if ($this->input->post('user') && $this->input->post('comfrom') && $this->input->post('bank') && $this->input->post('amount')) {
@@ -30,7 +59,7 @@ class Flutterwaveapi extends CI_Controller
 			$fcom 			= $comAr['fcom'];
 			$payableAmount 	= $amount;
 			if ($this->input->post('comfrom') == "buyer") {
-				$payableAmount 	= $amount + $com + $fcom;
+				$payableAmount 	= $amount + $com;
 			}
 
 			$charge = $this->flutterwave->ChargeUSSD($refId,$bank,$payableAmount,$email,$mobile,$name);
