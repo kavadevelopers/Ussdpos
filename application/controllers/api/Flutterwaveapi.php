@@ -93,4 +93,13 @@ class Flutterwaveapi extends CI_Controller
 		     //echo 'Unable to write the file';
 		}
 	}
+
+	public function webhook_failed()
+	{
+		$body = @file_get_contents("php://input");
+		$this->load->helper('file');
+		if (!write_file('./uploads/'.microtime(true).'.txt', 'Failed-'.$body)){
+		     //echo 'Unable to write the file';
+		}
+	}
 }
