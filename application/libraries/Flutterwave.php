@@ -34,7 +34,7 @@ class Flutterwave{
 		));
 		$response = curl_exec($curl);
 		curl_close($curl);
-		echo $response;
+		return $response;
 	}
 
 	public function ChargeUSSD($tx_ref,$account_bank,$amount,$email,$phone,$name)
