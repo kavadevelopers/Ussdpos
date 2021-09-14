@@ -30,6 +30,7 @@ class Setting extends CI_Controller
 		$this->form_validation->set_rules('flutterapi', 'FlutterWave Secret Key','trim|required');
 		$this->form_validation->set_rules('flutter_public', 'FlutterWave Public Key','trim|required');
 		$this->form_validation->set_rules('flutter_enc_key', 'Encryption Key','trim|required');
+		$this->form_validation->set_rules('fluter_web_hash', 'FlutterWave Webhook Hash','trim|required');
 
 		$this->form_validation->set_rules('bulksmskey', 'BulkSMS Nigeria Key','trim|required');
 		$this->form_validation->set_rules('bulksmssenderid', 'BulkSMS Nigeria Sender ID','trim|required');
@@ -61,6 +62,7 @@ class Setting extends CI_Controller
 				'flutterapi'				=> $this->input->post('flutterapi'),
 				'flutter_public'			=> $this->input->post('flutter_public'),
 				'flutter_enc_key'			=> $this->input->post('flutter_enc_key'),
+				'fluter_web_hash'			=> $this->input->post('fluter_web_hash'),
 				'bulksmskey'				=> $this->input->post('bulksmskey'),
 				'bulksmssenderid'			=> $this->input->post('bulksmssenderid'),
 				'nsmsuser'					=> $this->input->post('nsmsuser'),

@@ -92,6 +92,13 @@
                             <?= form_error('flutter_enc_key') ?>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>FlutterWave Webhook Hash <span class="-req">*</span><br><small>Generate hash and put here and flutterwave webhook section</small></label>
+                            <input name="fluter_web_hash" type="text" class="form-control" value="<?= set_value('fluter_web_hash',get_setting()['fluter_web_hash']); ?>" >
+                            <?= form_error('fluter_web_hash') ?>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-block">

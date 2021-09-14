@@ -88,14 +88,21 @@ class Flutterwaveapi extends CI_Controller
 	public function webhook_success()
 	{
 		$body = @file_get_contents("php://input");
-		$response = json_decode($body,1);
-		$paymentRow = $this->db->get_where('payment_types',['chid' => $response['id']])->row_object();
-		if ($paymentRow) {
-			$this->db->where('chid',$response['id'])->update('payment_types',['status' => '1']);
-			if ($paymentRow->type == "ussd") {
-				$this->db->where('id',$response['pay'])->update('payment_ussd',['status' => '1']);
+		$signature = (isset($_SERVER['HTTP_VERIF_HASH']))?$_SERVER['HTTP_VERIF_HASH']:'';
+		if(empty($signature) || $signature != get_setting()['fluter_web_hash']){
+            exit();
+        }else{
+        	$response = json_decode($body,1);
+			$paymentRow = $this->db->get_where('payment_types',['chid' => $response['id']])->row_object();
+			if ($paymentRow) {
+				$this->db->where('chid',$response['id'])->update('payment_types',['status' => '1']);
+				if ($paymentRow->type == "ussd") {
+					$this->db->where('id',$response['pay'])->update('payment_ussd',['status' => '1']);
+				}
 			}
-		}
+        }
+		
+		
 
 
 
@@ -109,14 +116,19 @@ class Flutterwaveapi extends CI_Controller
 	public function webhook_failed()
 	{
 		$body = @file_get_contents("php://input");
-		$response = json_decode($body,1);
-		$paymentRow = $this->db->get_where('payment_types',['chid' => $response['id']])->row_object();
-		if ($paymentRow) {
-			$this->db->where('chid',$response['id'])->update('payment_types',['status' => '2']);
-			if ($paymentRow->type == "ussd") {
-				$this->db->where('id',$response['pay'])->update('payment_ussd',['status' => '2']);
+		$signature = (isset($_SERVER['HTTP_VERIF_HASH']))?$_SERVER['HTTP_VERIF_HASH']:'';
+		if(empty($signature) || $signature != get_setting()['fluter_web_hash']){
+            exit();
+        }else{
+        	$response = json_decode($body,1);
+			$paymentRow = $this->db->get_where('payment_types',['chid' => $response['id']])->row_object();
+			if ($paymentRow) {
+				$this->db->where('chid',$response['id'])->update('payment_types',['status' => '2']);
+				if ($paymentRow->type == "ussd") {
+					$this->db->where('id',$response['pay'])->update('payment_ussd',['status' => '2']);
+				}
 			}
-		}
+        }
 
 		// $this->load->helper('file');
 		// if (!write_file('./uploads/'.microtime(true).'.txt', 'Failed-'.$body)){
