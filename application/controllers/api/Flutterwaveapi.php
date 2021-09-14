@@ -97,7 +97,7 @@ class Flutterwaveapi extends CI_Controller
 			if ($paymentRow) {
 				$this->db->where('chid',$response['id'])->update('payment_types',['status' => '1']);
 				if ($paymentRow->type == "ussd") {
-					$this->db->where('id',$paymentRow->pay)->update('payment_ussd',['status' => '1']);
+					$this->db->where('chid',$response['id'])->update('payment_ussd',['status' => '1']);
 				}
 			}
         }
@@ -125,7 +125,7 @@ class Flutterwaveapi extends CI_Controller
 			if ($paymentRow) {
 				$this->db->where('chid',$response['id'])->update('payment_types',['status' => '2']);
 				if ($paymentRow->type == "ussd") {
-					$this->db->where('id',$paymentRow->pay)->update('payment_ussd',['status' => '2']);
+					$this->db->where('chid',$response['id'])->update('payment_ussd',['status' => '2']);
 				}
 			}
         }
