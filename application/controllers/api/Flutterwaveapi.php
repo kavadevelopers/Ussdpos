@@ -123,6 +123,12 @@ class Flutterwaveapi extends CI_Controller
 					];
 					$this->db->insert('payment_types',$data);
 
+					if ($this->input->post('comfrom') == "buyer") {
+						$payableAmount 	= $amount + $com + $fcom;
+					}else{
+						$payableAmount 	= $amount;
+					}
+
 					retJson([
 						'_return' 			=> true,
 						'msg' 				=> 'Charge Created',
@@ -130,7 +136,7 @@ class Flutterwaveapi extends CI_Controller
 						'charge'			=> $chrgeId,
 						'amount'			=> formatTwoDecimal($amount),
 						'fees'				=> formatTwoDecimal($com + $fcom),
-						'payable'			=> formatTwoDecimal($payableAmount + $fcom),
+						'payable'			=> formatTwoDecimal($payableAmount),
 						'cpayby'			=> $this->input->post('comfrom')
 					]);	
 				}else{
