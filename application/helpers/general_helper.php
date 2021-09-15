@@ -9,12 +9,17 @@ function pre_print($array)
     exit;
 }
 
+function niara()
+{
+    return "₦ ";
+}
+
 function traType($type)
 {
     if ($type == 1) {
         return ['ussd','1'];
     }else if($type == 2){
-        return ['comission','2'];
+        return ['fees','2'];
     }
 }
 
@@ -172,76 +177,9 @@ function docRejectReasons()
 
 // Groom
 
-function getCategory($id)
-{
-    $CI =& get_instance();   
-    return $CI->db->get_where('categories',['id' => $id])->row_array();
-}
-
-function generateOtp($user,$user_type,$otp_type,$email = false)
-{
-    $CI =& get_instance();
-    $otp = mt_rand(1000, 9999);
-    $data = [
-        'user'      => $user,
-        'otp'       => $otp,
-        'usertype'  => $user_type,
-        'otptype'   => $otp_type,
-        'used'      => 0,
-        'cat'       => _nowDateTime()
-    ];
-    $CI->db->insert('z_otp',$data);
-    return $otp;
-}
-
 function roundLatLon($lat)
 {
     return round($lat,6);
-}
-
-function getOccupations($id)
-{
-    $CI =& get_instance();   
-    return $CI->db->get_where('master_occupations',['id' => $id])->row_array();
-}
-
-function getSkills($id)
-{
-    $CI =& get_instance();   
-    return $CI->db->get_where('master_skills',['id' => $id])->row_array();
-}
-
-function getBookingId()
-{
-    $CI =& get_instance();   
-    $last_id = $CI->db->order_by('id','desc')->limit(1)->get('booking')->row_array();
-    if($last_id){
-        return random_string(6).($last_id['id'] + 1);
-    }else{
-        return random_string(6).'1';
-    }
-}
-
-function getProviderCode()
-{
-    $CI =& get_instance();   
-    $last_id = $CI->db->order_by('id','desc')->limit(1)->get('service_provider')->row_array();
-    if($last_id){
-        return random_string(6).($last_id['id'] + 1);
-    }else{
-        return random_string(6).'1';
-    }
-}
-
-function getGiftCardId()
-{
-    $CI =& get_instance();   
-    $last_id = $CI->db->order_by('id','desc')->limit(1)->get('gift_card')->row_array();
-    if($last_id){
-        return random_string(6).($last_id['id'] + 1);
-    }else{
-        return random_string(6).'1';
-    }
 }
 
 function random_string($length) {
@@ -255,29 +193,6 @@ function random_string($length) {
     return strtoupper($key);
 }
 
-function getPromoAmount($promoCode,$user,$shops)
-{
-    $CI =& get_instance();
-    $CI->db->where_in('shop',$shops); 
-    $CI->db->where('promo',$promoCode); 
-    $CI->db->where('active','yes'); 
-    $promoCode = $CI->db->get('promocodes')->row_array();
-    if($promoCode){
-        return $promoCode;
-    }else{
-        return false;
-    }
-}
-
-function getDiscountAfter($discountAmt,$subTotal,$totalProdAmount)
-{
-    if ($discountAmt > $totalProdAmount) {
-        return number_format((float)$totalProdAmount, 2, '.', '');
-    }else{
-        return number_format((float)($discountAmt * $subTotal) / $totalProdAmount, 2, '.', '');
-    }
-}
-
 function getTax($amount,$per)
 {
     return number_format((float)(($amount * $per) / 100), 2, '.', '');
@@ -286,36 +201,6 @@ function getTax($amount,$per)
 function formatTwoDecimal($num)
 {
     return number_format($num, 2, '.', '');   
-}
-
-function getDistinctShopFromCart($user)
-{
-    $CI =& get_instance();
-    $CI->db->distinct();
-    $CI->db->select('shop');
-    $CI->db->where('user',$user); 
-    $CI->db->where('booking',''); 
-    $shops = $CI->db->get('booking_products')->result_array();
-    $ar = [];
-    foreach ($shops as $key => $value) {
-        array_push($ar, $value['shop']);
-    }
-    return $ar;
-}
-
-function getDistinctShopFromOwner($user)
-{
-    $CI =& get_instance();
-    $CI->db->distinct();
-    $CI->db->select('id');
-    $CI->db->where('user',$user); 
-    $CI->db->where('df',''); 
-    $shops = $CI->db->get('shop')->result_array();
-    $ar = [];
-    foreach ($shops as $key => $value) {
-        array_push($ar, $value['id']);
-    }
-    return $ar;
 }
 
 function number_shorten($number, $precision = 3, $divisors = null) {

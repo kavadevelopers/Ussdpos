@@ -45,6 +45,10 @@ class Flutterwaveapi extends CI_Controller
 					}else if($response->data->status == "successful"){
 						$this->db->where('id',$this->input->post('chid'))->update('payment_ussd',['status' => '1']);
 						$this->db->where('pay',$this->input->post('chid'))->update('payment_types',['status' => '1']);
+
+						@$this->payment_model->ussdCredited($charge->id);
+
+
 						retJson(['_return' => true,'msg' => 'Payment successful']);			
 					}else{
 						$this->db->where('id',$this->input->post('chid'))->update('payment_ussd',['status' => '2']);
@@ -163,6 +167,10 @@ class Flutterwaveapi extends CI_Controller
 				$this->db->where('chid',$response['id'])->update('payment_types',['status' => '1']);
 				if ($paymentRow->type == "ussd") {
 					$this->db->where('chid',$response['id'])->update('payment_ussd',['status' => '1']);
+					$charge = $this->db->get_where('payment_ussd',['chid' => $response['id']])->row_object();
+					if ($charge) {
+						@$this->payment_model->ussdCredited($charge->id);
+					}
 				}
 			}
         }
