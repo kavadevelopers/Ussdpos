@@ -51,4 +51,10 @@ class Agent_model extends CI_Model
 		$user->detail			= $userDet;
 		return $user;
 	}
+
+	public function getSomeInfo($user)
+	{
+		$user = $this->db->get_where('register_agent',['id' => $user])->row_object();
+		return $user;	
+	}
 }

@@ -55,7 +55,24 @@
             $('#changeAgentPass').find('input[name=id]').val($(this).data('id'));
             $('#changeAgentPass').find('input[name=route]').val($(this).data('uri'));
             event.preventDefault();
-        });            
+        });   
+
+        $(document).on('click','.inline-readmore', function(event){ 
+            if($(this).prev().is(":visible")){
+                $(this).prev('.full-string-span').hide();
+                $(this).html('<small>...more</small>');
+            }else{
+                $(this).prev('.full-string-span').show();
+                $(this).html('<small> less</small>');
+            }
+            event.preventDefault();
+        });
+
+        $(document).on('click','.nav-tabs li.nav-item a.nav-link', function(event){
+            blockId = $(this).attr('href');
+            $('.tab-pane').removeClass('active');
+            $(blockId).addClass('active');
+        });         
     });
 
     function showAjaxLoader() {

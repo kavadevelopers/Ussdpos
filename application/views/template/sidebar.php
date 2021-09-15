@@ -122,6 +122,31 @@
                     </ul>
                 <?php } ?>
 
+                <?php if($this->rights->check([5])){ ?>
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li class="pcoded-hasmenu <?= menu(1,["transactions"])[2]; ?>">
+                            <a href="javascript:void(0)">
+                                <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                <span class="pcoded-mtext">Transactions</span>
+                            </a>   
+                            <ul class="pcoded-submenu">
+                                <li class="<?= menu(2,["agent"],'transactions')[0]; ?>">
+                                    <a href="<?= base_url('transactions/agent') ?>">
+                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                        <span class="pcoded-mtext">Agent</span>
+                                    </a>
+                                </li>
+                                <li class="<?= menu(2,["ussd"],'transactions')[0]; ?>">
+                                    <a href="<?= base_url('transactions/ussd') ?>">
+                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                        <span class="pcoded-mtext">UssdPos</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                <?php } ?>
+
                 
                 <?php if($this->rights->check([2])){ ?>
                     <!-- <div class="pcoded-navigatio-lavel">CMS</div> -->

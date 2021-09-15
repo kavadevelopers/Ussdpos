@@ -28,7 +28,7 @@
                                 <th class="text-center">Tra. Ref.</th>
                                 <th>Bank</th>
                                 <th class="text-right">Amount</th>
-                                <th class="text-center">Pay At</th>
+                                <th class="text-center">At</th>
                             </tr>
                         </thead>
                         <tbody>

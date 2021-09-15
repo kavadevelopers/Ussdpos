@@ -6,7 +6,7 @@ class Ussdpay extends CI_Controller
 	{
 		parent::__construct();
 		$this->auth->check_session();
-		$this->rights->redirect([3]);
+		$this->rights->redirect([4]);
 	}
 
 

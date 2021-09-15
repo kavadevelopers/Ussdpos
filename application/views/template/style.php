@@ -1,4 +1,9 @@
 <style type="text/css">
+	.link{
+		color: #007bff;
+	    text-decoration: none;
+	    background-color: transparent;
+	}
 	.radio-togless-field{
 		display: flex;
 		margin-bottom: 36px;

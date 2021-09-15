@@ -72,7 +72,7 @@ class Flutterwaveapi extends CI_Controller
 	public function ussdcharge()
 	{
 		if ($this->input->post('user') && $this->input->post('comfrom') && $this->input->post('bank') && $this->input->post('amount')) {
-			$refId 			= $this->general_model->generateUssdRefId();
+			$refId 			= $this->general_model->generateRefId();
 			$userData 		= $this->agent_model->get($this->input->post('user'));
 			$comAr 			= $this->commission_model->getUssdComission($this->input->post('amount'));			
 			$mobile 		= $userData->phone; 

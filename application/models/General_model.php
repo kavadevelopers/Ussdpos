@@ -7,6 +7,18 @@ class General_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function getDistinctUsersFromTransactions()
+	{
+		$this->db->distinct();
+		$this->db->select('user');
+		$users = $this->db->get('transactions')->result_object();
+		foreach ($users as $key => $value) {
+			$users[$key]->name = $this->agent_model->getSomeInfo($value->user)->name;
+			$users[$key]->id = $this->agent_model->getSomeInfo($value->user)->id;
+		}
+		return $users;
+	}
+
 	public function getBankByCode($id)
 	{
 		$this->db->select('name');
@@ -14,13 +26,13 @@ class General_model extends CI_Model
 		return $this->db->get('master_banks')->row_object();
 	}
 
-	public function generateUssdRefId()
+	public function generateRefId()
 	{
-		$last = $this->db->order_by('id','desc')->get_where('payment_ussd')->row_object();
+		$last = $this->db->order_by('id','desc')->get_where('payment_types')->row_object();
 		if ($last) {
-			return "USSDPOS".mt_rand(111111,999999).($last->id + 1);
+			return "USSDPOS".mt_rand(1111,9999).($last->id + 1);
 		}else{
-			return "USSDPOS".mt_rand(111111,999999).'1';
+			return "USSDPOS".mt_rand(1111,9999).'1';
 		}
 	}
 

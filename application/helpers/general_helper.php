@@ -105,6 +105,16 @@ function getPretyDateTime($date)
     return date('d M Y h:i A',strtotime($date));
 }
 
+function getPretyDate($date)
+{
+    return date('d M Y',strtotime($date));
+}
+
+function getPretyTime($time)
+{
+    return date('h:i A',strtotime($time));
+}
+
 function subStrr($str, $length = 125, $append = '...') {
     if (strlen($str) > $length) {
         $delim = "~\n~";
@@ -242,4 +252,14 @@ function date_range_list($first, $last, $step = '+1 day', $output_format = 'Y-m-
     }
     return $dates;
 }
+
+function stringReadMoreInline($str,$length) {
+    $strOk = nl2br($str);
+    if (strlen($str) > $length) {
+        $delim = "~\n~";
+        $append = '<span style="display:none;" class="full-string-span">'.substr($strOk,$length,strlen($str)).'</span><a href="#" class="link inline-readmore"><small>...more</small></a>';
+        $str = substr($strOk,0,$length).$append;
+    }
+    return $str;
+}  
 ?>
