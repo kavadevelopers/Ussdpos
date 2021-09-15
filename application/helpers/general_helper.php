@@ -11,7 +11,7 @@ function pre_print($array)
 
 function niara()
 {
-    return "₦ ";
+    return "₦";
 }
 
 function traType($type)

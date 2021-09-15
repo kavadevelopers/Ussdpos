@@ -7,6 +7,13 @@ class General_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function getBankByCode($id)
+	{
+		$this->db->select('name');
+		$this->db->where('bcode',$id);
+		return $this->db->get('master_banks')->row_object();
+	}
+
 	public function generateUssdRefId()
 	{
 		$last = $this->db->order_by('id','desc')->get_where('payment_ussd')->row_object();

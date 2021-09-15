@@ -91,7 +91,36 @@
                     <?php } ?>
                 <?php } ?>
                 
-                
+                <?php if($this->rights->check([4])){ ?>
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li class="pcoded-hasmenu <?= menu(1,["ussdpay"])[2]; ?>">
+                            <a href="javascript:void(0)">
+                                <span class="pcoded-micon"><i class="fa fa-hashtag"></i></span>
+                                <span class="pcoded-mtext">Ussd Payments</span>
+                            </a>   
+                            <ul class="pcoded-submenu">
+                                <li class="<?= menu(2,["pending"],'ussdpay')[0]; ?>">
+                                    <a href="<?= base_url('ussdpay/pending') ?>">
+                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                        <span class="pcoded-mtext">Pending</span>
+                                    </a>
+                                </li>
+                                <li class="<?= menu(2,["success"],'ussdpay')[0]; ?>">
+                                    <a href="<?= base_url('ussdpay/success') ?>">
+                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                        <span class="pcoded-mtext">Success</span>
+                                    </a>
+                                </li>
+                                <li class="<?= menu(2,["failed"],'ussdpay')[0]; ?>">
+                                    <a href="<?= base_url('ussdpay/failed') ?>">
+                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                        <span class="pcoded-mtext">Failed</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                <?php } ?>
 
                 
                 <?php if($this->rights->check([2])){ ?>

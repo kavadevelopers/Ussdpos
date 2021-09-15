@@ -26,6 +26,7 @@ class Transaction_model extends CI_Model
 				'credit'		=> $credit,
 				'main'			=> $chId,
 				'notes'			=> "USSD Payment received.",
+				'dt'			=> date('Y-m-d'),
 				'cat'			=> _nowDateTime()
 			];
 			$this->db->insert('transactions',$data);
@@ -38,6 +39,7 @@ class Transaction_model extends CI_Model
 				'credit'		=> $credit,
 				'main'			=> $chId,
 				'notes'			=> "USSD Payment received.",
+				'dt'			=> date('Y-m-d'),
 				'cat'			=> _nowDateTime()
 			];
 			$this->db->insert('transactions',$data);
@@ -50,6 +52,7 @@ class Transaction_model extends CI_Model
 				'credit'		=> $charge->com,
 				'main'			=> $chId,
 				'notes'			=> "USSD Fees received.",
+				'dt'			=> date('Y-m-d'),
 				'cat'			=> _nowDateTime()
 			];
 			$this->db->insert('transactions',$data);
