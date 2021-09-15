@@ -40,7 +40,10 @@ class General extends CI_Controller
 	public function getsettings()
 	{
 		$settings = [
-			'terms'		=> $this->db->get_where('cms_pages',['id' => '1'])->row_object()->descr
+			'_return'		=> true,
+			'android_ver'	=> get_setting()['android_ver'],
+			'ios_ver'		=> get_setting()['ios_ver'],
+			'terms'			=> $this->db->get_where('cms_pages',['id' => '1'])->row_object()->descr
 		];
 
 		retJson($settings);
