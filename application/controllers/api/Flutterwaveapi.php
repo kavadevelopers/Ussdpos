@@ -127,7 +127,11 @@ class Flutterwaveapi extends CI_Controller
 						'_return' 			=> true,
 						'msg' 				=> 'Charge Created',
 						'ussd' 				=> $response->meta->authorization->note,
-						'charge'			=> $chrgeId
+						'charge'			=> $chrgeId,
+						'amount'			=> formatTwoDecimal($amount),
+						'fees'				=> formatTwoDecimal($com + $fcom),
+						'payable'			=> formatTwoDecimal($payableAmount),
+						'cpayby'			=> $this->input->post('comfrom')
 					]);	
 				}else{
 					retJson(['_return' => false,'msg' => 'Error Please Try again later.']);	
