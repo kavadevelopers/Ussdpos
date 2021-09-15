@@ -130,7 +130,7 @@ class Flutterwaveapi extends CI_Controller
 						'charge'			=> $chrgeId,
 						'amount'			=> formatTwoDecimal($amount),
 						'fees'				=> formatTwoDecimal($com + $fcom),
-						'payable'			=> formatTwoDecimal($payableAmount),
+						'payable'			=> formatTwoDecimal($payableAmount + $fcom),
 						'cpayby'			=> $this->input->post('comfrom')
 					]);	
 				}else{
