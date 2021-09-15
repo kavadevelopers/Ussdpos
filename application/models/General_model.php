@@ -161,9 +161,10 @@ class General_model extends CI_Model
 
 	public function sendNotificationsToAndroidDevices($tokens,$title,$body,$type = '',$dy = [])
 	{
+		$randId = time();
 		$url = "https://fcm.googleapis.com/fcm/send";
 	    $serverKey = get_setting()['fserverkey'];
-	    $arrayToSend = array('registration_ids' => $tokens,"priority" => "high",'data' => ['title' => $title,'body' => $body,'type' => $type,'dy' => $dy]);
+	    $arrayToSend = array('registration_ids' => $tokens,"priority" => "high",'data' => ['notid' => $randId,'title' => $title,'body' => $body,'type' => $type,'dy' => $dy]);
 	    $json = json_encode($arrayToSend);
 	    $headers = array();
 	    $headers[] = 'Content-Type: application/json';
