@@ -150,7 +150,7 @@
                 
                 <?php if($this->rights->check([2])){ ?>
                     <!-- <div class="pcoded-navigatio-lavel">CMS</div> -->
-                    <ul class="pcoded-item pcoded-left-item">
+                    <!-- <ul class="pcoded-item pcoded-left-item">
                         <li class="pcoded-hasmenu <?= menu(1,["pages"])[2]; ?>">
                             <a href="javascript:void(0)">
                                 <span class="pcoded-micon"><i class="fa fa-file"></i></span>
@@ -168,76 +168,82 @@
                                 <?php } ?>
                             </ul>
                         </li>
-                    </ul>
-                <?php } ?>
-                <?php if(get_user()['user_type'] == '0'){ ?>
-                    <!-- <div class="pcoded-navigatio-lavel">Master Management</div> -->
+                    </ul> -->
+                <?php } ?>  
+                
+
+                <?php if(get_user()['user_type'] == '0' || $this->rights->check([2])){ ?>
                     <ul class="pcoded-item pcoded-left-item">
-                        <li class="pcoded-hasmenu <?= menu(1,["banks"])[2]; ?>">
+                        <li class="pcoded-hasmenu <?= menu(1,["setting","commission","users","states","regbanks","banks","pages"])[2]; ?>">
                             <a href="javascript:void(0)">
-                                <span class="pcoded-micon"><i class="fa fa-university"></i></span>
-                                <span class="pcoded-mtext">Banks</span>
-                            </a>   
+                                <span class="pcoded-micon"><i class="feather icon-list"></i></span>
+                                <span class="pcoded-mtext">Admin Setups</span>
+                            </a>
                             <ul class="pcoded-submenu">
-                                <li class="<?= menu(2,["ussd",'edit_ussd'],'banks')[0]; ?>">
-                                    <a href="<?= base_url('banks/ussd') ?>">
-                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
-                                        <span class="pcoded-mtext">Ussd</span>
+                                <li class="pcoded-hasmenu <?= menu(1,["pages"])[2]; ?>">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-mtext">Pages</span>
                                     </a>
+                                    <ul class="pcoded-submenu">
+                                        <?php $pages = $this->db->get('cms_pages')->result_array(); ?>
+                                        <?php foreach ($pages as $page) { ?>
+                                            <li class="<?= menu(3,[$page['id']])[0]; ?>">
+                                                <a href="<?= base_url('pages/page/').$page['id'] ?>">
+                                                    <span class="pcoded-mtext"><?= $page['name'] ?></span>
+                                                </a>
+                                            </li>
+                                        <?php } ?> 
+                                    </ul>
                                 </li>
-                                <li class="<?= menu(2,["transfer",'edit_transfer'],'banks')[0]; ?>">
-                                    <a href="<?= base_url('banks/transfer') ?>">
-                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
-                                        <span class="pcoded-mtext">Bank Transfer</span>
-                                    </a>
-                                </li>
+                                <?php if(get_user()['user_type'] == '0'){ ?>
+                                    <li class="pcoded-hasmenu <?= menu(1,["states","regbanks","banks"])[2]; ?>">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-mtext">Master</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="<?= menu(2,["ussd","edit_ussd"],'banks')[0]; ?>">
+                                                <a href="<?= base_url('banks/ussd') ?>">
+                                                    <span class="pcoded-mtext">USSD Bank</span>
+                                                </a>
+                                            </li>
+                                            <li class="<?= menu(2,["transfer","edit_transfer"],'banks')[0]; ?>">
+                                                <a href="<?= base_url('banks/transfer') ?>">
+                                                    <span class="pcoded-mtext">Transfer Bank</span>
+                                                </a>
+                                            </li>
+                                            <li class="<?= menu(1,["regbanks"])[0]; ?>">
+                                                <a href="<?= base_url('regbanks/banks') ?>">
+                                                    <span class="pcoded-mtext">Reg. Banks</span>
+                                                </a>
+                                            </li>
+                                            <li class="<?= menu(1,["states"])[0]; ?>">
+                                                <a href="<?= base_url('states/list') ?>">
+                                                    <span class="pcoded-mtext">States</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="<?= menu(1,["users"])[1]; ?>">
+                                        <a href="<?= base_url('users') ?>">
+                                            <span class="pcoded-mtext">Admin Users</span>
+                                        </a>
+                                    </li>
+                                    <li class="<?= menu(1,["commission"])[1]; ?>">
+                                        <a href="<?= base_url('commission') ?>">
+                                            <span class="pcoded-mtext">Commission</span>
+                                        </a>
+                                    </li>
+                                    <li class="<?= menu(1,["setting"])[1]; ?>">
+                                        <a href="<?= base_url('setting') ?>">
+                                            <span class="pcoded-mtext">Settings</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </li>
                     </ul>
-                    <ul class="pcoded-item pcoded-left-item">
-                        <li class="<?= menu(1,["regbanks"])[0]; ?>">
-                            <a href="<?= base_url('regbanks/banks') ?>">
-                                <span class="pcoded-micon"><i class="fa fa-university"></i></span>
-                                <span class="pcoded-mtext">Reg. Banks</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="pcoded-item pcoded-left-item">
-                        <li class="<?= menu(1,["states"])[0]; ?>">
-                            <a href="<?= base_url('states/list') ?>">
-                                <span class="pcoded-micon"><i class="fa fa-map"></i></span>
-                                <span class="pcoded-mtext">States</span>
-                            </a>
-                        </li>
-                    </ul>
-                <?php } ?>    
-                <?php if(get_user()['user_type'] == '0'){ ?>
-                    <!-- <div class="pcoded-navigatio-lavel">Super Admin Access</div> -->
-                    <ul class="pcoded-item pcoded-left-item">
-                        <li class="<?= menu(1,["users"])[0]; ?>">
-                            <a href="<?= base_url('users') ?>">
-                                <span class="pcoded-micon"><i class="fa fa-user-md"></i></span>
-                                <span class="pcoded-mtext">Admin Users</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="pcoded-item pcoded-left-item">
-                        <li class="<?= menu(1,["commission"])[0]; ?>">
-                            <a href="<?= base_url('commission') ?>">
-                                <span class="pcoded-micon"><i class="fa fa-percent"></i></span>
-                                <span class="pcoded-mtext">Commission Settings</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="pcoded-item pcoded-left-item">
-                        <li class="<?= menu(1,["setting"])[0]; ?>">
-                            <a href="<?= base_url('setting') ?>">
-                                <span class="pcoded-micon"><i class="fa fa-gear fa-spin"></i></span>
-                                <span class="pcoded-mtext">Setting</span>
-                            </a>
-                        </li>
-                    </ul>
-                <?php } ?>
+                <?php } ?>  
+
                     <ul class="pcoded-item pcoded-left-item">
                         <li>
                             <a href="<?= base_url('login/logout') ?>">

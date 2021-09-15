@@ -23,6 +23,11 @@ function traType($type)
     }
 }
 
+function traTypeArray()
+{
+    return [1,2];
+}
+
 function ptPretyAmount($amount)
 {
     return number_format($amount, 2, '.', ',');

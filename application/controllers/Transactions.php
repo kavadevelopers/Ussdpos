@@ -12,6 +12,7 @@ class Transactions extends CI_Controller
 	public function agent()
 	{
 		$data['_title']		= "Agent Transactions";		
+		$this->db->order_by('id','desc');
 		if ($this->input->post('limit')) {
 			if ($this->input->post('limit') != "All") {
 				$this->db->limit($this->input->post('limit'));	
@@ -19,8 +20,9 @@ class Transactions extends CI_Controller
 		}else{
 			$this->db->limit(100);	
 		}
-		
-		$this->db->order_by('id','desc');
+		if ($this->input->post('perticulars')) {
+			$this->db->where('type',$this->input->post('perticulars'));	
+		}
 		if ($this->input->post('user')) {
 			$this->db->where('user',$this->input->post('user'));	
 		}
@@ -46,6 +48,7 @@ class Transactions extends CI_Controller
 	public function ussd()
 	{
 		$data['_title']		= "UssdPos Transactions";		
+		$this->db->order_by('id','desc');
 		if ($this->input->post('limit')) {
 			if ($this->input->post('limit') != "All") {
 				$this->db->limit($this->input->post('limit'));	
@@ -53,8 +56,9 @@ class Transactions extends CI_Controller
 		}else{
 			$this->db->limit(100);	
 		}
-		
-		$this->db->order_by('id','desc');
+		if ($this->input->post('perticulars')) {
+			$this->db->where('type',$this->input->post('perticulars'));	
+		}
 		if ($this->input->post('user')) {
 			$this->db->where('user',$this->input->post('user'));	
 		}

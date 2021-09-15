@@ -45,7 +45,20 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Transaction Type</label>
+                                    <label>Perticulars</label>
+                                    <select class="form-control form-control-sm" name="perticulars">
+                                        <option value="">-- Select --</option>
+                                        <?php foreach(traTypeArray() as $traType){ ?>
+                                            <option value="<?= $traType ?>" <?= selected($this->input->post('perticulars'),$traType) ?>>
+                                                <?= strtoupper(traType($traType)[0]) ?>        
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Amount Type</label>
                                     <select class="form-control form-control-sm" name="tradebcre">
                                         <option value="Both">Both</option>
                                         <option value="Credit" <?= selected($this->input->post('tradebcre'),'Credit') ?>>Credit</option>
