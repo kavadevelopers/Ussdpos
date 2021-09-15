@@ -112,6 +112,7 @@ class General_model extends CI_Model
 
 	public function agentPush($user,$title,$body,$type = '',$dy = []){
 		$firebases = $this->db->get_where('firebase_agent',['user' => $user])->result_array();
+		$randId = time();
 		$url = "https://fcm.googleapis.com/fcm/send";
 	    $serverKey = get_setting()['fserverkey'];
 		foreach ($firebases as $key => $firebase) {
@@ -119,7 +120,7 @@ class General_model extends CI_Model
 		        $notification = array('title' => $title, 'body' => $body,'sound' => 'default','badge' => '0');
 		        $arrayToSend = array('registration_ids' => [$firebase['token']],"priority" => "high","notification" => $notification,'data' => ['title' => $title,'body' => $body,'type' => $type,'dy' => $dy]);
 		    }else{
-		        $arrayToSend = array('registration_ids' => [$firebase['token']],"priority" => "high",'data' => ['title' => $title,'body' => $body,'type' => $type,'dy' => $dy]);
+		        $arrayToSend = array('registration_ids' => [$firebase['token']],"priority" => "high",'data' => ['notid' => $randId,'title' => $title,'body' => $body,'type' => $type,'dy' => $dy]);
 		    }
 		    $json = json_encode($arrayToSend);
 		    $headers = array();
