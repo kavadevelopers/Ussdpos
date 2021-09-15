@@ -10,7 +10,10 @@ class Flutterwaveapi extends CI_Controller
 
 
 
-
+	public function check()
+	{
+		@$this->payment_model->ussdCredited($this->input->post('charge'));
+	}
 
 	public function ussd_charge_continue_check()
 	{
