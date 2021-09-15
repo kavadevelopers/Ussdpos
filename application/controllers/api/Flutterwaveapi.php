@@ -134,9 +134,9 @@ class Flutterwaveapi extends CI_Controller
 						'msg' 				=> 'Charge Created',
 						'ussd' 				=> $response->meta->authorization->note,
 						'charge'			=> $chrgeId,
-						'amount'			=> formatTwoDecimal($amount),
-						'fees'				=> formatTwoDecimal($com + $fcom),
-						'payable'			=> formatTwoDecimal($payableAmount),
+						'amount'			=> ptPretyAmount($amount),
+						'fees'				=> ptPretyAmount($com + $fcom),
+						'payable'			=> ptPretyAmount($payableAmount),
 						'cpayby'			=> $this->input->post('comfrom')
 					]);	
 				}else{
