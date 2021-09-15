@@ -7,7 +7,7 @@ class Notification_model extends CI_Model
 		
 	}
 
-	public function ussdCredited()
+	public function ussdCredited($chId)
 	{
 		$charge = $this->db->get_where('payment_ussd',['id' => $chId])->row_object();
 		if ($charge) {
