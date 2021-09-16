@@ -19,6 +19,16 @@ class General_model extends CI_Model
 		return $users;
 	}
 
+	public function getUsersList()
+	{
+		$this->db->distinct();
+		$this->db->select('id,name');
+		$this->db->where('df','');
+		$this->db->where('block','');
+		$users = $this->db->get('register_agent')->result_object();
+		return $users;
+	}
+
 	public function getBankByCode($id)
 	{
 		$this->db->select('name');

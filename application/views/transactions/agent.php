@@ -33,7 +33,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>User</label>
-                                    <select class="form-control form-control-sm" name="user">
+                                    <select class="form-control form-control-sm select2" name="user">
                                         <option value="">-- Select --</option>
                                         <?php foreach($this->general_model->getDistinctUsersFromTransactions() as $key => $value){ ?>
                                             <option value="<?= $value->id ?>" <?= selected($this->input->post('user'),$value->id) ?>>

@@ -21,32 +21,43 @@ class Other extends CI_Controller
 
 	public function send_pushnotification($id = false)
 	{
-		$atokens = []; $itokens = [];
-		if($this->input->post('user_type') == "customer"){
-			$users = $this->db->select('token')->where('df','')->where('token !=','')->get('z_customer')->result_array();
-			foreach ($users as $key => $value) {
-				array_push($tokens, $value['token']);
-			}
-		}
-
-		$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->get('firebase_agent')->result_array();
-		foreach ($androidUsers as $key => $value) {
-			array_push($atokens, $value['token']);
-		}
-		$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->get('firebase_agent')->result_array();
-		foreach ($iosUsers as $key => $value) {
-			array_push($itokens, $value['token']);
-		}
-
+		//print_r($_POST);exit;	
 		if (!$id) {
+			if ($this->input->post('users')) {
+				$usersStr = implode(',', $this->input->post('users'));
+			}else{
+				$usersStr = "";
+			}
 			$data = [
 				'title'			=>	$this->input->post('title'),
-				'body'			=>	$this->input->post('message')
+				'body'			=>	$this->input->post('message'),
+				'users'			=> $usersStr
 			];
 			$this->db->insert('custom_notifications',$data);
 			$old = $this->db->get_where('custom_notifications',['id' => $this->db->insert_id()])->row_object();
 		}else{
 			$old = $this->db->get_where('custom_notifications',['id' => $id])->row_object();
+		}
+
+
+		if ($old->users != "") {
+			$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->where_in('user',explode(',', $old->users))->get('firebase_agent')->result_array();
+			foreach ($androidUsers as $key => $value) {
+				array_push($atokens, $value['token']);
+			}
+			$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->where_in('user',explode(',', $old->users))->get('firebase_agent')->result_array();
+			foreach ($iosUsers as $key => $value) {
+				array_push($itokens, $value['token']);
+			}
+		}else{
+			$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->get('firebase_agent')->result_array();
+			foreach ($androidUsers as $key => $value) {
+				array_push($atokens, $value['token']);
+			}
+			$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->get('firebase_agent')->result_array();
+			foreach ($iosUsers as $key => $value) {
+				array_push($itokens, $value['token']);
+			}
 		}
 
 		$a = $this->general_model->sendNotificationsToAndroidDevices(
