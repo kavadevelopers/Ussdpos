@@ -294,6 +294,7 @@ class Agent extends CI_Controller
 		
 		$this->db->where('id',$id)->update('register_agent',['df' => 'yes']);
 		$this->db->where('user',$id)->update('details_agent',['df' => 'yes']);
+		$this->db->where('user',$id)->delete('firebase_agent');
 		$this->session->set_flashdata('msg', 'Agent deleted');
 	    redirect(base_url('agent/'.$type));
 	}
