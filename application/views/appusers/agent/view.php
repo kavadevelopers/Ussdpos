@@ -53,10 +53,6 @@
                         <a class="nav-link active" data-toggle="tab" href="#personal" role="tab" aria-selected="false">Agent Info</a>
                         <div class="slide"></div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#doc" role="tab" aria-selected="false">Documents</a>
-                        <div class="slide"></div>
-                    </li>
                     <?php if ($item->df == "") { ?>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#ver" role="tab" aria-selected="false">Verification</a>
@@ -171,54 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="doc" role="tabpanel">
-                    <div class="card">
-                        <div class="card-block">
-                            <div class="view-info">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="general-info">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-xl-6">
-                                                    <div class="table-responsive">
-                                                        <table class="table m-0 tbl-shopdis">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row">ID Verification</th>
-                                                                    <td>
-                                                                        <a href="#" class="photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($item->detail->fileid) ?>">
-                                                                            <img src="<?= $item->detail->fileid ?>" style="max-width: 200px;">
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 col-xl-6">
-                                                    <div class="table-responsive">
-                                                        <table class="table m-0 tbl-shopdis">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row">Address Verification</th>
-                                                                    <td>
-                                                                        <a href="#" class="photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($item->detail->fileaddress) ?>">
-                                                                            <img src="<?= $item->detail->fileaddress ?>" style="max-width: 200px;">
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="tab-pane" id="ver" role="tabpanel">
                     <form method="post" action="<?= base_url('agent/doc_status') ?>">
                         <div class="card">
