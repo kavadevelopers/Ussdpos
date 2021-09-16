@@ -43,8 +43,18 @@ class General extends CI_Controller
 			'_return'		=> true,
 			'android_ver'	=> get_setting()['android_ver'],
 			'ios_ver'		=> get_setting()['ios_ver'],
-			'terms'			=> $this->db->get_where('cms_pages',['id' => '1'])->row_object()->descr
+			'terms'			=> $this->db->get_where('cms_pages',['id' => '1'])->row_object()->descr,
+			'msg'			=> '`user`,`firetoken` are Optional'
 		];
+
+		if ($this->input->post('user')) {
+			$isLoggedIn = $this->db->get_where('service_firebase',['user' => $this->input->post('user'),'token' => $this->input->post('token')])->row_object();
+			if ($isLoggedIn) {
+				$settings['isLoggedIn'] = "1";
+			}else{
+				$settings['isLoggedIn'] = "0";
+			}
+		}
 
 		retJson($settings);
 	}

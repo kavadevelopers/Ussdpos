@@ -63,6 +63,10 @@
                             <div class="slide"></div>
                         </li>
                     <?php } ?>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#devices" role="tab" aria-selected="false">Devices</a>
+                        <div class="slide"></div>
+                    </li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -363,6 +367,40 @@
                         </div>
                     </form>
                 </div>
+                <div class="tab-pane" id="devices" role="tabpanel">
+                    <div class="card">
+                        <div class="card-block table-responsive">
+                            <table class="table table-striped table-bordered table-mini table-dt">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">OS</th>
+                                        <th>Device</th>
+                                        <th class="text-center">Device Id</th>
+                                        <th class="text-center">Logged In At</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($devices as $key => $value) { ?>
+                                        <tr>
+                                            <td class="text-center"><?= $key+1 ?></td>
+                                            <td class="text-center"><?= $value->device ?></td>
+                                            <td><?= $value->descr ?></td>
+                                            <td class="text-center"><?= $value->device_id ?></td>
+                                            <td class="text-center"><small><?= getPretyDateTime($value->cat) ?></small></td>
+                                            <td class="text-center">
+                                                <a href="#" class="btn btn-danger btn-mini btnLogout" data-id="<?= $value->id ?>">
+                                                    Logout
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -409,6 +447,31 @@
                 $('#addressReason').hide();
                 $('#addressReason').find('select').removeAttr('required');
                 $('#addressReason').find('select').val('');
+            }
+        });
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        $(document).on('click','.btnLogout', function(event){
+            event.preventDefault();
+            _this = $(this);
+            if(confirm('Are you sure?')){
+                showAjaxLoader();
+                $.post("<?= base_url('agent/logout_device') ?>", 
+                    {id: $(this).data('id')}, 
+                    function(result){
+                        hideAjaxLoader();
+                        _this.closest('tr').remove();
+                        PNOTY('Logout Success','success');       
+                    }
+                );
             }
         });
     })

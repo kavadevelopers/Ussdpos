@@ -9,6 +9,12 @@ class Agent extends CI_Controller
 		$this->rights->redirect([3]);
 	}
 
+	public function logout_device()
+	{
+		$this->db->where('id',$this->input->post('id'))->delete('firebase_agent');
+		retJson(['_return' => true]);
+	}
+
 	public function reset_password()
 	{
 		$this->db->where('id',$this->input->post('id'))->update('register_agent',['password' => md5($this->input->post('pass'))]);
@@ -211,6 +217,7 @@ class Agent extends CI_Controller
 		if (!empty($page)) {
 			$data['page']		= $page;	
 		}
+		$data['devices']	= $this->db->get_where('firebase_agent',['user' => $id])->result_object();
 		$data['item']		= $this->agent_model->get($id);
 		$this->load->theme('appusers/agent/view',$data);
 	}
