@@ -48,7 +48,7 @@ class General extends CI_Controller
 		];
 
 		if ($this->input->post('user')) {
-			$isLoggedIn = $this->db->get_where('service_firebase',['user' => $this->input->post('user'),'token' => $this->input->post('token')])->row_object();
+			$isLoggedIn = $this->db->get_where('firebase_agent',['user' => $this->input->post('user'),'token' => $this->input->post('firetoken')])->row_object();
 			if ($isLoggedIn) {
 				$settings['isLoggedIn'] = "1";
 			}else{
