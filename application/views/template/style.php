@@ -18,7 +18,7 @@
 	}
 	.radio-togless-field{
 		display: flex;
-		margin-bottom: 36px;
+		/*margin-bottom: 36px;*/
 		overflow: hidden;
 	}
 

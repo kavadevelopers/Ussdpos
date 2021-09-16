@@ -18,10 +18,10 @@ class Notification_model extends CI_Model
 			}
 
 
-			$template = 'Hi there, you received payment of '.niara().ptPretyAmount($credit).' Thankyou';
+			$template = 'You have just received '.niara().ptPretyAmount($credit);
 			@$this->general_model->agentPush(
 				$charge->user,
-				'USSD Payment received',
+				'USSD Payment Received',
 				$template
 			);
 		}
