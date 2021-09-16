@@ -23,15 +23,21 @@ class Other extends CI_Controller
 	{
 		//print_r($_POST);exit;	
 		if (!$id) {
-			if ($this->input->post('users')) {
-				$usersStr = implode(',', $this->input->post('users'));
+			if ($this->input->post('group') == "User") {
+				if ($this->input->post('users')) {
+					$usersStr = implode(',', $this->input->post('users'));
+				}else{
+					$usersStr = "";
+				}	
 			}else{
 				$usersStr = "";
 			}
+			
 			$data = [
 				'title'			=>	$this->input->post('title'),
 				'body'			=>	$this->input->post('message'),
-				'users'			=> $usersStr
+				'type'			=> 	$this->input->post('group'),
+				'users'			=>	$usersStr
 			];
 			$this->db->insert('custom_notifications',$data);
 			$old = $this->db->get_where('custom_notifications',['id' => $this->db->insert_id()])->row_object();
@@ -40,25 +46,89 @@ class Other extends CI_Controller
 		}
 
 
-		if ($old->users != "") {
-			$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->where_in('user',explode(',', $old->users))->get('firebase_agent')->result_array();
+		if ($old->type == "Active") {
+			$this->db->select('id');
+			$regUsersActive = $this->db->get_where('register_agent',['df' => '','status' => '1'])->result_object();
+			$arrayIds = [];
+			foreach ($regUsersActive as $key => $value) {
+				array_push($arrayIds, $value->id);
+			}
+			$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->where_in('user',$arrayIds)->get('firebase_agent')->result_array();
 			foreach ($androidUsers as $key => $value) {
 				array_push($atokens, $value['token']);
 			}
-			$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->where_in('user',explode(',', $old->users))->get('firebase_agent')->result_array();
+			$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->where_in('user',$arrayIds)->get('firebase_agent')->result_array();
+			foreach ($iosUsers as $key => $value) {
+				array_push($itokens, $value['token']);
+			}
+		}else if ($old->type == "Processing") {
+			$this->db->select('id');
+			$regUsersActive = $this->db->get_where('register_agent',['df' => '','status' => '2'])->result_object();
+			$arrayIds = [];
+			foreach ($regUsersActive as $key => $value) {
+				array_push($arrayIds, $value->id);
+			}
+			$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->where_in('user',$arrayIds)->get('firebase_agent')->result_array();
+			foreach ($androidUsers as $key => $value) {
+				array_push($atokens, $value['token']);
+			}
+			$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->where_in('user',$arrayIds)->get('firebase_agent')->result_array();
+			foreach ($iosUsers as $key => $value) {
+				array_push($itokens, $value['token']);
+			}
+		}else if ($old->type == "ReUploaded") {
+			$this->db->select('id');
+			$regUsersActive = $this->db->get_where('register_agent',['df' => '','status' => '3'])->result_object();
+			$arrayIds = [];
+			foreach ($regUsersActive as $key => $value) {
+				array_push($arrayIds, $value->id);
+			}
+			$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->where_in('user',$arrayIds)->get('firebase_agent')->result_array();
+			foreach ($androidUsers as $key => $value) {
+				array_push($atokens, $value['token']);
+			}
+			$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->where_in('user',$arrayIds)->get('firebase_agent')->result_array();
+			foreach ($iosUsers as $key => $value) {
+				array_push($itokens, $value['token']);
+			}
+		}else if ($old->type == "Pending") {
+			$this->db->select('id');
+			$regUsersActive = $this->db->get_where('register_agent',['df' => '','status' => '0'])->result_object();
+			$arrayIds = [];
+			foreach ($regUsersActive as $key => $value) {
+				array_push($arrayIds, $value->id);
+			}
+			$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->where_in('user',$arrayIds)->get('firebase_agent')->result_array();
+			foreach ($androidUsers as $key => $value) {
+				array_push($atokens, $value['token']);
+			}
+			$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->where_in('user',$arrayIds)->get('firebase_agent')->result_array();
 			foreach ($iosUsers as $key => $value) {
 				array_push($itokens, $value['token']);
 			}
 		}else{
-			$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->get('firebase_agent')->result_array();
-			foreach ($androidUsers as $key => $value) {
-				array_push($atokens, $value['token']);
-			}
-			$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->get('firebase_agent')->result_array();
-			foreach ($iosUsers as $key => $value) {
-				array_push($itokens, $value['token']);
-			}
+			if ($old->users != "") {
+				$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->where_in('user',explode(',', $old->users))->get('firebase_agent')->result_array();
+				foreach ($androidUsers as $key => $value) {
+					array_push($atokens, $value['token']);
+				}
+				$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->where_in('user',explode(',', $old->users))->get('firebase_agent')->result_array();
+				foreach ($iosUsers as $key => $value) {
+					array_push($itokens, $value['token']);
+				}
+			}else{
+				$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->get('firebase_agent')->result_array();
+				foreach ($androidUsers as $key => $value) {
+					array_push($atokens, $value['token']);
+				}
+				$iosUsers = $this->db->select('token')->where('token !=','')->where('device','iOS')->get('firebase_agent')->result_array();
+				foreach ($iosUsers as $key => $value) {
+					array_push($itokens, $value['token']);
+				}
+			}	
 		}
+
+		
 
 		$a = $this->general_model->sendNotificationsToAndroidDevices(
 			$atokens,

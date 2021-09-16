@@ -130,7 +130,7 @@
                             <i class="feather icon-menu"></i>
                         </a>
                         <a href="<?= base_url() ?>">
-                            <img class="img-fluid" src="<?= base_url() ?>asset/images/logo.png" alt="Theme-Logo" style="width: 58%;">
+                            <img class="img-fluid" src="<?= base_url() ?>asset/images/logo_head.png" alt="Theme-Logo">
                         </a>
                         <a class="mobile-options">
                             <i class="feather icon-more-horizontal"></i>

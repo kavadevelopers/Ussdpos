@@ -27,7 +27,19 @@
                                     <?= form_error('title') ?>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label style="width: 100%;">Group</label>
+                                    <select name="group" class="form-control form-control-sm">
+                                        <option value="User">Select User</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Processing">Processing</option>
+                                        <option value="ReUploaded">ReUploaded</option>
+                                        <option value="Pending">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="multiBlock">
                                 <div class="form-group">
                                     <label style="width: 100%;">Select Users</label>
                                     <select name="users[]" class="form-control form-control-sm multiSelect" multiple>
@@ -94,11 +106,18 @@
 
 <script type="text/javascript">
     $(function(){
+        $('select[name=group]').change(function(){
+            if ($(this).val() == "User") {
+                $('#multiBlock').show();
+            }else{
+                $('#multiBlock').hide();
+            }
+        })
         $('.multiSelect').multiselect({
             nonSelectedText: 'Select Users',
             enableFiltering: true,
             enableCaseInsensitiveFiltering: true,
-            buttonWidth:'400px',
+            buttonWidth:'100%',
             includeSelectAllOption: true
         });
         $('.multiselect-container .filter .input-group-addon').html('<i class="fa fa-search"></i>');

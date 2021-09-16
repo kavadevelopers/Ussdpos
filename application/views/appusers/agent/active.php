@@ -32,6 +32,7 @@
                                 <?php if ($this->uri->segment(2) == "active") { ?>
                                     <th class="text-center">Status</th>                     
                                 <?php } ?>
+                                <th class="text-center">At</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -63,6 +64,7 @@
                                             <?php } ?>
                                         </td>
                                     <?php } ?>
+                                    <td class="text-center"><small><?= getPretyDateTime($value->cat) ?></small></td>
                                     <td class="text-center">
                                         <a href="<?= base_url('agent/view/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-success btn-mini" title="View">
                                             <i class="fa fa-eye"></i>
