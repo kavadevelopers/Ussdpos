@@ -302,7 +302,10 @@ class Agent extends CI_Controller
 	public function block($id,$type,$status = false)
 	{
 		$s = "";
-		if($status){ $s = "yes"; }
+		if($status){ 
+			$s = "yes"; 
+			$this->db->where('user',$id)->delete('firebase_agent');	
+		}
 		$this->db->where('id',$id)->update('register_agent',['block' => $s]);
 		$this->session->set_flashdata('msg', 'Status Changed');
 	    redirect(base_url('agent/'.$type));
