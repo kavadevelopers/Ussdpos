@@ -183,7 +183,7 @@
                         $("#sign-in-loader").html('<i class="fa fa-circle-o-notch fa-spin"></i> Redirecting...');
                         setTimeout(function(){
                             window.location = "<?= base_url() ?>";
-                        },2000);
+                        },1000);
                     }
                     else
                     {
