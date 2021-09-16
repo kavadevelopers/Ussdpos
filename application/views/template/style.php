@@ -1,4 +1,16 @@
 <style type="text/css">
+	@media only screen and (max-width: 768px){
+		.card-block.user-info {
+		    position: inherit;
+		    text-align: center;
+		    background-repeat: no-repeat;
+		    background: url(<?= base_url() ?>asset/assets/images/banner.jpg);
+		    margin-bottom: 20px;
+		}
+		.profile-bg-img img.profile-bg-img{
+			display: none;
+		}
+	}
 	.link{
 		color: #007bff;
 	    text-decoration: none;
