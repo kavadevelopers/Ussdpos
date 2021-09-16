@@ -47,6 +47,7 @@ class Other extends CI_Controller
 
 
 		if ($old->type == "Active") {
+			$atokens = [];
 			$this->db->select('id');
 			$regUsersActive = $this->db->get_where('register_agent',['df' => '','status' => '1'])->result_object();
 			$arrayIds = [];
@@ -62,6 +63,7 @@ class Other extends CI_Controller
 				array_push($itokens, $value['token']);
 			}
 		}else if ($old->type == "Processing") {
+			$atokens = [];
 			$this->db->select('id');
 			$regUsersActive = $this->db->get_where('register_agent',['df' => '','status' => '2'])->result_object();
 			$arrayIds = [];
@@ -77,6 +79,7 @@ class Other extends CI_Controller
 				array_push($itokens, $value['token']);
 			}
 		}else if ($old->type == "ReUploaded") {
+			$atokens = [];
 			$this->db->select('id');
 			$regUsersActive = $this->db->get_where('register_agent',['df' => '','status' => '3'])->result_object();
 			$arrayIds = [];
@@ -92,6 +95,7 @@ class Other extends CI_Controller
 				array_push($itokens, $value['token']);
 			}
 		}else if ($old->type == "Pending") {
+			$atokens = [];
 			$this->db->select('id');
 			$regUsersActive = $this->db->get_where('register_agent',['df' => '','status' => '0'])->result_object();
 			$arrayIds = [];
@@ -107,8 +111,14 @@ class Other extends CI_Controller
 				array_push($itokens, $value['token']);
 			}
 		}else{
+			$atokens = [];
 			if ($old->users != "") {
+
 				$androidUsers = $this->db->select('token')->where('token !=','')->where('device','android')->where_in('user',explode(',', $old->users))->get('firebase_agent')->result_array();
+
+
+
+
 				foreach ($androidUsers as $key => $value) {
 					array_push($atokens, $value['token']);
 				}
