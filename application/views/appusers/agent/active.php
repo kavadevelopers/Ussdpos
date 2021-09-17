@@ -38,7 +38,7 @@
                         </thead>
                         <tbody>
                             <?php foreach ($list as $key => $value) { ?>
-                                <tr>
+                                <tr data-khref="<?= base_url('agent/view/').$value->id.'/'.$this->uri->segment(2) ?>">
                                     <td class="text-center">
                                         <?= $key + 1 ?>
                                     </td>

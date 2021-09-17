@@ -1,9 +1,9 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("*").dblclick(function(e){
-		    e.preventDefault();
-		    return false;
-		});
+		// $("*").dblclick(function(e){
+		//     e.preventDefault();
+		//     return false;
+		// });
 
 		$('.table-dt').DataTable({
             "dom": "<'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-md-12't>><'row'<'col-md-6'i><'col-md-6'p>>",
@@ -72,7 +72,11 @@
             blockId = $(this).attr('href');
             $('.tab-pane').removeClass('active');
             $(blockId).addClass('active');
-        });         
+        });   
+
+        $(document).on('dblclick','*[data-khref]', function(event){
+            window.location = $(this).data("khref");
+        });      
     });
 
     function showAjaxLoader() {

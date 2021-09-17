@@ -1,4 +1,5 @@
 <style type="text/css">
+	[data-khref] { cursor: pointer; }
 	@media only screen and (max-width: 768px){
 		.card-block.user-info {
 		    position: inherit;
