@@ -124,6 +124,10 @@
                                                         <table class="table m-0 tbl-shopdis">
                                                             <tbody>
                                                                 <tr>
+                                                                    <th scope="row">Updated Balance</th>
+                                                                    <td><?= niara().ptPretyAmount($this->dashboard_model->getAgentBalance($item->id)) ?></td>
+                                                                </tr>
+                                                                <tr>
                                                                     <th scope="row">BVN</th>
                                                                     <td><?= $item->bvn ?></td>
                                                                 </tr>

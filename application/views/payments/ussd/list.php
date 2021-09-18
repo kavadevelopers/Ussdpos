@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                             <?php foreach ($list as $key => $value) { ?>
-                                <tr>
+                                <tr data-khref="<?= base_url('ussdpay/view/').$value->id.'/'.$this->uri->segment(2) ?>">
                                     <th class="text-center">
                                         <?= $value->ref ?>
                                     </th>
