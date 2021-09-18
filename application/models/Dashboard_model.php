@@ -7,6 +7,22 @@ class Dashboard_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function getActiveAgents()
+	{
+		$this->db->where('df','');
+		$this->db->where('status','1');
+		return $this->db->get('register_agent')->num_rows();
+	}
+
+	public function getLatest50Transaction()
+	{
+		$this->db->limit(50);
+		$this->db->order_by('id','desc');
+		$this->db->where('usertype','agent');	
+		$q = $this->db->get('transactions');
+		return $q->result_object();
+	}
+
 	public function getAllTransactions($user)
 	{
 		$this->db->order_by('id','desc');
@@ -67,5 +83,50 @@ class Dashboard_model extends CI_Model
 		}
 
 		return $creditA - $debitA;
+	}
+
+	public function getAdminBalance()
+	{
+		$this->db->select_sum('debit');
+		$debit = $this->db->get('transactions')->row_object();
+		$debitA = 0;
+		if ($debit) {
+			$debitA = $debit->debit;
+		}
+
+		$this->db->select_sum('credit');
+		$credit = $this->db->get('transactions')->row_object();
+		$creditA = 0;
+		if ($credit) {
+			$creditA = $credit->credit;
+		}
+
+		return $creditA - $debitA;
+	}
+
+	public function getAdminUssdCollected()
+	{
+		$this->db->select_sum('credit');
+		$this->db->where('type',traType(1)[1]);
+		$credit = $this->db->get('transactions')->row_object();
+		$creditA = 0;
+		if ($credit) {
+			$creditA = $credit->credit;
+		}
+
+		return $creditA;
+	}
+
+	public function getAdminFeesCollected()
+	{
+		$this->db->select_sum('credit');
+		$this->db->where('type',traType(2)[1]);
+		$credit = $this->db->get('transactions')->row_object();
+		$creditA = 0;
+		if ($credit) {
+			$creditA = $credit->credit;
+		}
+
+		return $creditA;
 	}
 }

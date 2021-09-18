@@ -24,6 +24,7 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 		$data['_title']		= "Dashboard";
+		$data['list']		= $this->dashboard_model->getLatest50Transaction();
 		$this->load->theme('dashboard',$data);
 	}
 
