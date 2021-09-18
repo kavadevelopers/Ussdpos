@@ -26,9 +26,10 @@
                         <thead>
                             <tr>
                                 <th class="text-center">Tra. Ref.</th>
-                                <th>Bank</th>
+                                <th>Agent</th>
                                 <th class="text-right">Amount</th>
                                 <th class="text-center">At</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,9 +38,14 @@
                                     <th class="text-center">
                                         <?= $value->ref ?>
                                     </th>
-                                    <td><?= $this->general_model->getBankByCode($value->bank)->name ?></td>
+                                    <td><?= $this->agent_model->getSomeInfo($value->user)->name ?></td>
                                     <th class="text-right"><?= niara().ptPretyAmount($value->amount) ?></th>
                                     <td class="text-center"><small><?= getPretyDateTime($value->cat) ?></small></td>
+                                    <td class="text-center">
+                                        <a href="<?= base_url('ussdpay/view/').$value->id.'/'.$this->uri->segment(2) ?>" class="btn btn-success btn-mini" title="View">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>

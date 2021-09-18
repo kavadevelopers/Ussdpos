@@ -9,6 +9,16 @@ class Ussdpay extends CI_Controller
 		$this->rights->redirect([4]);
 	}
 
+	public function view($id,$page = "")
+	{
+		$data['_title']		= "USSD Payment Details";		
+		$data['page']       = "active";
+		if (!empty($page)) {
+			$data['page']		= $page;	
+		}	
+		$data['item']		= $this->db->get_where('payment_ussd',['id' => $id])->row_object();
+		$this->load->theme('payments/ussd/view',$data);	
+	}
 
 	public function pending()
 	{

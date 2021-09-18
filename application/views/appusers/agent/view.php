@@ -76,7 +76,7 @@
                                             <div class="row">
                                                 <div class="col-lg-12 col-xl-6">
                                                     <div class="table-responsive">
-                                                        <table class="table m-0 tbl-shopdis">
+                                                        <table class="table m-0 tbl-white-normal">
                                                             <tbody>
                                                                 <tr>
                                                                     <th scope="row">Full Name</th>

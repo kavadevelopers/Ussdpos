@@ -1,4 +1,7 @@
 <style type="text/css">
+	.tbl-white-normal td{
+        white-space: normal;
+    }
 	[data-khref] { cursor: pointer; }
 	@media only screen and (max-width: 768px){
 		.card-block.user-info {
