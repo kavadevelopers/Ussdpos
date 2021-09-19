@@ -9,6 +9,64 @@ class Agent extends CI_Controller
 		$this->rights->redirect([3]);
 	}
 
+	public function change_cropped_image()
+	{
+		// $img = $this->input->post('image');
+		// $image_parts = explode(";base64,", $img);
+		// retJson(['_return' => false,'post' => $image_parts]);	
+		// exit;
+		if($this->input->post('agent') && $this->input->post('type') && $this->input->post('image')){
+			$agent = $this->db->get_where('register_agent',['id' => $this->input->post('agent')])->row_object();
+			if ($agent) {
+				$img = $this->input->post('image');
+				$image_parts = explode(";base64,", $img);
+				$data = base64_decode($image_parts[1]);
+				$filename = microtime(true).'.png';
+				if(file_put_contents('./uploads/agent/'.$filename, $data)){
+					$old = $this->db->get_where('details_agent',['user' => $this->input->post('agent')])->row_object();
+					if ($this->input->post('type') == "profile") {
+						if(file_exists(FCPATH.'/uploads/agent/'.$old->fileprofile)) {
+			    			@unlink(FCPATH.'/uploads/agent/'.$old->fileprofile);
+			    		}
+			    		$data = [
+							'fileprofile'		=> $filename
+						];
+						$this->db->where('user',$this->input->post('agent'))->update('details_agent',$data);	
+					}	
+
+					if ($this->input->post('type') == "id") {
+						if(file_exists(FCPATH.'/uploads/agent/'.$old->fileid)) {
+			    			@unlink(FCPATH.'/uploads/agent/'.$old->fileid);
+			    		}
+			    		$data = [
+							'fileid'		=> $filename
+						];
+						$this->db->where('user',$this->input->post('agent'))->update('details_agent',$data);
+					}
+
+					if ($this->input->post('type') == "address") {
+						if(file_exists(FCPATH.'/uploads/agent/'.$old->fileaddress)) {
+			    			@unlink(FCPATH.'/uploads/agent/'.$old->fileaddress);
+			    		}
+			    		$data = [
+							'fileaddress'		=> $filename
+						];
+						$this->db->where('user',$this->input->post('agent'))->update('details_agent',$data);
+					}
+
+					$this->session->set_flashdata('msg', 'Image Saved');
+					retJson(['_return' => true]);	
+				}else{
+					retJson(['_return' => false,'msg' => 'Upload Error']);	
+				}
+			}else{
+				retJson(['_return' => false,'msg' => 'Agent not found']);	
+			}
+		}else{
+			retJson(['_return' => false,'msg' => 'Data not Completed']);	
+		}
+	}
+
 	public function logout_device()
 	{
 		$this->db->where('id',$this->input->post('id'))->delete('firebase_agent');

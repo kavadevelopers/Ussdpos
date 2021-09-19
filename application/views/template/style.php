@@ -1,4 +1,11 @@
 <style type="text/css">
+    @media (min-width: 768px)
+    {
+        .modal-xl {
+            width: 95%;
+            max-width: 1350px;
+        }    
+    }
 	.tbl-white-normal td{
         white-space: normal;
     }

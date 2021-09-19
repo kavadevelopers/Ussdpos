@@ -66,7 +66,7 @@
                 </ul>
             </div>
             <div class="tab-content">
-                <div class="tab-pane active" id="personal" role="tabpanel">
+                <div class="tab-pane " id="personal" role="tabpanel">
                     <div class="card">
                         <div class="card-block">
                             <div class="view-info">
@@ -172,13 +172,13 @@
                     </div>
                 </div>
                 
-                <div class="tab-pane" id="ver" role="tabpanel">
+                <div class="tab-pane active" id="ver" role="tabpanel">
                     <form method="post" action="<?= base_url('agent/doc_status') ?>">
                         <div class="card">
                             <div class="card-block">
                                 <div class="view-info">
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 table-responsive">
                                             <table class="table table-striped table-bordered">
                                                 <tr>
                                                     <th>Type</th>
@@ -193,6 +193,11 @@
                                                         <a href="#" class="profile-image photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($item->detail->fileprofile) ?>">
                                                             <img src="<?= $item->detail->fileprofile ?>" alt="user-img" style="width: 100px;">   
                                                         </a>
+
+                                                        <p>
+                                                            <a class="link imageEdit" data-type="profile" href="#" data-uri="<?= $item->detail->fileprofile ?>">Edit Image</a> | 
+                                                            <a class="link" href="<?= $item->detail->fileprofile ?>" download="0<?= $item->id ?>-profile.png">Download</a>
+                                                        </p>
                                                     </td>
                                                     <td>
                                                         <?php if($item->sphoto == '0'){ ?>
@@ -233,6 +238,10 @@
                                                         <a href="#" class="profile-image photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($item->detail->fileid) ?>">
                                                             <img src="<?= $item->detail->fileid ?>" alt="user-img" style="width: 100px;">   
                                                         </a>
+                                                        <p>
+                                                            <a class="link imageEdit" data-type="id" href="#" data-uri="<?= $item->detail->fileid ?>">Edit Image</a> | 
+                                                            <a class="link" href="<?= $item->detail->fileid ?>" download="0<?= $item->id ?>-fileid.png">Download</a>
+                                                        </p>
                                                     </td>
                                                     <td>
                                                         <?php if($item->sid == '0'){ ?>
@@ -271,8 +280,12 @@
                                                     </th>
                                                     <td>
                                                         <a href="#" class="profile-image photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($item->detail->fileaddress) ?>">
-                                                            <img src="<?= $item->detail->fileaddress ?>" alt="user-img" style="width: 100px;">   
+                                                            <img src="<?= $item->detail->fileaddress ?>" alt="user-img" style="width: 100px;"> 
                                                         </a>
+                                                        <p>
+                                                            <a class="link imageEdit" data-type="address" href="#" data-uri="<?= $item->detail->fileaddress ?>">Edit Image</a> | 
+                                                            <a class="link" href="<?= $item->detail->fileaddress ?>" download="0<?= $item->id ?>-address.png">Download</a>
+                                                        </p>
                                                     </td>
                                                     <td>
                                                         <?php if($item->saddress == '0'){ ?>
@@ -429,3 +442,162 @@
         });
     })
 </script>
+
+<!-- Cropper Js -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" integrity="sha512-0SPWAwpC/17yYyZ/4HSllgaK7/gg9OlVozq8K7rf3J8LvCjYEEIfzzpnA2/SSjpGIunCSD18r3UhvDcu/xncWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script type="text/javascript">
+    var cropper;
+    $(function(){
+        $('.imageEdit').click(function(event) {
+            $('input[name=typeOfPhoto]').val($(this).data('type'));
+            $('#imgEditBase').attr('src',$(this).data('uri'));
+            $('#modalImageEdit').modal('show');
+            event.preventDefault();
+        });
+        $('#modalImageEdit').on('shown.bs.modal', function () {
+            cropper = new Cropper($('#imgEditBase')[0], {
+                aspectRatio : NaN
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper.destroy();
+            cropper = null;
+        });
+
+        $('.btn-rotate').click(function(event) {
+            cropper.rotate($(this).data('option'));
+            event.preventDefault();
+        });
+
+        $('.btn-zoom').click(function(event) {
+            cropper.zoom($(this).data('option'));
+            event.preventDefault();
+        });
+
+        $('.btn-fliphor').click(function(event) {
+            cropper.scaleX($(this).data('option'));
+            if ($(this).data('option') == -1) {
+                $(this).data('option',1);
+            }else{
+                $(this).data('option',-1);
+            }
+            event.preventDefault();
+        });
+
+        $('.btn-flipver').click(function(event) {
+            cropper.scaleY($(this).data('option'));
+            if ($(this).data('option') == -1) {
+                $(this).data('option',1);
+            }else{
+                $(this).data('option',-1);
+            }
+            event.preventDefault();
+        });
+
+        $('.btn-cropper-reset').click(function(event) { 
+            cropper.reset();
+        });
+
+        $('#saveCropped').click(function(event) {
+            cropper.getCroppedCanvas().toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function() {
+                    var base64data = reader.result;
+                    //console.log(base64data);
+                    showAjaxLoader();
+                    $.post("<?= base_url('agent/change_cropped_image') ?>", 
+                        {agent : $('input[name=agentId]').val(),type:$('input[name=typeOfPhoto]').val(),image:base64data}, 
+                        function(result){
+                            console.log(result);
+                            hideAjaxLoader();
+                            if(result._return){
+                                window.location.reload();
+                            }else{
+                                PNOTY(result.msg,'error');    
+                            }
+                        }
+                    );
+                }
+            });
+        });
+    });
+</script>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalImageEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cropper-img-container">
+                            <img id="imgEditBase" src="" style="width:100%; border: solid 2px #ccc;">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-mini btn-zoom" data-option="-0.1" title="Zoom Out">
+                                        <i class="fa fa-search-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-mini btn-zoom" data-option="0.1" title="Zoom In">
+                                      <i class="fa fa-search-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-mini btn-rotate" data-option="-45" title="Rotate Left">
+                                        <i class="fa fa-undo"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-mini btn-rotate" data-option="45" title="Rotate Right">
+                                      <i class="fa fa-repeat"></i>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-mini btn-fliphor" data-option="-1" title="Flip Horizontal">
+                                        <i class="fa fa-arrows-h"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-mini btn-flipver" data-option="-1" title="Flip Vertical">
+                                      <i class="fa fa-arrows-v"></i>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-mini btn-cropper-reset" data-option="-1" title="Reset">
+                                        <i class="fa fa-refresh"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <h5>Preview</h5>
+                        <div id="previewImage" style=""></div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="agentId" value="<?= $item->id ?>">
+                <input type="hidden" name="typeOfPhoto">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" id="saveCropped">Save Image</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style type="text/css">
+    #previewImage{
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+        width: 160px;height: 160px; overflow: hidden; border: solid 2px #ccc;
+    }
+</style>
