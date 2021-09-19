@@ -477,7 +477,7 @@
         });
 
         $('.btn-fliphor').click(function(event) {
-            cropper.scaleX($(this).data('option'));
+            cropper.scaleY($(this).data('option'));
             if ($(this).data('option') == -1) {
                 $(this).data('option',1);
             }else{
@@ -487,7 +487,7 @@
         });
 
         $('.btn-flipver').click(function(event) {
-            cropper.scaleY($(this).data('option'));
+            cropper.scaleX($(this).data('option'));
             if ($(this).data('option') == -1) {
                 $(this).data('option',1);
             }else{
