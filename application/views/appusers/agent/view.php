@@ -66,7 +66,7 @@
                 </ul>
             </div>
             <div class="tab-content">
-                <div class="tab-pane " id="personal" role="tabpanel">
+                <div class="tab-pane active" id="personal" role="tabpanel">
                     <div class="card">
                         <div class="card-block">
                             <div class="view-info">
@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 
-                <div class="tab-pane active" id="ver" role="tabpanel">
+                <div class="tab-pane" id="ver" role="tabpanel">
                     <form method="post" action="<?= base_url('agent/doc_status') ?>">
                         <div class="card">
                             <div class="card-block">
