@@ -174,7 +174,7 @@
 
                 <?php if(get_user()['user_type'] == '0' || $this->rights->check([2])){ ?>
                     <ul class="pcoded-item pcoded-left-item">
-                        <li class="pcoded-hasmenu <?= menu(1,["setting","commission","users","states","regbanks","banks","pages"])[2]; ?>">
+                        <li class="pcoded-hasmenu <?= menu(1,["setting","commission","users","states","regbanks","banks","pages","products"])[2]; ?>">
                             <a href="javascript:void(0)">
                                 <span class="pcoded-micon"><i class="feather icon-list"></i></span>
                                 <span class="pcoded-mtext">Admin Setups</span>
@@ -196,6 +196,23 @@
                                     </ul>
                                 </li>
                                 <?php if(get_user()['user_type'] == '0'){ ?>
+                                    <li class="pcoded-hasmenu <?= menu(1,["products"])[2]; ?>">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-mtext">Product Settings</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="<?= menu(2,["categories","edit_category"],"products")[0]; ?>">
+                                                <a href="<?= base_url('products/categories') ?>">
+                                                    <span class="pcoded-mtext">Categories</span>
+                                                </a>
+                                            </li>
+                                            <li class="<?= menu(2,["list","add","edit"],"products")[0]; ?>">
+                                                <a href="<?= base_url('products/list') ?>">
+                                                    <span class="pcoded-mtext">Products</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                     <li class="pcoded-hasmenu <?= menu(1,["states","regbanks","banks"])[2]; ?>">
                                         <a href="javascript:void(0)">
                                             <span class="pcoded-mtext">Master</span>

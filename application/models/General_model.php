@@ -74,6 +74,42 @@ class General_model extends CI_Model
 		}
 	}
 
+	public function getCategoryThumb($cate)
+	{
+		$cate = $this->db->get_where('products_cate',['id' => $cate])->row_array();
+		if($cate){
+			if($cate['image'] != ""){
+				if(file_exists(FCPATH.'uploads/products/'.$cate['image'])){
+					return base_url('uploads/products/'.$cate['image']);
+				}else{
+					return base_url('uploads/placeholders/placeholder512.jpg');
+				}
+			}else{
+				return base_url('uploads/placeholders/placeholder512.jpg');
+			}
+		}else{
+			return base_url('uploads/placeholders/placeholder512.jpg');
+		}
+	}
+
+	public function getProductThumb($cate)
+	{
+		$cate = $this->db->get_where('products',['id' => $cate])->row_array();
+		if($cate){
+			if($cate['image'] != ""){
+				if(file_exists(FCPATH.'uploads/products/'.$cate['image'])){
+					return base_url('uploads/products/'.$cate['image']);
+				}else{
+					return base_url('uploads/placeholders/placeholder512.jpg');
+				}
+			}else{
+				return base_url('uploads/placeholders/placeholder512.jpg');
+			}
+		}else{
+			return base_url('uploads/placeholders/placeholder512.jpg');
+		}
+	}
+
 	public function getHeightWidthOfImage($url)
 	{
 		$data = @getimagesize($url);
