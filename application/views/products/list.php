@@ -36,7 +36,9 @@
                                 <?php $category = $this->db->get_where('products_cate',['id' => $value->category])->row_object() ?>
                                 <tr>
                                     <td class="text-center">
-                                        <img src="<?= $this->general_model->getProductThumb($value->id)?>" style="max-width: 80px;">
+                                        <a href="#" class="photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($this->general_model->getProductThumb($value->id)) ?>">
+                                            <img src="<?= $this->general_model->getProductThumb($value->id)?>" style="max-width: 80px;">
+                                        </a>
                                     </td>
                                     <td><?= $value->name ?></td>
                                     <td><?= $category->name ?></td>

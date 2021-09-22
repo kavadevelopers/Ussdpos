@@ -61,7 +61,9 @@
                                 </div>
                             </div> 
                             <div class="col-md-12 text-center">
-                                <img src="<?= $this->general_model->getCategoryThumb($item->id) ?>" style="max-width: 150px;">
+                                <a href="#" class="photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($this->general_model->getCategoryThumb($item->id)) ?>">
+                                    <img src="<?= $this->general_model->getCategoryThumb($item->id) ?>" style="max-width: 150px;">
+                                </a>
                             </div>   
                         </div>
                         <div class="card-footer text-right">
@@ -82,7 +84,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-block table-responsive">
-                    <table class="table table-bordered table-mini table-dt">
+                    <table class="table table-bordered table-mini table-striped table-dt">
                         <thead>
                             <tr>
                                 <th class="text-center">Thumbnail</th>
@@ -94,7 +96,9 @@
                             <?php foreach ($list as $key => $value) { ?>
                                 <tr>
                                     <td class="text-center">
-                                        <img src="<?= $this->general_model->getCategoryThumb($value['id'])?>" style="max-width: 80px;">
+                                        <a href="#" class="photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($this->general_model->getCategoryThumb($value['id'])) ?>">
+                                            <img src="<?= $this->general_model->getCategoryThumb($value['id'])?>" style="max-width: 80px;">
+                                        </a>
                                     </td>
                                     <td><?= $value['name'] ?></td>
                                     <td class="text-center">
