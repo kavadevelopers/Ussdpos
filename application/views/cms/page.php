@@ -12,7 +12,7 @@
 
 <div class="page-body">
     <div class="card">
-        <form method="post" action="<?= base_url('pages/save') ?>">
+        <form method="post" action="<?= base_url('pages/update_page') ?>">
             <div class="card-block">
                 <div class="row">
 

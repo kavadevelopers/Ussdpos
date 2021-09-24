@@ -25,7 +25,7 @@ class Pages extends CI_Controller
 		}
 	}
 
-	public function save()
+	public function update_page()
 	{
 		$this->db->where('id',$this->input->post('id'))->update('cms_pages',['descr' => $this->input->post('content')]);
 		$this->session->set_flashdata('msg', 'Page Saved');
