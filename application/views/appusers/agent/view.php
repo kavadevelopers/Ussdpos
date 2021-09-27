@@ -227,6 +227,29 @@
                                                             Approved
                                                         <?php }else if($item->sphoto == '2'){ ?>
                                                             Rejected
+                                                            <br><br>
+                                                            <div class="form-radio">
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="photos_status" value="1" required>
+                                                                        <i class="helper"></i>Approve
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="photos_status" value="0">
+                                                                        <i class="helper"></i>Reject
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div id="passReason" class="form-group" style="display:none;">
+                                                                <select class="form-control" name="photo_reason">
+                                                                    <option value="">-- Select Reason--</option>
+                                                                    <?php foreach (docRejectReasons() as $key => $value) { ?>
+                                                                        <option value="<?= $value ?>"><?= $value ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                         <?php } ?>
                                                     </td>
                                                 </tr>
@@ -271,6 +294,29 @@
                                                             Approved
                                                         <?php }else if($item->sid == '2'){ ?>
                                                             Rejected
+                                                            <br><br>
+                                                            <div class="form-radio">
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="id_status" value="1" required>
+                                                                        <i class="helper"></i>Approve
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="id_status" value="0">
+                                                                        <i class="helper"></i>Reject
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div id="idReason" class="form-group" style="display:none;">
+                                                                <select class="form-control" name="id_reason">
+                                                                    <option value="">-- Select Reason--</option>
+                                                                    <?php foreach (docRejectReasons() as $key => $value) { ?>
+                                                                        <option value="<?= $value ?>"><?= $value ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                         <?php } ?>
                                                     </td>
                                                 </tr>
@@ -315,6 +361,29 @@
                                                             Approved
                                                         <?php }else if($item->saddress == '2'){ ?>
                                                             Rejected
+                                                            <br><br>
+                                                            <div class="form-radio">
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="address_status" value="1" required>
+                                                                        <i class="helper"></i>Approve
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio radio-inline">
+                                                                    <label>
+                                                                        <input type="radio" name="address_status" value="0">
+                                                                        <i class="helper"></i>Reject
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div id="addressReason" class="form-group" style="display:none;">
+                                                                <select class="form-control" name="address_reason">
+                                                                    <option value="">-- Select Reason--</option>
+                                                                    <?php foreach (docRejectReasons() as $key => $value) { ?>
+                                                                        <option value="<?= $value ?>"><?= $value ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                         <?php } ?>
                                                     </td>
                                                 </tr>
@@ -323,7 +392,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php if($item->saddress == '0' || $item->sid == '0' || $item->sphoto == '0'){ ?>
+                            <?php if($item->saddress != '1' || $item->sid != '1' || $item->sphoto != '1'){ ?>
                                 <div class="card-footer text-right">
                                     <input type="hidden" name="agent" value="<?= $item->id ?>">
                                     <input type="hidden" name="uri" value="<?= $this->uri->segment(4) ?>">
