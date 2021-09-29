@@ -12,6 +12,7 @@ class Authcls extends CI_Controller
 			$user = $this->db->get_where('register_agent',['id' => $this->input->post('user')])->row_object();
 			if ($user) {
 				if (md5($this->input->post('old')) == $user->password) {
+					$this->db->where('user',$this->input->post('user'))->delete('firebase_agent');	
 					$this->db->where('id',$this->input->post('user'))->update('register_agent',['password' => md5($this->input->post('pass'))]);	
 					retJson(['_return' => true,'msg' => 'Password Changed.']);			
 				}else{
