@@ -13,8 +13,8 @@ class Authcls extends CI_Controller
 			if ($user) {
 				$mail = mt_rand(111111,999999);
 				$template = $this->load->view('mail/verification_code',['code' => $mail],true);
-				@$this->general_model->send_mail($user->email,'Verification Code',$template);
-				@$this->general_model->nigeriaBulkSms($user->phone,'Phone Verification Code is : '.$mail);
+				//@$this->general_model->send_mail($user->email,'Verification Code',$template);
+				//@$this->general_model->nigeriaBulkSms($user->phone,'Phone Verification Code is : '.$mail);
 
 				retJson(['_return' => true,'msg' => '','code' => $mail]);	
 			}else{
