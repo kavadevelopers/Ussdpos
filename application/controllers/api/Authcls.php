@@ -6,6 +6,30 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function business_update()
+	{
+		if($this->input->post('user') && $this->input->post('bname') && $this->input->post('bank') && $this->input->post('bankac')){ 
+
+			$this->db->where('user',$this->input->post('user'))->update('details_agent',
+				[
+					'bankac'	=> $this->input->post('bankac'),
+					'bank'		=> $this->input->post('bank')	
+				]
+			);
+
+			$this->db->where('id',$this->input->post('user'))->update('register_agent',
+				[
+					'business'	=> $this->input->post('bname')
+				]
+			);
+
+
+			retJson(['_return' => true,'msg' => 'Business Details Saved','user' => $this->agent_model->get($this->input->post('user'))]);
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`bname`,`bank`,`bankac` are Required']);
+		}
+	}
+
 	public function address_update()
 	{
 		if($this->input->post('user') && $this->input->post('fileaddress') && $this->input->post('address')){
