@@ -6,6 +6,25 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function changepass()
+	{
+		if($this->input->post('user') && $this->input->post('pass') && $this->input->post('old')){
+			$user = $this->db->get_where('register_agent',['id' => $this->input->post('user')])->row_object();
+			if ($user) {
+				if (md5($this->input->post('old')) == $user->password) {
+					$this->db->where('id',$this->input->post('user'))->update('register_agent',['password' => md5($this->input->post('pass'))]);	
+					retJson(['_return' => true,'msg' => 'Password Changed.']);			
+				}else{
+					retJson(['_return' => false,'msg' => 'Old Password do not match']);		
+				}
+			}else{
+				retJson(['_return' => false,'msg' => 'User not found']);	
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`pass`,`old` are Required']);
+		}	
+	}
+
 	public function getuser()
 	{
 		if($this->input->post('user')){
