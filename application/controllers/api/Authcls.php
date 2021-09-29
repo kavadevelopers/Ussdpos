@@ -6,6 +6,25 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function send_account_verification()
+	{
+		if($this->input->post('user')){
+			$user = $this->db->get_where('register_agent',['id' => $this->input->post('user')])->row_object();
+			if ($user) {
+				$mail = mt_rand(111111,999999);
+				$template = $this->load->view('mail/verification_code',['code' => $mail],true);
+				@$this->general_model->send_mail($user->email,'Verification Code',$template);
+				@$this->general_model->nigeriaBulkSms($user->phone,'Phone Verification Code is : '.$mail);
+
+				retJson(['_return' => true,'msg' => '','code' => $mail]);	
+			}else{
+				retJson(['_return' => false,'msg' => 'User not found']);	
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`user` are Required']);
+		}	
+	}
+
 	public function changepass()
 	{
 		if($this->input->post('user') && $this->input->post('pass') && $this->input->post('old')){
