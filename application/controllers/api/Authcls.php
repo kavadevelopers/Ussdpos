@@ -6,6 +6,34 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function address_update()
+	{
+		if($this->input->post('user') && $this->input->post('fileaddress') && $this->input->post('address')){
+			$old = $this->db->get_where('details_agent',['user' => $this->input->post('user')])->row_object();
+			if ($this->input->post('fileaddress')) {
+	    		$img = $this->input->post('fileaddress');
+	    		$img = str_replace('data:image/png;base64,', '', $img);
+				$img = str_replace(' ', '+', $img);
+				$data = base64_decode($img);
+				$fileaddress = microtime(true).'.png';
+				file_put_contents('./uploads/agent/'.$fileaddress, $data);
+
+				if(file_exists(FCPATH.'/uploads/agent/'.$old->fileaddress)) {
+	    			@unlink(FCPATH.'/uploads/agent/'.$old->fileaddress);
+	    		}
+				$this->db->where('user',$this->input->post('user'))->update('details_agent',['fileaddress'	=> $fileaddress]);
+				$this->db->where('id',$this->input->post('user'))->update('register_agent',['saddress'	=> '0','status' => '3']);
+	    	}
+
+	    	$this->db->where('user',$this->input->post('user'))->update('details_agent',['address'	=> $this->input->post('address')]);
+
+	    	retJson(['_return' => true,'msg' => 'Address Updated','user' => $this->agent_model->get($this->input->post('user'))]);
+
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`fileaddress`,`address` are Required']);
+		}
+	}
+
 	public function createpin()
 	{
 		if($this->input->post('user') && $this->input->post('code')){

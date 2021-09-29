@@ -114,7 +114,7 @@ class General extends CI_Controller
 
 			retJson(['_return' => true,'msg' => 'Images Uploaded','user' => $this->agent_model->get($this->input->post('user'))]);
 		}else{
-			retJson(['_return' => false,'msg' => '`user` are Required']);
+			retJson(['_return' => false,'msg' => '`user` are Required,`fileprofile`,`fileid`,`fileaddress` are Optional']);
 		}
 	}
 }
