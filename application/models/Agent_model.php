@@ -49,6 +49,8 @@ class Agent_model extends CI_Model
 		$userDet->fileid 		= $this->iddoc($user->id);
 		$userDet->fileaddress	= $this->fileaddt($user->id);
 		$user->detail			= $userDet;
+		$user->income 			= number_shortenNum($this->getLifeTimeIncome($user->id));
+		$user->monthincome 		= number_shortenNum($this->getCurrentMonthIncome($user->id));
 		return $user;
 	}
 
@@ -56,5 +58,35 @@ class Agent_model extends CI_Model
 	{
 		$user = $this->db->get_where('register_agent',['id' => $user])->row_object();
 		return $user;	
+	}
+
+	public function getLifeTimeIncome($user)
+	{
+		$this->db->select_sum('credit');
+		$this->db->where('usertype','agent');
+		$this->db->where('user',$user);
+		$credit = $this->db->get('transactions')->row_object();
+		$creditA = 0;
+		if ($credit) {
+			$creditA = $credit->credit;
+		}
+
+		return $creditA;
+	}
+
+	public function getCurrentMonthIncome($user)
+	{
+		$this->db->select_sum('credit');
+		$this->db->where('dt >=',date('Y-m-d'));
+		$this->db->where('dt <=',date('Y-m-d'));
+		$this->db->where('usertype','agent');
+		$this->db->where('user',$user);
+		$credit = $this->db->get('transactions')->row_object();
+		$creditA = 0;
+		if ($credit) {
+			$creditA = $credit->credit;
+		}
+
+		return $creditA;
 	}
 }
