@@ -6,6 +6,26 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function verify_phone_update()
+	{
+		if ($this->input->post('user') && $this->input->post('phone')) {
+			$user = $this->db->get_where('register_agent',['id !=' => $this->input->post('user'),'phone' => $this->input->post('phone')])->row_object();
+			if ($user) {
+				retJson(['_return' => false,'msg' => 'Mobile no. already assigned with another user.']);		
+			}else{
+				$phone = mt_rand(111111,999999);
+				if ($this->input->post('hardsms')) {
+					@$this->general_model->sendSms($this->input->post('phone'),'Phone Verification Code is : '.$phone,6);
+				}else{
+					@$this->general_model->nigeriaBulkSms($this->input->post('phone'),'Phone Verification Code is : '.$phone);
+				}
+				retJson(['_return' => true,'msg' => 'phone-'.$phone,'phone_code' => $phone]);
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`phone`,`user` are Required']);
+		}	
+	}
+
 	public function business_update()
 	{
 		if($this->input->post('user') && $this->input->post('bname') && $this->input->post('bank') && $this->input->post('bankac')){ 
@@ -77,8 +97,8 @@ class Authcls extends CI_Controller
 			if ($user) {
 				$mail = mt_rand(111111,999999);
 				$template = $this->load->view('mail/verification_code',['code' => $mail],true);
-				//@$this->general_model->send_mail($user->email,'Verification Code',$template);
-				//@$this->general_model->nigeriaBulkSms($user->phone,'Phone Verification Code is : '.$mail);
+				@$this->general_model->send_mail($user->email,'Verification Code',$template);
+				@$this->general_model->nigeriaBulkSms($user->phone,'Phone Verification Code is : '.$mail);
 
 				retJson(['_return' => true,'msg' => '','code' => $mail]);	
 			}else{
