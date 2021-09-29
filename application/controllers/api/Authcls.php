@@ -6,6 +6,18 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function createpin()
+	{
+		if($this->input->post('user') && $this->input->post('code')){
+
+			$this->db->where('id',$this->input->post('user'))->update('register_agent',['transactionpin' => $this->input->post('code')]);
+			retJson(['_return' => true,'msg' => 'Transaction PIN Saved','user' => $this->agent_model->get($this->input->post('user'))]);
+
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`code` are Required']);
+		}	
+	}
+
 	public function send_account_verification()
 	{
 		if($this->input->post('user')){
