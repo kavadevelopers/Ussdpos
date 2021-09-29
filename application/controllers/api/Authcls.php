@@ -58,7 +58,7 @@ class Authcls extends CI_Controller
 
 	public function verify_email_update()
 	{
-		if ($this->input->post('user') && $this->input->post('phone')) {
+		if ($this->input->post('user') && $this->input->post('email')) {
 			$user = $this->db->get_where('register_agent',['id !=' => $this->input->post('user'),'email' => $this->input->post('email')])->row_object();
 			if ($user) {
 				retJson(['_return' => false,'msg' => 'This Email already assigned with another user.']);		
@@ -69,7 +69,7 @@ class Authcls extends CI_Controller
 				retJson(['_return' => true,'msg' => 'email-'.$mail,'email_code' => $mail]);
 			}
 		}else{
-			retJson(['_return' => false,'msg' => '`phone`,`user` are Required']);
+			retJson(['_return' => false,'msg' => '`email`,`user` are Required']);
 		}	
 	}
 
