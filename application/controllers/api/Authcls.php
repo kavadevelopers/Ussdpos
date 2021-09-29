@@ -6,6 +6,21 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function update_email()
+	{
+		if ($this->input->post('user') && $this->input->post('email')) {
+			$this->db->where('id',$this->input->post('user'))->update('register_agent',
+				[
+					'email'	=> $this->input->post('email')
+				]
+			);
+
+			retJson(['_return' => true,'msg' => 'Email updated','user' => $this->agent_model->get($this->input->post('user'))]);
+		}else{
+			retJson(['_return' => false,'msg' => '`email`,`user` are Required']);
+		}
+	}
+
 	public function update_phone()
 	{
 		if ($this->input->post('user') && $this->input->post('phone')) {
@@ -26,7 +41,7 @@ class Authcls extends CI_Controller
 		if ($this->input->post('user') && $this->input->post('phone')) {
 			$user = $this->db->get_where('register_agent',['id !=' => $this->input->post('user'),'phone' => $this->input->post('phone')])->row_object();
 			if ($user) {
-				retJson(['_return' => false,'msg' => 'Mobile no. already assigned with another user.']);		
+				retJson(['_return' => false,'msg' => 'This Mobile no. already assigned with another user.']);		
 			}else{
 				$phone = mt_rand(111111,999999);
 				if ($this->input->post('hardsms')) {
@@ -35,6 +50,23 @@ class Authcls extends CI_Controller
 					@$this->general_model->nigeriaBulkSms($this->input->post('phone'),'Phone Verification Code is : '.$phone);
 				}
 				retJson(['_return' => true,'msg' => 'phone-'.$phone,'phone_code' => $phone]);
+			}
+		}else{
+			retJson(['_return' => false,'msg' => '`phone`,`user` are Required']);
+		}	
+	}
+
+	public function verify_email_update()
+	{
+		if ($this->input->post('user') && $this->input->post('phone')) {
+			$user = $this->db->get_where('register_agent',['id !=' => $this->input->post('user'),'email' => $this->input->post('email')])->row_object();
+			if ($user) {
+				retJson(['_return' => false,'msg' => 'This Email already assigned with another user.']);		
+			}else{
+				$mail = mt_rand(111111,999999);
+				$template = $this->load->view('mail/verification_code',['code' => $mail],true);
+				@$this->general_model->send_mail($this->input->post('email'),'Email Verification Code',$template);
+				retJson(['_return' => true,'msg' => 'email-'.$mail,'email_code' => $mail]);
 			}
 		}else{
 			retJson(['_return' => false,'msg' => '`phone`,`user` are Required']);
