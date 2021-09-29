@@ -6,6 +6,21 @@ class Authcls extends CI_Controller
 		parent::__construct();
 	}
 
+	public function update_phone()
+	{
+		if ($this->input->post('user') && $this->input->post('phone')) {
+			$this->db->where('id',$this->input->post('user'))->update('register_agent',
+				[
+					'phone'	=> $this->input->post('phone')
+				]
+			);
+
+			retJson(['_return' => true,'msg' => 'Mobile no. updated','user' => $this->agent_model->get($this->input->post('user'))]);
+		}else{
+			retJson(['_return' => false,'msg' => '`phone`,`user` are Required']);
+		}
+	}
+
 	public function verify_phone_update()
 	{
 		if ($this->input->post('user') && $this->input->post('phone')) {
