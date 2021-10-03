@@ -16,7 +16,7 @@ class Orderpos extends CI_Controller
 
 		$list = $get->result_object();
 		foreach ($list as $key => $value) {
-			$list['image'] 		= $this->general_model->getCategoryThumb($value['id']);
+			$list->image 		= $this->general_model->getCategoryThumb($value->id);
 		}
 		retJson(['_return' => true,'catcount' => $get->num_rows(),'catlist' => $list]);
 	}
