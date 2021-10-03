@@ -90,6 +90,19 @@
     function hideAjaxLoader() {
         $('.ajaxLoader').hide();
     }
+
+    function productType() {
+        if ($('select[name=type]').val() == "2") {
+            $('#lable-price').html('Lease amount per month <span class="-req">*</span>');
+            $('input[name=price]').attr('placeholder','Lease price per month');
+        }else if ($('select[name=type]').val() == "3") {
+            $('#lable-price').html('Onboarding fee <span class="-req">*</span>');
+            $('input[name=price]').attr('placeholder','Onboarding fee');
+        }else{
+            $('#lable-price').html('Selling Price <span class="-req">*</span>');
+            $('input[name=price]').attr('placeholder','Selling Price');
+        } 
+    }
 </script>
 
 

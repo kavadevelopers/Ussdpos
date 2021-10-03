@@ -24,10 +24,10 @@
                         <thead>
                             <tr>
                                 <th class="text-center">Thumbnail</th>
+                                <th>Type</th>
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th class="text-right">Price</th>
-                                <th>Provider</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -40,10 +40,18 @@
                                             <img src="<?= $this->general_model->getProductThumb($value->id)?>" style="max-width: 80px;">
                                         </a>
                                     </td>
+                                    <td>
+                                        <?php if($value->type == "1"){ ?>
+                                            Outright Purchase   
+                                        <?php }else if($value->type == "2"){ ?>
+                                            Lease Purchase
+                                        <?php }else{ ?>
+                                            Lease Rent
+                                        <?php } ?>
+                                    </td>
                                     <td><?= $value->name ?></td>
                                     <td><?= $category->name ?></td>
                                     <td class="text-right"><?= niara().$value->price ?></td>
-                                    <td><?= $value->provider ?></td>
                                     <td class="text-center">
                                         <a href="<?= base_url('products/edit/').$value->id ?>" class="btn btn-primary btn-mini">
                                             <i class="fa fa-pencil"></i>

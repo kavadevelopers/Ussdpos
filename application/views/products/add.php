@@ -30,6 +30,17 @@
                     </div>  
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label>Type <span class="-req">*</span></label>
+                            <select class="form-control form-control-sm" name="type" required>
+                                <option value="">-- Select --</option>
+                                <option value="1">Outright Purchase</option>
+                                <option value="2">Lease Purchase</option>
+                                <option value="3">Lease Rent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label>Category <span class="-req">*</span></label>
                             <?php $categories = $this->db->get_where('products_cate',['df' => ''])->result_object(); ?>
                             <select class="form-control select2" name="category" required>
@@ -50,7 +61,7 @@
                     </div> 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Selling Price <span class="-req">*</span></label>
+                            <label id="lable-price">Selling Price <span class="-req">*</span></label>
                             <input name="price" type="text" class="form-control decimal-num" value="<?= set_value('price'); ?>" placeholder="Selling Price">
                             <?= form_error('price') ?>
                         </div>
@@ -117,8 +128,15 @@
     </form>
 </div>
 
+<script type="text/javascript">
+    $(function(){
+        $('select[name=type]').change(function(e) {
+            productType();
+            $('input[name=price]').val('');
+        });
+    })
+</script>
 <script src="<?= base_url('asset/assets/ckeditor/ckeditor.js') ?>"></script>
-
 <script type="text/javascript">
     var toolbarGroups = [
         { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },

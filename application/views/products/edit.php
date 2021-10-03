@@ -30,6 +30,17 @@
                     </div>  
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label>Type <span class="-req">*</span></label>
+                            <select class="form-control form-control-sm" name="type" required>
+                                <option value="">-- Select --</option>
+                                <option value="1" <?= $item->type=="1"?'selected':'' ?>>Outright Purchase</option>
+                                <option value="2" <?= $item->type=="2"?'selected':'' ?>>Lease Purchase</option>
+                                <option value="3" <?= $item->type=="3"?'selected':'' ?>>Lease Rent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label>Category <span class="-req">*</span></label>
                             <?php $categories = $this->db->get_where('products_cate',['df' => ''])->result_object(); ?>
                             <select class="form-control select2" name="category" required>
@@ -50,7 +61,7 @@
                     </div> 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Selling Price <span class="-req">*</span></label>
+                            <label id="lable-price">Selling Price <span class="-req">*</span></label>
                             <input name="price" type="text" class="form-control decimal-num" value="<?= set_value('price',$item->price); ?>" placeholder="Selling Price">
                             <?= form_error('price') ?>
                         </div>
@@ -117,7 +128,15 @@
         </div>
     </form>
 </div>
-
+<script type="text/javascript">
+    $(function(){
+        productType();
+        $('select[name=type]').change(function(e) {
+            productType();
+            $('input[name=price]').val('');
+        });
+    })
+</script>
 <script src="<?= base_url('asset/assets/ckeditor/ckeditor.js') ?>"></script>
 
 <script type="text/javascript">
