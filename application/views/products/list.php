@@ -24,6 +24,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center">Thumbnail</th>
+                                <th class="text-center">Charge Info</th>
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th class="text-right">Price</th>
@@ -37,6 +38,11 @@
                                     <td class="text-center">
                                         <a href="#" class="photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($this->general_model->getProductThumb($value->id)) ?>">
                                             <img src="<?= $this->general_model->getProductThumb($value->id)?>" style="max-width: 80px;">
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#" class="photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($this->general_model->getProductInfo($value->id)) ?>">
+                                            <img src="<?= $this->general_model->getProductInfo($value->id)?>" style="max-width: 80px;">
                                         </a>
                                     </td>
                                     <td><?= $value->name ?></td>

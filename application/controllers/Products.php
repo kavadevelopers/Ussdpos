@@ -62,6 +62,21 @@ class Products extends CI_Controller
 				$this->db->where('id',$this->input->post('id'))->update('products',$data);
 	    	}
 		}
+		if (isset($_FILES ['imagech']) && $_FILES ['imagech']['error'] == 0) {
+			$file_name2 = microtime(true).".".pathinfo($_FILES['imagech']['name'], PATHINFO_EXTENSION);
+			$config['file_name'] = $file_name2;
+	    	$this->upload->initialize($config);
+	    	if($this->upload->do_upload('imagech')){
+	    		$old = $this->db->get_where('products',['id' => $this->input->post('id')])->row_array();
+	    		if(file_exists(FCPATH.'/uploads/products/'.$old['chargeinfo'])){
+	    			@unlink(FCPATH.'/uploads/products/'.$old['chargeinfo']);
+	    		}
+	    		$data = [
+					'chargeinfo'		=> $file_name2
+				];
+				$this->db->where('id',$this->input->post('id'))->update('products',$data);
+	    	}
+		}
 
 		$data = [
 			'name'					=> $this->input->post('name'),
@@ -75,8 +90,7 @@ class Products extends CI_Controller
 			'target_type'			=> $this->input->post('target_type'),
 			'target_duration'		=> $this->input->post('target_duration'),
 			'target_amount'			=> $this->input->post('target_amount'),
-			'descr'					=> $this->input->post('content'),
-			'chargeinfo'			=> $this->input->post('chargeinfo')
+			'descr'					=> $this->input->post('content')
 		];
 		$this->db->where('id',$this->input->post('id'))->update('products',$data);
 		$this->session->set_flashdata('msg', 'Product Saved');
@@ -104,6 +118,17 @@ class Products extends CI_Controller
 	    	}
 		}
 
+		if (isset($_FILES ['imagech']) && $_FILES ['imagech']['error'] == 0) {
+			$file_name2 = microtime(true).".".pathinfo($_FILES['imagech']['name'], PATHINFO_EXTENSION);
+			$config['file_name'] = $file_name2;
+	    	$this->upload->initialize($config);
+	    	if($this->upload->do_upload('imagech')){
+	    		
+	    	}else{
+	    		$file_name2 = "";
+	    	}
+		}
+
 		$data = [
 			'image'					=> $file_name,
 			'name'					=> $this->input->post('name'),
@@ -118,7 +143,7 @@ class Products extends CI_Controller
 			'target_duration'		=> $this->input->post('target_duration'),
 			'target_amount'			=> $this->input->post('target_amount'),
 			'descr'					=> $this->input->post('content'),
-			'chargeinfo'			=> $this->input->post('chargeinfo'),
+			'chargeinfo'			=> $file_name2,
 			'df'					=> "",
 			'cat'					=> _nowDateTime()
 		];

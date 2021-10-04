@@ -110,6 +110,24 @@ class General_model extends CI_Model
 		}
 	}
 
+	public function getProductInfo($cate)
+	{
+		$cate = $this->db->get_where('products',['id' => $cate])->row_array();
+		if($cate){
+			if($cate['image'] != ""){
+				if(file_exists(FCPATH.'uploads/products/'.$cate['chargeinfo'])){
+					return base_url('uploads/products/'.$cate['chargeinfo']);
+				}else{
+					return base_url('uploads/placeholders/placeholder-long.jpg');
+				}
+			}else{
+				return base_url('uploads/placeholders/placeholder-long.jpg');
+			}
+		}else{
+			return base_url('uploads/placeholders/placeholder-long.jpg');
+		}
+	}
+
 	public function getHeightWidthOfImage($url)
 	{
 		$data = @getimagesize($url);

@@ -50,6 +50,13 @@
                     </div> 
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label>Charges Details</label>
+                            <input name="imagech" type="file" class="form-control" onchange="readFileImage(this)" value="<?= set_value('imagech'); ?>">
+                            <?= form_error('imagech') ?>
+                        </div>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label>Selling/Outright Price <span class="-req">*</span></label>
                             <input name="price" type="text" class="form-control decimal-num" value="<?= set_value('price',$item->price); ?>" placeholder="Selling/Outright Price" required>
                             <?= form_error('price') ?>
@@ -117,12 +124,6 @@
                             <textarea name="content" type="text" id="editor" class="form-control" value=""><?= $item->descr ?></textarea>
                         </div>
                     </div>   
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Charges Information <span class="-req">*</span></label>
-                            <textarea name="chargeinfo" type="text" id="editor2" class="form-control" value=""><?= $item->chargeinfo ?></textarea>
-                        </div>
-                    </div> 
                 </div>
             </div>
             <div class="card-footer text-right">

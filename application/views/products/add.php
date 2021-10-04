@@ -50,6 +50,13 @@
                     </div> 
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label>Charges Details <span class="-req">*</span></label>
+                            <input name="imagech" type="file" class="form-control" onchange="readFileImage(this)" value="<?= set_value('imagech'); ?>" required>
+                            <?= form_error('imagech') ?>
+                        </div>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label>Selling/Outright Price <span class="-req">*</span></label>
                             <input name="price" type="text" class="form-control decimal-num" value="<?= set_value('price'); ?>" placeholder="Selling/Outright Price" required>
                             <?= form_error('price') ?>
@@ -116,13 +123,7 @@
                             <label>Other Information  <span class="-req">*</span></label>
                             <textarea name="content" type="text" id="editor" class="form-control" value=""></textarea>
                         </div>
-                    </div>  
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Charges Information <span class="-req">*</span></label>
-                            <textarea name="chargeinfo" type="text" id="editor2" class="form-control" value=""></textarea>
-                        </div>
-                    </div>   
+                    </div>    
                 </div>
             </div>
             <div class="card-footer text-right">
@@ -152,25 +153,6 @@
         { name: 'others', groups: [ 'others' ] }
     ];
     CKEDITOR.replace( 'editor',{
-        toolbar : 'Basic',
-        toolbarGroups,
-    });
-</script>
-<script type="text/javascript">
-    var toolbarGroups = [
-        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
-        { name: 'forms', groups: [ 'forms' ] },
-        '/',
-        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
-        '/',
-        { name: 'styles', groups: [ 'styles' ] },
-        { name: 'colors', groups: [ 'colors' ] },
-        { name: 'tools', groups: [ 'tools' ] },
-        { name: 'others', groups: [ 'others' ] },
-        { name: 'insert' },
-    ];
-    CKEDITOR.replace( 'editor2',{
         toolbar : 'Basic',
         toolbarGroups,
     });
