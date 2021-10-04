@@ -9,7 +9,7 @@ class Orderpos extends CI_Controller
 	public function getproducts()
 	{
 		if ($this->input->post('category')) {
-			$query = $this->db->get_where('products',['df' => '']);
+			$query = $this->db->get_where('products',['df' => '','category' => $this->input->post('category')]);
 			$list = $query->result_object();
 			foreach ($list as $key => $value) {
 				$list[$key]->image =	$this->general_model->getProductThumb($value->id);
