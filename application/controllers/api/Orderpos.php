@@ -6,7 +6,7 @@ class Orderpos extends CI_Controller
 		parent::__construct();
 	}
 
-	public function update_email()
+	public function getproducts()
 	{
 		if ($this->input->post('category')) {
 			$query = $this->db->get_where('products',['df' => '']);
