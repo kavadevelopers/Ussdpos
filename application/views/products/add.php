@@ -24,21 +24,10 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Name <span class="-req">*</span></label>
-                            <input name="name" type="text" class="form-control" value="<?= set_value('name'); ?>" placeholder="Name">
+                            <input name="name" type="text" class="form-control" value="<?= set_value('name'); ?>" placeholder="Name" required>
                             <?= form_error('name') ?>
                         </div>
                     </div>  
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Type <span class="-req">*</span></label>
-                            <select class="form-control form-control-sm" name="type" required>
-                                <option value="">-- Select --</option>
-                                <option value="1">Outright Purchase</option>
-                                <option value="2">Lease Purchase</option>
-                                <option value="3">Lease Rent</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Category <span class="-req">*</span></label>
@@ -61,50 +50,64 @@
                     </div> 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label id="lable-price">Selling Price <span class="-req">*</span></label>
-                            <input name="price" type="text" class="form-control decimal-num" value="<?= set_value('price'); ?>" placeholder="Selling Price">
+                            <label>Selling/Outright Price <span class="-req">*</span></label>
+                            <input name="price" type="text" class="form-control decimal-num" value="<?= set_value('price'); ?>" placeholder="Selling/Outright Price" required>
                             <?= form_error('price') ?>
+                        </div>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Lease Onboarding fee <span class="-req">*</span></label>
+                            <input name="leasefee" type="text" class="form-control decimal-num" value="<?= set_value('leasefee'); ?>" placeholder="Lease Onboarding fee" required>
+                            <?= form_error('leasefee') ?>
+                        </div>
+                    </div>  
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Lease amount monthly <span class="-req">*</span></label>
+                            <input name="leasemonth" type="text" class="form-control decimal-num" value="<?= set_value('leasemonth'); ?>" placeholder="Lease amount monthly" required>
+                            <?= form_error('leasemonth') ?>
                         </div>
                     </div>  
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Network Provider <span class="-req">*</span></label>
-                            <input name="provider" type="text" class="form-control" value="<?= set_value('provider'); ?>" placeholder="Network Provider">
+                            <input name="provider" type="text" class="form-control" value="<?= set_value('provider'); ?>" placeholder="Network Provider" required>
                             <?= form_error('provider') ?>
                         </div>
                     </div>  
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Withdrawal Rate <span class="-req">*</span></label>
-                            <input name="with_rate" type="text" class="form-control decimal-num" value="<?= set_value('with_rate'); ?>" placeholder="Withdrawal Rate">
+                            <input name="with_rate" type="text" class="form-control decimal-num" value="<?= set_value('with_rate'); ?>" placeholder="Withdrawal Rate" required>
                             <?= form_error('with_rate') ?>
                         </div>
                     </div>  
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Transfer / Deposit Rate <span class="-req">*</span></label>
-                            <input name="depo_rate" type="text" class="form-control decimal-num" value="<?= set_value('depo_rate'); ?>" placeholder="Transfer / Deposit Rate">
+                            <input name="depo_rate" type="text" class="form-control decimal-num" value="<?= set_value('depo_rate'); ?>" placeholder="Transfer / Deposit Rate" required>
                             <?= form_error('depo_rate') ?>
                         </div>
                     </div>  
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Target Type <span class="-req">*</span></label>
-                            <input name="target_type" type="text" class="form-control" value="<?= set_value('target_type'); ?>" placeholder="Target Type">
+                            <input name="target_type" type="text" class="form-control" value="<?= set_value('target_type'); ?>" placeholder="Target Type" required>
                             <?= form_error('target_type') ?>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Target Duration <span class="-req">*</span></label>
-                            <input name="target_duration" type="text" class="form-control" value="<?= set_value('target_duration'); ?>" placeholder="Target Duration">
+                            <input name="target_duration" type="text" class="form-control" value="<?= set_value('target_duration'); ?>" placeholder="Target Duration" required>
                             <?= form_error('target_duration') ?>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Target Amount  <span class="-req">*</span></label>
-                            <input name="target_amount" type="text" class="form-control decimal-num" value="<?= set_value('target_amount'); ?>" placeholder="Target Amount ">
+                            <input name="target_amount" type="text" class="form-control decimal-num" value="<?= set_value('target_amount'); ?>" placeholder="Target Amount " required>
                             <?= form_error('target_amount') ?>
                         </div>
                     </div>
@@ -128,14 +131,6 @@
     </form>
 </div>
 
-<script type="text/javascript">
-    $(function(){
-        $('select[name=type]').change(function(e) {
-            productType();
-            $('input[name=price]').val('');
-        });
-    })
-</script>
 <script src="<?= base_url('asset/assets/ckeditor/ckeditor.js') ?>"></script>
 <script type="text/javascript">
     var toolbarGroups = [

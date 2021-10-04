@@ -6,7 +6,19 @@ class Orderpos extends CI_Controller
 		parent::__construct();
 	}
 
-
+	public function update_email()
+	{
+		if ($this->input->post('category')) {
+			$query = $this->db->get_where('products',['df' => '']);
+			$list = $query->result_object();
+			foreach ($list as $key => $value) {
+				$list[$key]->image =	$this->general_model->getProductThumb($value->id);
+			}
+			retJson(['_return' => true,'msg' => '','prodcount' => $query->num_rows(),'prodlist' => $list]);
+		}else{
+			retJson(['_return' => false,'msg' => '`category` are Required']);
+		}
+	}
 
 	public function getcategory()
 	{
