@@ -75,7 +75,8 @@ class Products extends CI_Controller
 			'target_type'			=> $this->input->post('target_type'),
 			'target_duration'		=> $this->input->post('target_duration'),
 			'target_amount'			=> $this->input->post('target_amount'),
-			'descr'					=> $this->input->post('content')
+			'descr'					=> $this->input->post('content'),
+			'chargeinfo'			=> $this->input->post('chargeinfo')
 		];
 		$this->db->where('id',$this->input->post('id'))->update('products',$data);
 		$this->session->set_flashdata('msg', 'Product Saved');
@@ -117,6 +118,7 @@ class Products extends CI_Controller
 			'target_duration'		=> $this->input->post('target_duration'),
 			'target_amount'			=> $this->input->post('target_amount'),
 			'descr'					=> $this->input->post('content'),
+			'chargeinfo'			=> $this->input->post('chargeinfo'),
 			'df'					=> "",
 			'cat'					=> _nowDateTime()
 		];

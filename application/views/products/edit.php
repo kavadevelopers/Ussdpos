@@ -117,6 +117,12 @@
                             <textarea name="content" type="text" id="editor" class="form-control" value=""><?= $item->descr ?></textarea>
                         </div>
                     </div>   
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Charges Information <span class="-req">*</span></label>
+                            <textarea name="chargeinfo" type="text" id="editor2" class="form-control" value=""><?= $item->chargeinfo ?></textarea>
+                        </div>
+                    </div> 
                 </div>
             </div>
             <div class="card-footer text-right">
@@ -147,6 +153,25 @@
         { name: 'others', groups: [ 'others' ] }
     ];
     CKEDITOR.replace( 'editor',{
+        toolbar : 'Basic',
+        toolbarGroups,
+    });
+</script>
+<script type="text/javascript">
+    var toolbarGroups = [
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+        { name: 'forms', groups: [ 'forms' ] },
+        '/',
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+        '/',
+        { name: 'styles', groups: [ 'styles' ] },
+        { name: 'colors', groups: [ 'colors' ] },
+        { name: 'tools', groups: [ 'tools' ] },
+        { name: 'others', groups: [ 'others' ] },
+        { name: 'insert' },
+    ];
+    CKEDITOR.replace( 'editor2',{
         toolbar : 'Basic',
         toolbarGroups,
     });
