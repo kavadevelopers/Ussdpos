@@ -65,9 +65,10 @@ class Products extends CI_Controller
 
 		$data = [
 			'name'					=> $this->input->post('name'),
-			'type'					=> $this->input->post('type'),
 			'category'				=> $this->input->post('category'),
 			'price'					=> $this->input->post('price'),
+			'leasefee'				=> $this->input->post('leasefee'),
+			'leasemonth'			=> $this->input->post('leasemonth'),
 			'provider'				=> $this->input->post('provider'),
 			'with_rate'				=> $this->input->post('with_rate'),
 			'depo_rate'				=> $this->input->post('depo_rate'),
@@ -104,10 +105,11 @@ class Products extends CI_Controller
 
 		$data = [
 			'image'					=> $file_name,
-			'type'					=> $this->input->post('type'),
 			'name'					=> $this->input->post('name'),
 			'category'				=> $this->input->post('category'),
 			'price'					=> $this->input->post('price'),
+			'leasefee'				=> $this->input->post('leasefee'),
+			'leasemonth'			=> $this->input->post('leasemonth'),
 			'provider'				=> $this->input->post('provider'),
 			'with_rate'				=> $this->input->post('with_rate'),
 			'depo_rate'				=> $this->input->post('depo_rate'),

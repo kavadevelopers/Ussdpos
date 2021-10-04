@@ -24,7 +24,6 @@
                         <thead>
                             <tr>
                                 <th class="text-center">Thumbnail</th>
-                                <th>Type</th>
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th class="text-right">Price</th>
@@ -39,15 +38,6 @@
                                         <a href="#" class="photo-swipe" data-photoswipe="<?= $this->general_model->imagesArrayForPhotoSwipe($this->general_model->getProductThumb($value->id)) ?>">
                                             <img src="<?= $this->general_model->getProductThumb($value->id)?>" style="max-width: 80px;">
                                         </a>
-                                    </td>
-                                    <td>
-                                        <?php if($value->type == "1"){ ?>
-                                            Outright Purchase   
-                                        <?php }else if($value->type == "2"){ ?>
-                                            Lease Purchase
-                                        <?php }else{ ?>
-                                            Lease Rent
-                                        <?php } ?>
                                     </td>
                                     <td><?= $value->name ?></td>
                                     <td><?= $category->name ?></td>
