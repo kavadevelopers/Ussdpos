@@ -14,6 +14,9 @@ class Orderpos extends CI_Controller
 			foreach ($list as $key => $value) {
 				$list[$key]->image =	$this->general_model->getProductThumb($value->id);
 				$list[$key]->chargeinfo =	$this->general_model->getProductInfo($value->id);
+				$list[$key]->pprice =	ptPretyAmount($value->price);
+				$list[$key]->pleasefee =	ptPretyAmount($value->leasefee);
+				$list[$key]->pleasemonth =	ptPretyAmount($value->leasemonth);
 			}
 			retJson(['_return' => true,'msg' => '','prodcount' => $query->num_rows(),'prodlist' => $list]);
 		}else{
