@@ -64,8 +64,15 @@
                     </div> 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Lease Month <span class="-req">*</span></label>
-                            <input name="leasemonth" type="text" class="form-control numbers" value="<?= set_value('leasemonth',$item->leasemonth); ?>" placeholder="Lease Month" required>
+                            <label>Lease Purchase Price <span class="-req">*</span></label>
+                            <input name="lprice" type="text" class="form-control decimal-num" value="<?= set_value('lprice',$item->lprice); ?>" placeholder="Lease Purchase Price" required>
+                            <?= form_error('lprice') ?>
+                        </div>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Lease Purchase Month <span class="-req">*</span></label>
+                            <input name="leasemonth" type="text" class="form-control numbers" value="<?= set_value('leasemonth',$item->leasemonth); ?>" placeholder="Lease Purchase Month" required>
                             <?= form_error('leasemonth') ?>
                         </div>
                     </div> 
