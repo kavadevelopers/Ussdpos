@@ -12,11 +12,12 @@ class Orderpos extends CI_Controller
 			$query = $this->db->get_where('products',['df' => '','category' => $this->input->post('category')]);
 			$list = $query->result_object();
 			foreach ($list as $key => $value) {
-				$list[$key]->image =	$this->general_model->getProductThumb($value->id);
-				$list[$key]->chargeinfo =	$this->general_model->getProductInfo($value->id);
-				$list[$key]->pprice =	ptPretyAmount($value->price);
-				$list[$key]->pleasefee =	ptPretyAmount($value->leasefee);
-				$list[$key]->pleasemonth =	ptPretyAmount($value->leasemonth);
+				$list[$key]->image 			=	$this->general_model->getProductThumb($value->id);
+				$list[$key]->chargeinfo 	=	$this->general_model->getProductInfo($value->id);
+				$list[$key]->pprice 		=	ptPretyAmount($value->price);
+				$list[$key]->pleasefee 		=	ptPretyAmount($value->leasefee);
+				$list[$key]->pleasemonth 	=	ptPretyAmount($value->leasemonth);
+				$list[$key]->leasemonth 	=	($value->price / $value->leasemonth);
 			}
 			retJson(['_return' => true,'msg' => '','prodcount' => $query->num_rows(),'prodlist' => $list]);
 		}else{
@@ -28,8 +29,6 @@ class Orderpos extends CI_Controller
 	{
 		$this->db->where('df','');
 		$get = $this->db->get('products_cate');
-
-
 		$list = $get->result_object();
 		foreach ($list as $key => $value) {
 			$list[$key]->image 		= $this->general_model->getCategoryThumb($value->id);

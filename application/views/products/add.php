@@ -64,18 +64,18 @@
                     </div> 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Lease Onboarding fee <span class="-req">*</span></label>
+                            <label>Lease Month <span class="-req">*</span></label>
+                            <input name="leasemonth" type="text" class="form-control numbers" value="<?= set_value('leasemonth'); ?>" placeholder="Lease Month" required>
+                            <?= form_error('leasemonth') ?>
+                        </div>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Lease Onboarding fee (for lease rent)<span class="-req">*</span></label>
                             <input name="leasefee" type="text" class="form-control decimal-num" value="<?= set_value('leasefee'); ?>" placeholder="Lease Onboarding fee" required>
                             <?= form_error('leasefee') ?>
                         </div>
-                    </div>  
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Lease amount monthly <span class="-req">*</span></label>
-                            <input name="leasemonth" type="text" class="form-control decimal-num" value="<?= set_value('leasemonth'); ?>" placeholder="Lease amount monthly" required>
-                            <?= form_error('leasemonth') ?>
-                        </div>
-                    </div>  
+                    </div>   
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Network Provider <span class="-req">*</span></label>
