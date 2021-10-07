@@ -17,7 +17,7 @@ class Orderpos extends CI_Controller
 				$list[$key]->pprice 		=	ptPretyAmount($value->price);
 				$list[$key]->pleasefee 		=	ptPretyAmount($value->leasefee);
 				$list[$key]->pleasemonth 	=	ptPretyAmount($value->leasemonth);
-				$list[$key]->leasemonth 	=	($value->price / $value->leasemonth);
+				$list[$key]->permonth 		=	ptPretyAmount($value->price / $value->leasemonth);
 			}
 			retJson(['_return' => true,'msg' => '','prodcount' => $query->num_rows(),'prodlist' => $list]);
 		}else{
