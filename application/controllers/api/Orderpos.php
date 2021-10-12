@@ -8,8 +8,17 @@ class Orderpos extends CI_Controller
 
 	public function getproducts()
 	{
-		if ($this->input->post('category')) {
-			$query = $this->db->get_where('products',['df' => '','category' => $this->input->post('category')]);
+		if ($this->input->post('category') && $this->input->post('type')) {
+			if ($this->input->post('type') == "1") {
+				$this->db->where('lprice !=','0.00');
+			}
+			if ($this->input->post('type') == "2") {
+				$this->db->where('leasefee !=','0.00');
+			}
+			if ($this->input->post('type') == "1") {
+				$this->db->where('price !=','0.00');
+			}
+			$query = $this->db->get_where('products',['df' => '','category' => $this->input->post('category'),'']);
 			$list = $query->result_object();
 			foreach ($list as $key => $value) {
 				$list[$key]->image 			=	$this->general_model->getProductThumb($value->id);
@@ -21,7 +30,7 @@ class Orderpos extends CI_Controller
 			}
 			retJson(['_return' => true,'msg' => '','prodcount' => $query->num_rows(),'prodlist' => $list]);
 		}else{
-			retJson(['_return' => false,'msg' => '`category` are Required']);
+			retJson(['_return' => false,'msg' => '`category`,`type`(1{Lease Purchase},2{Lease Rent},3{Outright Purchase}) are Required']);
 		}
 	}
 
