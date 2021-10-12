@@ -15,7 +15,7 @@ class Orderpos extends CI_Controller
 			if ($this->input->post('type') == "2") {
 				$this->db->where('leasefee !=','0.00');
 			}
-			if ($this->input->post('type') == "1") {
+			if ($this->input->post('type') == "3") {
 				$this->db->where('price !=','0.00');
 			}
 			$query = $this->db->get_where('products',['df' => '','category' => $this->input->post('category'),'']);
