@@ -174,7 +174,7 @@
 
                 <?php if(get_user()['user_type'] == '0' || $this->rights->check([2])){ ?>
                     <ul class="pcoded-item pcoded-left-item">
-                        <li class="pcoded-hasmenu <?= menu(1,["setting","commission","users","states","regbanks","banks","pages","products"])[2]; ?>">
+                        <li class="pcoded-hasmenu <?= menu(1,["setting","commission","users","states","regbanks","banks","pages","products","common"])[2]; ?>">
                             <a href="javascript:void(0)">
                                 <span class="pcoded-micon"><i class="feather icon-list"></i></span>
                                 <span class="pcoded-mtext">Admin Setups</span>
@@ -248,6 +248,11 @@
                                     <li class="<?= menu(1,["commission"])[1]; ?>">
                                         <a href="<?= base_url('commission') ?>">
                                             <span class="pcoded-mtext">Commission</span>
+                                        </a>
+                                    </li>
+                                    <li class="<?= menu(1,["common"])[1]; ?>">
+                                        <a href="<?= base_url('common/delivery') ?>">
+                                            <span class="pcoded-mtext">POS Delivery Charges</span>
                                         </a>
                                     </li>
                                     <li class="<?= menu(1,["setting"])[1]; ?>">
