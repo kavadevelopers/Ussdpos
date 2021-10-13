@@ -6,6 +6,16 @@ class Orderpos extends CI_Controller
 		parent::__construct();
 	}
 
+	public function getdeliverycharges()
+	{
+		if($this->input->post('user')){
+			$delivery = $this->db->get_where('order_delivery_charges',['id' => '1'])->row_object();
+			retJson(['_return' => true,'user' => $this->agent_model->get($this->input->post('user')),'balance' => $this->dashboard_model->getAgentBalance($this->input->post('user')),'delivery' => $delivery]);
+		}else{
+			retJson(['_return' => false,'msg' => '`user` are Required']);
+		}
+	}
+
 	public function getproducts()
 	{
 		if ($this->input->post('category') && $this->input->post('type')) {
