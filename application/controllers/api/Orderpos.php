@@ -11,6 +11,7 @@ class Orderpos extends CI_Controller
 		if ($this->input->post('category') && $this->input->post('type')) {
 			if ($this->input->post('type') == "1") {
 				$this->db->where('lprice !=','0.00');
+				$this->db->where('leasemonth !=','0');
 			}
 			if ($this->input->post('type') == "2") {
 				$this->db->where('leasefee !=','0.00');
@@ -25,7 +26,7 @@ class Orderpos extends CI_Controller
 				$list[$key]->chargeinfo 	=	$this->general_model->getProductInfo($value->id);
 				$list[$key]->pprice 		=	ptPretyAmount($value->price);
 				$list[$key]->pleasefee 		=	ptPretyAmount($value->leasefee);
-				$list[$key]->pleasemonth 	=	ptPretyAmount($value->leasemonth);
+				$list[$key]->pleasemonth 	=	$value->leasemonth;
 				$list[$key]->permonth 		=	ptPretyAmount($value->lprice / $value->leasemonth);
 			}
 			retJson(['_return' => true,'msg' => '','prodcount' => $query->num_rows(),'prodlist' => $list]);
