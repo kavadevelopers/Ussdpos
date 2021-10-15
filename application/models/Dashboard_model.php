@@ -88,6 +88,7 @@ class Dashboard_model extends CI_Model
 	public function getAdminBalance()
 	{
 		$this->db->select_sum('debit');
+		$this->db->where('usertype','admin');
 		$debit = $this->db->get('transactions')->row_object();
 		$debitA = 0;
 		if ($debit) {
@@ -95,6 +96,7 @@ class Dashboard_model extends CI_Model
 		}
 
 		$this->db->select_sum('credit');
+		$this->db->where('usertype','admin');
 		$credit = $this->db->get('transactions')->row_object();
 		$creditA = 0;
 		if ($credit) {
@@ -108,6 +110,7 @@ class Dashboard_model extends CI_Model
 	{
 		$this->db->select_sum('credit');
 		$this->db->where('type',traType(1)[1]);
+		$this->db->where('usertype','admin');
 		$credit = $this->db->get('transactions')->row_object();
 		$creditA = 0;
 		if ($credit) {
@@ -121,6 +124,7 @@ class Dashboard_model extends CI_Model
 	{
 		$this->db->select_sum('credit');
 		$this->db->where('type',traType(2)[1]);
+		$this->db->where('usertype','admin');
 		$credit = $this->db->get('transactions')->row_object();
 		$creditA = 0;
 		if ($credit) {
