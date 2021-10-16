@@ -7,7 +7,7 @@
                 <div class="card-block-small">
                     <i class="fa fa-university bg-c-blue card1-icon"></i>
                     <span class="text-c-blue f-w-600">Available Balance</span>
-                    <h4><?= niara().number_shortenNum($this->dashboard_model->getAdminBalance()); ?></h4>
+                    <h4><?= niara().ptPretyAmount($this->dashboard_model->getAdminBalance()); ?></h4>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
 	            <div class="card-block-small">
 	                <i class="fa fa-hashtag bg-c-green card1-icon"></i>
 	                <span class="text-c-green f-w-600">USSD Payments</span>
-	                <h4><?= niara().number_shortenNum($this->dashboard_model->getAdminUssdCollected(),2); ?></h4>
+	                <h4><?= niara().ptPretyAmount($this->dashboard_model->getAdminUssdCollected(),2); ?></h4>
 	            </div>
 	        </div>
 	    </div>
@@ -25,7 +25,7 @@
                 <div class="card-block-small">
                     <i class="fa fa-percent bg-c-pink card1-icon"></i>
                     <span class="text-c-pink f-w-600">Fees Collected</span>
-                    <h4><?= niara().number_shortenNum($this->dashboard_model->getAdminFeesCollected()); ?></h4>
+                    <h4><?= niara().ptPretyAmount($this->dashboard_model->getAdminFeesCollected()); ?></h4>
                 </div>
             </div>
         </div>
