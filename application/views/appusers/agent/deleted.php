@@ -36,7 +36,7 @@
                             <?php foreach ($list as $key => $value) { ?>
                                 <tr>
                                     <td class="text-center">
-                                        0<?= $value->id ?>
+                                        0000<?= $value->id ?>
                                     </td>
                                     <td>
                                         <?= ucfirst($value->name) ?>
