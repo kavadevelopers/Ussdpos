@@ -6,6 +6,47 @@ class Orderpos extends CI_Controller
 		parent::__construct();
 	}
 
+	public function order()
+	{
+		if($this->input->post('user') && $this->input->post('product') && $this->input->post('qty') && $this->input->post('price') && $this->input->post('subtotal') && $this->input->post('delivery') && $this->input->post('total') && $this->input->post('paymenttype') && $this->input->post('deliverytype') && $this->input->post('state')){
+			$terminal = ""; $address = ""; $buspark = "";
+			if ($this->input->post('terminal')) {
+				$terminal = $this->input->post('terminal');
+			}
+			if ($this->input->post('address')) {
+				$address = $this->input->post('address');
+			}
+			if ($this->input->post('buspark')) {
+				$buspark = $this->input->post('buspark');
+			}
+
+			$data = [
+				'user'				=> $this->input->post('user'),
+				'product'			=> $this->input->post('product'),
+				'qty'				=> $this->input->post('qty'),
+				'price'				=> $this->input->post('price'),
+				'subtotal'			=> $this->input->post('subtotal'),
+				'delivery'			=> $this->input->post('delivery'),
+				'total'				=> $this->input->post('total'),
+				'paymenttype'		=> $this->input->post('paymenttype'),
+				'deliverytype'		=> $this->input->post('deliverytype'),
+				'state'				=> $this->input->post('state'),
+				'terminal'			=> $terminal,
+				'address'			=> $address,
+				'buspark'			=> $buspark,
+				'status'			=> '0',
+				'cat'				=> _nowDateTime()
+			];
+			$this->db->insert('orders',$data);
+
+			$fullAddress = $terminal.' '.$address.' '.$buspark.' '.$this->input->post('state');
+
+			retJson(['_return' => true,'msg' => 'Order Placed','address' => $fullAddress]);
+		}else{
+			retJson(['_return' => false,'msg' => '`user`,`product`,`qty`,`price`,`subtotal`,`delivery`,`total`,`paymenttype`,`deliverytype`,`state` are Required, `terminal`,`address`,`buspark` are Optional']);
+		}	
+	}
+
 	public function getdeliverycharges()
 	{
 		if($this->input->post('user')){
