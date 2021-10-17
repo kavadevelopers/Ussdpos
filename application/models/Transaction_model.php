@@ -10,7 +10,7 @@ class Transaction_model extends CI_Model
 	public function posOrder($user,$amount,$main)
 	{
 		$data = [
-			'type'			=> traType(2)[1],
+			'type'			=> traType(3)[1],
 			'usertype'		=> 'agent',
 			'user'			=> $user,
 			'debit'			=> $amount,

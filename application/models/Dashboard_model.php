@@ -40,14 +40,14 @@ class Dashboard_model extends CI_Model
 					$product = $this->db->get_where('products',['id' => $order->product])->row_object();
 					if ($product) {
 						$list[$key]->title 		= $product->name;
-						$list[$key]->desc 		= "ordered pos";	
+						$list[$key]->desc 		= $value->notes;	
 					}else{
 						$list[$key]->title 		= "Order";
-						$list[$key]->desc 		= "ordered pos";	
+						$list[$key]->desc 		= $value->notes;	
 					}
 				}else{
 					$list[$key]->title 		= "Order";
-					$list[$key]->desc 		= "ordered pos";
+					$list[$key]->desc 		= $value->notes;
 				}
 			}
 			$list[$key]->at 		= getPretyDate($value->dt);
@@ -75,14 +75,14 @@ class Dashboard_model extends CI_Model
 					$product = $this->db->get_where('products',['id' => $order->product])->row_object();
 					if ($product) {
 						$list[$key]->title 		= $product->name;
-						$list[$key]->desc 		= "ordered pos";	
+						$list[$key]->desc 		= $value->notes;	
 					}else{
 						$list[$key]->title 		= "Order";
-						$list[$key]->desc 		= "ordered pos";	
+						$list[$key]->desc 		= $value->notes;	
 					}
 				}else{
 					$list[$key]->title 		= "Order";
-					$list[$key]->desc 		= "ordered pos";
+					$list[$key]->desc 		= $value->notes;
 				}
 			}
 			$list[$key]->at 		= getPretyDate($value->dt);
