@@ -39,8 +39,12 @@ class Orderpos extends CI_Controller
 				'cat'				=> _nowDateTime()
 			];
 			$this->db->insert('orders',$data);
-
+			$orderId = $this->db->insert_id();
 			$fullAddress = $terminal.' '.$address.' '.$buspark.' '.$this->input->post('state');
+
+			if ($this->input->post('paymenttype') == "wallet") {
+				@$this->transaction_model->posOrder($this->input->post('user'),$this->input->post('total'),$orderId);
+			}
 
 			retJson(['_return' => true,'msg' => 'Order Placed','address' => $fullAddress]);
 		}else{

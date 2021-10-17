@@ -34,10 +34,25 @@ class Dashboard_model extends CI_Model
 			if ($value->type == '1') {
 				$list[$key]->title 		= "USSD Payment";
 				$list[$key]->desc 		= "Payment Received";
-				$list[$key]->at 		= getPretyDate($value->dt);
-				$list[$key]->debit 		= ptPretyAmount($value->debit);
-				$list[$key]->credit 	= ptPretyAmount($value->credit);
+			}else if ($value->type == '3') {
+				$order = $this->db->get_where('orders',['id' => $value->main])->row_object();
+				if ($order) {
+					$product = $this->db->get_where('products',['id' => $order->product])->row_object();
+					if ($product) {
+						$list[$key]->title 		= $product->name;
+						$list[$key]->desc 		= "ordered pos";	
+					}else{
+						$list[$key]->title 		= "Order";
+						$list[$key]->desc 		= "ordered pos";	
+					}
+				}else{
+					$list[$key]->title 		= "Order";
+					$list[$key]->desc 		= "ordered pos";
+				}
 			}
+			$list[$key]->at 		= getPretyDate($value->dt);
+			$list[$key]->debit 		= ptPretyAmount($value->debit);
+			$list[$key]->credit 	= ptPretyAmount($value->credit);
 		}
 		return ['count' => $q->num_rows(),'list' => $list];
 	}
@@ -54,10 +69,25 @@ class Dashboard_model extends CI_Model
 			if ($value->type == '1') {
 				$list[$key]->title 		= "USSD Payment";
 				$list[$key]->desc 		= "Payment Received";
-				$list[$key]->at 		= getPretyDate($value->dt);
-				$list[$key]->debit 		= ptPretyAmount($value->debit);
-				$list[$key]->credit 	= ptPretyAmount($value->credit);
+			}else if ($value->type == '3') {
+				$order = $this->db->get_where('orders',['id' => $value->main])->row_object();
+				if ($order) {
+					$product = $this->db->get_where('products',['id' => $order->product])->row_object();
+					if ($product) {
+						$list[$key]->title 		= $product->name;
+						$list[$key]->desc 		= "ordered pos";	
+					}else{
+						$list[$key]->title 		= "Order";
+						$list[$key]->desc 		= "ordered pos";	
+					}
+				}else{
+					$list[$key]->title 		= "Order";
+					$list[$key]->desc 		= "ordered pos";
+				}
 			}
+			$list[$key]->at 		= getPretyDate($value->dt);
+			$list[$key]->debit 		= ptPretyAmount($value->debit);
+			$list[$key]->credit 	= ptPretyAmount($value->credit);
 		}
 		return ['count' => $q->num_rows(),'list' => $list];
 	}

@@ -20,12 +20,14 @@ function traType($type)
         return ['ussd','1'];
     }else if($type == 2){
         return ['fees','2'];
+    }else if($type == 3){
+        return ['posorder','3'];
     }
 }
 
 function traTypeArray()
 {
-    return [1,2];
+    return [1,2,3];
 }
 
 function ptPretyAmount($amount)

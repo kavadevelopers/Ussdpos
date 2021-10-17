@@ -7,6 +7,21 @@ class Transaction_model extends CI_Model
 		
 	}
 
+	public function posOrder($user,$amount,$main)
+	{
+		$data = [
+			'type'			=> traType(2)[1],
+			'usertype'		=> 'agent',
+			'user'			=> $user,
+			'debit'			=> $amount,
+			'credit'		=> 0.00,
+			'main'			=> $main,
+			'notes'			=> "POS Order",
+			'dt'			=> date('Y-m-d'),
+			'cat'			=> _nowDateTime()
+		];
+		$this->db->insert('transactions',$data);
+	}
 
 	public function ussdCredited($chId)
 	{

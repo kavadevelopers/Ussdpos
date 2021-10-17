@@ -9,7 +9,7 @@ class Home extends CI_Controller
 	public function transactions()
 	{
 		if ($this->input->post('user')) {
-			$homeTransactions 	= $this->dashboard_model->getHomeTransactions($this->input->post('user'));
+			$homeTransactions 	= $this->dashboard_model->getAllTransactions($this->input->post('user'));
 			$data = [
 				'_return'		=> true,
 				'tracounter'	=> $homeTransactions['count'],
