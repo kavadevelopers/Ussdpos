@@ -34,7 +34,7 @@
                                 <div class="col-lg-12">
                                     <div class="user-title">
                                         <h2><?= ucfirst($item->name) ?></h2>
-                                        <span class="text-white">POS Agent - AGENT0<?= $item->id ?></span>
+                                        <span class="text-white">POS Agent - 0<?= $item->id ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <th scope="row">Agent ID</th>
-                                                                    <td>AGENT0<?= $item->id ?></td>
+                                                                    <td>0<?= $item->id ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Full Name</th>

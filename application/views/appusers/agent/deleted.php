@@ -25,7 +25,7 @@
                     <table class="table table-striped table-bordered table-mini table-dt">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
+                                <th class="text-center">Agent Id</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>                    
@@ -36,7 +36,7 @@
                             <?php foreach ($list as $key => $value) { ?>
                                 <tr>
                                     <td class="text-center">
-                                        AGENT0<?= $value->id ?>
+                                        0<?= $value->id ?>
                                     </td>
                                     <td>
                                         <?= ucfirst($value->name) ?>
