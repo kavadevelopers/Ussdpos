@@ -8,7 +8,7 @@ class Orderpos extends CI_Controller
 
 	public function order()
 	{
-		if($this->input->post('user') && $this->input->post('product') && $this->input->post('qty') && $this->input->post('price') && $this->input->post('subtotal') && $this->input->post('delivery') && $this->input->post('total') && $this->input->post('paymenttype') && $this->input->post('deliverytype') && $this->input->post('state')){
+		if($this->input->post('poption') && $this->input->post('user') && $this->input->post('product') && $this->input->post('qty') && $this->input->post('price') && $this->input->post('subtotal') && $this->input->post('delivery') && $this->input->post('total') && $this->input->post('paymenttype') && $this->input->post('deliverytype') && $this->input->post('state')){
 			$terminal = ""; $address = ""; $buspark = "";
 			if ($this->input->post('terminal')) {
 				$terminal = $this->input->post('terminal');
@@ -43,7 +43,7 @@ class Orderpos extends CI_Controller
 
 			retJson(['_return' => true,'msg' => 'Order Placed','address' => $fullAddress]);
 		}else{
-			retJson(['_return' => false,'msg' => '`user`,`product`,`qty`,`price`,`subtotal`,`delivery`,`total`,`paymenttype`,`deliverytype`,`state` are Required, `terminal`,`address`,`buspark` are Optional']);
+			retJson(['_return' => false,'msg' => '`poption`,`user`,`product`,`qty`,`price`,`subtotal`,`delivery`,`total`,`paymenttype`,`deliverytype`,`state` are Required, `terminal`,`address`,`buspark` are Optional']);
 		}	
 	}
 
