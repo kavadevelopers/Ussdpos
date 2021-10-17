@@ -18,7 +18,7 @@ class Dashboard_model extends CI_Model
 	{
 		$this->db->limit(50);
 		$this->db->order_by('id','desc');
-		$this->db->where('usertype','admin');	
+		$this->db->where('usertype','agent');	
 		$q = $this->db->get('transactions');
 		return $q->result_object();
 	}
