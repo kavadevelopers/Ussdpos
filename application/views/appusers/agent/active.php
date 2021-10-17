@@ -40,7 +40,7 @@
                             <?php foreach ($list as $key => $value) { ?>
                                 <tr data-khref="<?= base_url('agent/view/').$value->id.'/'.$this->uri->segment(2) ?>">
                                     <td class="text-center">
-                                        <?= $key + 1 ?>
+                                        AGENT0<?= $value->id ?>
                                     </td>
                                     <td>
                                         <?= ucfirst($value->name) ?>

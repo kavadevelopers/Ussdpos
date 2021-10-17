@@ -34,7 +34,7 @@
                                 <div class="col-lg-12">
                                     <div class="user-title">
                                         <h2><?= ucfirst($item->name) ?></h2>
-                                        <span class="text-white">POS Agent</span>
+                                        <span class="text-white">POS Agent - AGENT0<?= $item->id ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -78,6 +78,10 @@
                                                     <div class="table-responsive">
                                                         <table class="table m-0 tbl-white-normal">
                                                             <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Agent ID</th>
+                                                                    <td>AGENT0<?= $item->id ?></td>
+                                                                </tr>
                                                                 <tr>
                                                                     <th scope="row">Full Name</th>
                                                                     <td><?= ucfirst($item->name) ?></td>
