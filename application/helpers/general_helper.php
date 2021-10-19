@@ -55,6 +55,30 @@ function deliveryType($t)
     }
 }
 
+function generateOrderId()
+{
+    $ci=& get_instance();
+    $ci->load->database();
+    $id = generateRandomString().'0';
+    $ci->db->order_by('id','desc');
+    $last = $ci->db->get('orders')->row_object();
+    if ($last) {
+        return $id.($last + 1);
+    }else{
+        return $id.'1';
+    }
+}
+
+function generateRandomString($length = 10) {
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
 function retJson($array){
     header("Content-type: application/json");
     echo json_encode($array);

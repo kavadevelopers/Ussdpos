@@ -21,6 +21,7 @@ class Orderpos extends CI_Controller
 			}
 
 			$data = [
+				'ordid'				=> generateOrderId(),
 				'poption'			=> $this->input->post('poption'),
 				'user'				=> $this->input->post('user'),
 				'product'			=> $this->input->post('product'),
