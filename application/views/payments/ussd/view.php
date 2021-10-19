@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="col-md-6 text-right">
-                <a href="<?= base_url('ussdpay/'.$page) ?>" class="btn btn-danger btn-mini">
+                <a href="#" onclick="window.history.go(-1); return false;" class="btn btn-danger btn-mini">
                     <i class="fa fa-arrow-left"></i> Back
                 </a>
             </div>

@@ -35,6 +35,26 @@ function ptPretyAmount($amount)
     return number_format($amount, 2, '.', ',');
 }
 
+function posPurchaseOption($val)
+{
+    if ($val == "1") {
+        return "Lease Purchase";
+    }else if ($val == "2") {
+        return "Lease Rent";
+    }else{
+        return "Outright Purchase";
+    }
+}
+
+function deliveryType($t)
+{
+    if ($t == "1") {
+        return "GIG Logistics";
+    }else{
+        return "Local Bus";
+    }
+}
+
 function retJson($array){
     header("Content-type: application/json");
     echo json_encode($array);

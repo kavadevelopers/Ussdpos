@@ -121,7 +121,16 @@
                         </li>
                     </ul>
                 <?php } ?>
-
+                <?php if($this->rights->check([6])){ ?>
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li class="<?= menu(2,["list","view"],"orders")[0]; ?>">
+                            <a href="<?= base_url('orders/list') ?>">
+                                <span class="pcoded-micon"><i class="fa fa-mobile"></i></span>
+                                <span class="pcoded-mtext">POS Orders</span>
+                            </a>
+                        </li>
+                    </ul>
+                <?php } ?>
                 <?php if($this->rights->check([5])){ ?>
                     <ul class="pcoded-item pcoded-left-item">
                         <li class="pcoded-hasmenu <?= menu(1,["transactions"])[2]; ?>">
