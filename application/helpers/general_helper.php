@@ -59,7 +59,7 @@ function generateOrderId()
 {
     $ci=& get_instance();
     $ci->load->database();
-    $id = generateRandomString().'0';
+    $id = generateRandomString(3).'0';
     $ci->db->order_by('id','desc');
     $last = $ci->db->get('orders')->row_object();
     if ($last) {
