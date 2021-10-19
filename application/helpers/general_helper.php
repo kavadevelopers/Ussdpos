@@ -349,4 +349,29 @@ function stringReadMoreInline($str,$length) {
     }
     return $str;
 }  
+
+
+function statusArray()
+{
+    $data = [
+        'Pending',
+        'Order Confirmed',
+        'Processing',
+        'Manual Verification Required',
+        'Shipment Dispatched',
+        'Shipped',
+        'Awaiting Pickup',
+        'Completed',
+        'Cancelled',
+        'Declined',
+        'Refunded',
+        'Disputed'
+    ];
+    return $data;
+}
+
+function getStatusString($v)
+{
+    return statusArray()[$v];
+}
 ?>
