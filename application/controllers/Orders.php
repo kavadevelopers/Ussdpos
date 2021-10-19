@@ -13,6 +13,7 @@ class Orders extends CI_Controller
 	public function list()
 	{
 		$data['_title']		= "POS Orders";
+		$this->db->order_by('id','desc');
 		$data['list']		= $this->db->get('orders')->result_object();
 		$this->load->theme('orders/list',$data);	
 	}
