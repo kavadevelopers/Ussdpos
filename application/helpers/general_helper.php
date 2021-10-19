@@ -63,7 +63,7 @@ function generateOrderId()
     $ci->db->order_by('id','desc');
     $last = $ci->db->get('orders')->row_object();
     if ($last) {
-        return $id.($last + 1);
+        return $id.($last->id + 1);
     }else{
         return $id.'1';
     }
