@@ -37,7 +37,7 @@
                                 <?php $product = $this->db->get_where('products',['id' => $value->product])->row_object(); ?>
                                 <tr>
                                     <td class="text-center">
-                                        0000<?= $value->id ?>
+                                        <?= $value->ordid ?>
                                     </td>
                                     <td>
                                         <?= $agent->name ?>    

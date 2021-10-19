@@ -34,7 +34,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <th scope="row">Order ID</th>
-                                                            <td>0000<?= $item->id ?></td>
+                                                            <td><?= $item->ordid ?></td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Purchase Option</th>
