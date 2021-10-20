@@ -5,6 +5,7 @@ $product = $this->db->get_where('products',['id' => $item->product])->row_object
 <br>
 <p>New Order Received.</p>
 
-<p><b>Order Id </b> : <?= $item->ordid ?></p>
+<p><b>Order Id </b> : #<?= $item->ordid ?></p>
+<p><b>POS Device </b> : <?= $product->name ?></p>
 
 <?= $this->load->view('mail/template/footer',[],true);  ?>
