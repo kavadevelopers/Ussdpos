@@ -90,6 +90,27 @@
     function hideAjaxLoader() {
         $('.ajaxLoader').hide();
     }
+
+    $(function(){
+        $(document).on('click','.view-order', function(e){
+            e.preventDefault();
+            id = $(this).data('id');
+            var AjaxParam = {
+                'url'       : '<?= base_url('orders/get') ?>',
+                'data'      : {id:id},
+                'dataType'  : 'json',
+                'successCb' : getOrderCallBack
+            };
+            doAjax(AjaxParam);
+        });
+    })
+
+    function getOrderCallBack(response) {
+        console.log(response);
+        $('#showOrderModel').html(response.bodyR);
+        $('#showOrderModel').modal('show');
+
+    }
 </script>
 
 

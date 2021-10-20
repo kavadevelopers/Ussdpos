@@ -54,7 +54,7 @@
                                         <small><?= getPretyDateTime($value->cat) ?></small>
                                     </td>
                                     <td class="text-center">
-                                        <a href="<?= base_url('orders/view/').$value->id ?>" class="btn btn-success btn-mini" title="View">
+                                        <a href="#" class="btn btn-success btn-mini view-order" title="View" data-id="<?= $value->id ?>">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         <?php if ($value->status != 8): ?>    
@@ -87,7 +87,7 @@
             $('#changeStatus textarea[name=note]').val($(this).data('note'));
             $('#changeStatus').modal('show');
         });
-    })
+    });
 </script>
 
 

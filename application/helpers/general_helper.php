@@ -22,12 +22,14 @@ function traType($type)
         return ['fees','2'];
     }else if($type == 3){
         return ['posorder','3'];
+    }else if($type == 4){
+        return ['refund','4'];
     }
 }
 
 function traTypeArray()
 {
-    return [1,2,3];
+    return [1,2,3,4];
 }
 
 function ptPretyAmount($amount)
@@ -95,6 +97,21 @@ function _sortdate($datetime)
         return date('Ymd',strtotime($datetime));
     }else{
         return "";
+    }
+}
+
+function agentAcStatus($st)
+{
+    if ($st == '0') {
+        return "Pending";
+    }else if ($st == '1') {
+        return "Active";
+    }else if ($st == '2') {
+        return "Processing";
+    }else if ($st == '3') {
+        return "Documents Re Uploaded";
+    }else{
+        return "Active";
     }
 }
 

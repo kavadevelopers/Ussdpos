@@ -1,4 +1,7 @@
 <style type="text/css">
+	#showOrderModel td,#showOrderModel th{
+		white-space: normal;
+	}
     @media (min-width: 768px)
     {
         .modal-xl {

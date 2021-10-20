@@ -31,6 +31,45 @@ function delete_confirm(url) {
 	});
 }
 
+function doAjax(params) {
+    showAjaxLoader();
+    var url                             = params['url'];
+    if (params['type']) {
+        var requestType                 = params['type'];
+    }else{
+        var requestType                 = 'POST';
+    }
+    if (params['dataType']) {
+        var _dataType                    = params['dataType'];
+    }else{
+        var _dataType                    = 'HTML';
+    }
+    var data                        = params['data'];
+    var success                     = params['successCb'];
+    var error                       = params['errorCb'];
+
+    $.ajax({
+        type        : requestType,
+        data        : data,
+        dataType    : _dataType,
+        url         : url     
+    }).done(function(data) {
+        setTimeout(function () {
+            hideAjaxLoader();
+            if (typeof success === "function") {
+                success(data);
+            }
+        }, 1000);
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        hideAjaxLoader();
+        PNOTY('Ajax Error','error');
+        console.log('Ajax error pLease try again later - '+textStatus, errorThrown);
+        if (typeof error === "function") {
+            error();
+        }
+    });
+}
+
 $(function(){
     $('.select2').select2();
 
