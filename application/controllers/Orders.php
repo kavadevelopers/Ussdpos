@@ -29,7 +29,9 @@ class Orders extends CI_Controller
 	{
 		if ($this->input->post('status') == "8") {
 			$order		= $this->db->get_where('orders',['id' => $this->input->post('id')])->row_object();
-			@$this->transaction_model->posOrderRefund($order->user,$order->total,$this->input->post('id'));
+			if ($order->paymenttype == "wallet") {
+				@$this->transaction_model->posOrderRefund($order->user,$order->total,$this->input->post('id'));
+			}
 		}
 		$this->db->where('id',$this->input->post('id'))->update('orders',['status' => $this->input->post('status'),'note' => $this->input->post('note')]);
 		$this->session->set_flashdata('msg', 'Status Changed');

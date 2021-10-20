@@ -48,6 +48,9 @@ class Orderpos extends CI_Controller
 				@$this->transaction_model->posOrder($this->input->post('user'),$this->input->post('total'),$orderId);
 			}
 
+			$template = $this->load->view('mail/admin/new_pos_order',[],true);
+			@$this->general_model->send_mail(get_setting()['admin_noti_email'],'POS Order received',$template);
+
 			retJson(['_return' => true,'msg' => 'Order Placed','address' => $fullAddress]);
 		}else{
 			retJson(['_return' => false,'msg' => '`poption`,`user`,`product`,`qty`,`price`,`subtotal`,`delivery`,`total`,`paymenttype`,`deliverytype`,`state` are Required, `terminal`,`address`,`buspark` are Optional']);
