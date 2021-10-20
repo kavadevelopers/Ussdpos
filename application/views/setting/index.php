@@ -24,6 +24,14 @@
                         </div>
                     </div>
 
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Admin Notification Email<small>(Add comma if there is multiple)</small> <span class="-req">*</span></label>
+                            <input name="admin_noti_email" type="text" class="form-control" value="<?= set_value('admin_noti_email',get_setting()['admin_noti_email']); ?>" >
+                            <?= form_error('admin_noti_email') ?>
+                        </div>
+                    </div>
+
                     
 
                     
