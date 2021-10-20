@@ -6,7 +6,7 @@
     -ms-overflow-style: none;
 }
 .new-mainmenu::-webkit-scrollbar {
-  display: none;
+  /*display: none;*/
 }
 .pcoded-inner-navbar {
     height: calc(100% - 80px);
