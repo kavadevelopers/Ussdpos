@@ -27,7 +27,7 @@ class Orders extends CI_Controller
 
 	public function change_status()
 	{
-		$this->db->where('id',$this->input->post('id'))->update('orders',['status' => $this->input->post('status')]);
+		$this->db->where('id',$this->input->post('id'))->update('orders',['status' => $this->input->post('status'),'note' => $this->input->post('note')]);
 		$this->session->set_flashdata('msg', 'Status Changed');
 	    redirect(base_url('orders/list'));
 	}

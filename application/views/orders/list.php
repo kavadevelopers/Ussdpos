@@ -23,12 +23,13 @@
                     <table class="table table-bordered table-mini table-striped table-dt">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
+                                <th class="text-center">Order ID</th>
                                 <th>Agent</th>
                                 <th>Product</th>
                                 <th>Purchase Option</th>
                                 <th class="text-center">Type</th>
                                 <th class="text-center">Status</th>
+                                <th class="text-center">At</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -50,11 +51,14 @@
                                         <?= getStatusString($value->status) ?>
                                     </td>
                                     <td class="text-center">
+                                        <small><?= getPretyDateTime($value->cat) ?></small>
+                                    </td>
+                                    <td class="text-center">
                                         <a href="<?= base_url('orders/view/').$value->id ?>" class="btn btn-success btn-mini" title="View">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         <?php if ($value->status != 8): ?>    
-                                            <a href="#" class="btn btn-warning btn-mini s_change" title="Change Status" data-status="<?= $value->status ?>" data-id="<?= $value->id ?>">
+                                            <a href="#" class="btn btn-warning btn-mini s_change" title="Change Status" data-status="<?= $value->status ?>" data-id="<?= $value->id ?>" data-note="<?= $value->note ?>">
                                                 <i class="fa fa-check-square-o"></i>
                                             </a>
                                         <?php endif ?>
@@ -74,8 +78,13 @@
     $(function(){
         $('.s_change').click(function(e) {
             e.preventDefault();
-            $('#changeStatus select[name=status]').val($(this).data('status'));
+            if ($(this).data('status') == 0) {
+                $('#changeStatus select[name=status]').val("");
+            }else{
+                $('#changeStatus select[name=status]').val($(this).data('status'));
+            }
             $('#changeStatus input[name=id]').val($(this).data('id'));
+            $('#changeStatus textarea[name=note]').val($(this).data('note'));
             $('#changeStatus').modal('show');
         });
     })
@@ -98,10 +107,17 @@
                             <div class="form-group">
                                 <label>Status<span class="-req">*</span></label>
                                 <select class="form-control" name="status" required>
+                                        <option value="">-- Select --</option>
                                     <?php foreach (statusArray() as $key => $value) { ?>
-                                        <option value="<?= $key ?>"><?= $value ?></option>
+                                        <?php if($key != 0){ ?>
+                                            <option value="<?= $key ?>"><?= $value ?></option>
+                                        <?php } ?>
                                     <?php } ?>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Notes</label>
+                                <textarea class="form-control" name="note" placeholder="Notes (if any)" rows="8"></textarea>
                             </div>
                         </div> 
                     </div>

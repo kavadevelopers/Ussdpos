@@ -37,6 +37,7 @@ class Orderpos extends CI_Controller
 				'address'			=> $address,
 				'buspark'			=> $buspark,
 				'status'			=> '0',
+				'note'				=> '',
 				'cat'				=> _nowDateTime()
 			];
 			$this->db->insert('orders',$data);
