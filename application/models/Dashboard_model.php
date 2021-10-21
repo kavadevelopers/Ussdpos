@@ -51,8 +51,8 @@ class Dashboard_model extends CI_Model
 				}
 			}
 			$list[$key]->at 		= getPretyDate($value->dt);
-			$list[$key]->debit 		= ptPretyAmount($value->debit);
-			$list[$key]->credit 	= ptPretyAmount($value->credit);
+			$list[$key]->debit 		= tranAmount($value->debit);
+			$list[$key]->credit 	= tranAmount($value->credit);
 		}
 		return ['count' => $q->num_rows(),'list' => $list];
 	}
@@ -86,8 +86,8 @@ class Dashboard_model extends CI_Model
 				}
 			}
 			$list[$key]->at 		= getPretyDate($value->dt);
-			$list[$key]->debit 		= ptPretyAmount($value->debit);
-			$list[$key]->credit 	= ptPretyAmount($value->credit);
+			$list[$key]->debit 		= tranAmount($value->debit);
+			$list[$key]->credit 	= tranAmount($value->credit);
 		}
 		return ['count' => $q->num_rows(),'list' => $list];
 	}

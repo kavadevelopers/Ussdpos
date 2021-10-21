@@ -37,6 +37,15 @@ function ptPretyAmount($amount)
     return number_format($amount, 2, '.', ',');
 }
 
+function tranAmount($amount)
+{
+    if ($amount > 99000) {
+        return number_shortenNum($amount);
+    }else{
+        return ptPretyAmount($amount);
+    }
+}
+
 function posPurchaseOption($val)
 {
     if ($val == "1") {
