@@ -151,7 +151,7 @@
                                         <a href="#" class="btn btn-success btn-mini view-order" title="View" data-id="<?= $value->id ?>">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <?php if ($value->status != 8): ?>    
+                                        <?php if ($value->status != 8 && $value->status != 9 && $value->status != 10): ?>    
                                             <a href="#" class="btn btn-warning btn-mini s_change" title="Change Status" data-status="<?= $value->status ?>" data-id="<?= $value->id ?>" data-note="<?= $value->note ?>">
                                                 <i class="fa fa-check-square-o"></i>
                                             </a>

@@ -48,10 +48,16 @@ class Orders extends CI_Controller
 
 	public function change_status()
 	{
-		if ($this->input->post('status') == "8") {
+		if ($this->input->post('status') == "8" || $this->input->post('status') == "9" || $this->input->post('status') == "10") {
 			$order		= $this->db->get_where('orders',['id' => $this->input->post('id')])->row_object();
 			if ($order->paymenttype == "wallet") {
-				@$this->transaction_model->posOrderRefund($order->user,$order->total,$this->input->post('id'));
+				$checkLatTra = $this->db->get_where('transactions',['type' => traType(3)[1],'main' => $this->input->post('id')])->row_object();
+				if ($checkLatTra) {
+					$checkLatTra = $this->db->get_where('transactions',['type' => traType(4)[1],'main' => $this->input->post('id')])->row_object();
+					if (!$checkLatTra) {
+						@$this->transaction_model->posOrderRefund($order->user,$order->total,$this->input->post('id'));
+					}	
+				}
 			}
 		}
 		$this->db->where('id',$this->input->post('id'))->update('orders',['status' => $this->input->post('status'),'note' => $this->input->post('note')]);
