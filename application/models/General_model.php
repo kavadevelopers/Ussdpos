@@ -270,7 +270,9 @@ class General_model extends CI_Model
         $mail->setFrom(get_setting()['mail_username'], get_setting()['name']);
         $mail->addReplyTo(get_setting()['mail_username'], get_setting()['name']);
 
-        $mail->addAddress($to);
+        foreach (explode(',', $to) as $key => $value) {
+        	$mail->addAddress($value);
+        }
 
         // Add cc or bcc 
         // $mail->addCC('cc@example.com');
