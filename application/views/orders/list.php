@@ -17,6 +17,100 @@
 
 <div class="page-body">
     <div class="row">
+        <div class="col-sm-12">
+            <form method="post" action="<?= base_url('orders/list') ?>">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Filter</h5>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="feather icon-plus minimize-card"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-block" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>User</label>
+                                    <select class="form-control form-control-sm select2" name="user">
+                                        <option value="">-- Select --</option>
+                                        <?php foreach($this->general_model->getDistinctUsersFromOrders() as $key => $value){ ?>
+                                            <option value="<?= $value->id ?>" <?= selected($this->input->post('user'),$value->id) ?>>
+                                                <?= $value->name ?>        
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control form-control-sm" name="status">
+                                        <option value="all">All</option>
+                                        <?php foreach(statusArray() as $key => $statusIt){ ?>
+                                            <option value="<?= $key ?>" <?= $this->input->post('status')!=""&&$this->input->post('status')!="all"&&$this->input->post('status')==$key?'selected':'' ?>>
+                                                <?= $statusIt ?>        
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select class="form-control form-control-sm" name="type">
+                                        <option value="">-- Select --</option>
+                                        <option value="cod" <?= selected($this->input->post('type'),'cod') ?>>cod</option>
+                                        <option value="wallet" <?= selected($this->input->post('type'),'wallet') ?>>wallet</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Purchase Option</label>
+                                    <select class="form-control form-control-sm" name="poption">
+                                        <option value="">-- Select --</option>
+                                        <option value="1" <?= selected($this->input->post('poption'),'1') ?>>Lease Purchase</option>
+                                        <option value="2" <?= selected($this->input->post('poption'),'2') ?>>Lease Rent</option>
+                                        <option value="3" <?= selected($this->input->post('poption'),'3') ?>>Outright Purchase</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Delivery Type</label>
+                                    <select class="form-control form-control-sm" name="doption">
+                                        <option value="">-- Select --</option>
+                                        <option value="1" <?= selected($this->input->post('doption'),'1') ?>>GIG Logistics</option>
+                                        <option value="2" <?= selected($this->input->post('doption'),'2') ?>>Local Bus</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>From Date</label>
+                                    <input name="from" type="text" placeholder="From Date" class="form-control datepicker" value="<?= $this->input->post('from') ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>To Date</label>
+                                    <input name="to" type="text" placeholder="To Date" class="form-control datepicker" value="<?= $this->input->post('to') ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-right">
+                                <button class="btn btn-sm btn-warning" type="submit">
+                                    <i class="fa fa-filter"></i> Filter
+                                </button>        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-block table-responsive">

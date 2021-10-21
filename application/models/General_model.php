@@ -19,6 +19,18 @@ class General_model extends CI_Model
 		return $users;
 	}
 
+	public function getDistinctUsersFromOrders()
+	{
+		$this->db->distinct();
+		$this->db->select('user');
+		$users = $this->db->get('orders')->result_object();
+		foreach ($users as $key => $value) {
+			$users[$key]->name = $this->agent_model->getSomeInfo($value->user)->name;
+			$users[$key]->id = $this->agent_model->getSomeInfo($value->user)->id;
+		}
+		return $users;
+	}
+
 	public function getUsersList()
 	{
 		$this->db->distinct();

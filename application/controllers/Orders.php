@@ -14,6 +14,27 @@ class Orders extends CI_Controller
 	{
 		$data['_title']		= "POS Orders";
 		$this->db->order_by('id','desc');
+		if ($this->input->post('user')) {
+			$this->db->where('user',$this->input->post('user'));	
+		}
+		if ($this->input->post('status') != "" && $this->input->post('status') != 'all') {
+			$this->db->where('status',$this->input->post('status'));	
+		}
+		if ($this->input->post('poption')) {
+			$this->db->where('poption',$this->input->post('poption'));	
+		}
+		if ($this->input->post('type')) {
+			$this->db->where('paymenttype',$this->input->post('type'));	
+		}
+		if ($this->input->post('doption') != "") {
+			$this->db->where('deliverytype',$this->input->post('doption'));	
+		}
+		if ($this->input->post('from')) {
+			$this->db->where('cat >=',dd($this->input->post('from')));	
+		}
+		if ($this->input->post('to')) {
+			$this->db->where('cat <=',dd($this->input->post('to')));	
+		}
 		$data['list']		= $this->db->get('orders')->result_object();
 		$this->load->theme('orders/list',$data);	
 	}
