@@ -14,6 +14,13 @@ class Orders extends CI_Controller
 	{
 		$data['_title']		= "POS Orders";
 		$this->db->order_by('id','desc');
+		if ($this->input->post('limit')) {
+			if ($this->input->post('limit') != "All") {
+				$this->db->limit($this->input->post('limit'));	
+			}
+		}else{
+			$this->db->limit(100);	
+		}
 		if ($this->input->post('user')) {
 			$this->db->where('user',$this->input->post('user'));	
 		}

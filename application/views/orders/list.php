@@ -28,7 +28,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card-block" style="display: none;">
+                    <div class="card-block">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -97,6 +97,18 @@
                                 <div class="form-group">
                                     <label>To Date</label>
                                     <input name="to" type="text" placeholder="To Date" class="form-control datepicker" value="<?= $this->input->post('to') ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Limit</label>
+                                    <select class="form-control form-control-sm" name="limit">
+                                        <option value="100" <?= selected($this->input->post('limit'),'100') ?>>100</option>
+                                        <option value="200" <?= selected($this->input->post('limit'),'200') ?>>200</option>
+                                        <option value="500" <?= selected($this->input->post('limit'),'500') ?>>500</option>
+                                        <option value="1000" <?= selected($this->input->post('limit'),'1000') ?>>1000</option>
+                                        <option value="All" <?= selected($this->input->post('limit'),'All') ?>>All</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
