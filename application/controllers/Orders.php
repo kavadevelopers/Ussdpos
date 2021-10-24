@@ -55,8 +55,8 @@ class Orders extends CI_Controller
 
 	public function change_status()
 	{
+		$order		= $this->db->get_where('orders',['id' => $this->input->post('id')])->row_object();
 		if ($this->input->post('status') == "8" || $this->input->post('status') == "9" || $this->input->post('status') == "10") {
-			$order		= $this->db->get_where('orders',['id' => $this->input->post('id')])->row_object();
 			if ($order->paymenttype == "wallet") {
 				$checkLatTra = $this->db->get_where('transactions',['type' => traType(3)[1],'main' => $this->input->post('id')])->row_object();
 				if ($checkLatTra) {
@@ -67,6 +67,21 @@ class Orders extends CI_Controller
 				}
 			}
 		}
+
+		if ($this->input->post('status') > 1) {
+			$product = $this->db->get_where('products',['id' => $item->product])->row_object(); 
+			$template = "Hello ".$this->agent_model->getSomeInfo($order->user)->name.',\n';
+			$template .= "Summary Of Your Order".'\n';
+			$template .= "Order Id : #".$order->ordid.'\n';
+			$template .= "POS Device : ".$product->name.'\n';
+			$template .= "Status : ".getStatusString($order->status);
+			@$this->general_model->nigeriaBulkSms($this->agent_model->getSomeInfo($order->user)->phone,$template);
+		}
+
+		$orderId = $this->input->post('id');
+		$template = $this->load->view('mail/orders/order_placed',['id' => $orderId],true);
+		@$this->general_model->send_mail($this->agent_model->getSomeInfo($order->user)->email,'Order Status Changed',$template);
+		
 		$this->db->where('id',$this->input->post('id'))->update('orders',['status' => $this->input->post('status'),'note' => $this->input->post('note')]);
 		$this->session->set_flashdata('msg', 'Status Changed');
 	    redirect(base_url('orders/list'));

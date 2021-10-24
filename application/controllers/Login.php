@@ -36,7 +36,7 @@ class Login extends CI_Controller {
 
 	public function checkemail()
 	{
-		$this->load->view('mail/admin/new_pos_order',['id' => '5']);
+		$this->load->view('mail/orders/order_placed',['id' => '5']);
 	}
 
 	public function logout()
