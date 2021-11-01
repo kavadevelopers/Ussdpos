@@ -36,8 +36,8 @@ class Orderpos extends CI_Controller
 				$list[$key]->product 			= $this->general_model->getProduct($value->product);
 				$list[$key]->paymenttype		= strtoupper($value->paymenttype);
 				$list[$key]->deliverytype		= deliveryType($value->deliverytype);
-				$list[$key]->status				= getStatusString($value->status);
 				$list[$key]->statusint			= $value->status;
+				$list[$key]->status				= getStatusString($value->status);
 				$list[$key]->cat				= getPretyDateTime($value->cat);
 			}
 
