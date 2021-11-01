@@ -6,6 +6,29 @@ class Orderpos extends CI_Controller
 		parent::__construct();
 	}
 
+	public function getorders()
+	{
+		if($this->input->post('user')){
+			$this->db->order_by('id','desc');
+			$this->db->where('user',$this->input->post('user'));	
+			$orders = $this->db->get('orders');
+			$list = $orders->result_object();
+
+			foreach ($list as $key => $value) {
+				$list[$key]->poption			= posPurchaseOption($value->poption);
+				$list[$key]->product 			= $this->general_model->getProduct($value->product);
+				$list[$key]->paymenttype		= strtoupper($value->paymenttype);
+				$list[$key]->deliverytype		= deliveryType($value->deliverytype);
+				$list[$key]->status				= getStatusString($value->status);
+				$list[$key]->cat				= getPretyDateTime($value->cat);
+			}
+
+			retJson(['_return' => true,'count' => $orders->num_rows(),'orders' => $list]);
+		}else{
+			retJson(['_return' => false,'msg' => '`user` are Required']);
+		}
+	}
+
 	public function order()
 	{
 		if($this->input->post('poption') && $this->input->post('user') && $this->input->post('product') && $this->input->post('qty') && $this->input->post('price') && $this->input->post('subtotal') && $this->input->post('delivery') && $this->input->post('total') && $this->input->post('paymenttype') && $this->input->post('deliverytype') && $this->input->post('state')){

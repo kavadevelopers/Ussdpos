@@ -7,6 +7,15 @@ class General_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function getProduct($id)
+	{
+		$prod = $this->db->get_where('products',['id' => $id])->row_object();
+
+		$prod->image 			=	$this->getProductThumb($id);
+
+		return $prod;
+	}
+
 	public function getDistinctUsersFromTransactions()
 	{
 		$this->db->distinct();
