@@ -6,6 +6,23 @@ class Orderpos extends CI_Controller
 		parent::__construct();
 	}
 
+	public function cancelorder()
+	{
+		if($this->input->post('order')){
+
+			$this->db->where('id',$this->input->post('order'))->update('orders',['status' => "8",'note' => "Cancelled by agent"]);
+			$orderId = $this->input->post('order');
+			$template = $this->load->view('mail/orders/order_placed',['id' => $orderId],true);
+			@$this->general_model->send_mail($this->agent_model->getSomeInfo($order->user)->email,'Order Status Changed',$template);
+			@$this->general_model->send_mail(get_setting()['admin_noti_email'],'Order Cancelled by agent',$template);
+
+			retJson(['_return' => true]);
+						
+		}else{
+			retJson(['_return' => false,'msg' => '`order` are Required']);
+		}
+	}
+
 	public function getorders()
 	{
 		if($this->input->post('user')){
